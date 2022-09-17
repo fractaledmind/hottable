@@ -19,20 +19,16 @@
     </summary>
     <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsSortButton" tabindex="-1">
       <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Sort by</h3>
-      
+
       <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
         <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
         <%= f.sort_fields(sort_object) do |s| %>
           <div class="fields flex items-center justify-between space-x-2" data-object-name="<%= s.object_name %>">
             <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
-          
-            <%= tag.button %>
           </div>
-
         <% end %>
-        <%#= button_to_add_fields(f, :sort) %>
       <% end %>
-      
+
       <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
         <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
           Cancel
@@ -41,7 +37,7 @@
       </div>
     </div>
   </details>
-  
+
   <%= f.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
 <% end %>
 
@@ -61,7 +57,7 @@
         <% end %>
       </tr>
     </thead>
-    
+
     <tbody class="divide-y divide-gray-200 bg-white">
       <% @records.each do |record| %>
         <tr class="divide-x divide-gray-200">
@@ -73,7 +69,7 @@
         </tr>
       <% end %>
     </tbody>
-    
+
     <tfoot>
       <tr>
         <td colspan="<%= Book.ransortable_attributes.size %>">
