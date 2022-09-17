@@ -27,13 +27,14 @@ module Ransack
     end
 
     def fields=(args)
-      @fields ||= []
+      @fields ||= default_fields
 
       args.each do |field|
         case field
         when Hash
           field = Nodes::Attribute.new(@context, field['name'])
         when String
+          next if field == ''
           field = Nodes::Attribute.new(@context, field)
         end
 
@@ -43,7 +44,7 @@ module Ransack
     alias f= fields=
 
     def fields
-      @fields ||= []
+      @fields ||= default_fields
 
       @fields
     end
@@ -68,5 +69,14 @@ module Ransack
     def sort_attributes
       sorts.map(&:attr_name).uniq
     end
+
+    def field_attributes
+      fields.map(&:name).uniq
+    end
+
+    def hidden_fields
+      default_fields - fields
+    end
+
   end
 end
