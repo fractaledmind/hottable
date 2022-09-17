@@ -232,6 +232,13 @@
 
       <thead class="bg-gray-50">
         <tr class="divide-x divide-gray-200">
+          <th scope="col" class="w-12 text-center sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900" id="column_select">
+            <span class="sr-only">Select</span>
+            <input type="checkbox"
+                   class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                   data-action="selectable#bulkToggleSelection"
+                   data-target="selectable.bulkSelector">
+          </th>
           <% @search.field_attributes.each do |field| %>
             <%= tag.th(scope: :col, class: class_names("sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900", 'bg-orange-300': @search.sort_attributes.include?(field), 'bg-green-300': @search.condition_attributes.include?(field))) do %>
               <%= Book.human_attribute_name(field) %>
