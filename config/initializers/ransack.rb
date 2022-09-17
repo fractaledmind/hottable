@@ -76,6 +76,7 @@ module Ransack
 
     def fields=(args)
       @fields ||= default_fields
+      @fields = [] if args == []
 
       args.each do |field|
         case field
