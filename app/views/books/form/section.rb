@@ -9,7 +9,7 @@ module Views
     end
 
     def template(&)
-      details class: "relative inline-block text-left z-20", id: @id, **attributes do
+      details class: "relative inline-block text-left z-20 group", id: @id, **attributes do
         content(&)
       end
     end
@@ -18,7 +18,7 @@ module Views
       summary class: "marker:hidden cursor-pointer" do
         div id: "#{@id}Button",
           aria: { expanded: "true", haspopup: "true" },
-          **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 hover:border-gray-300 focus:ring-offset-gray-100",
+          **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 group-open:border-gray-200 hover:border-gray-300 focus:ring-offset-gray-100",
             -> { colored } => classes) do
 
           render Bootstrap::Icon.new(icon),
