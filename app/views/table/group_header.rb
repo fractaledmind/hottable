@@ -6,7 +6,7 @@ module Views
         @group_records = group_records
         @search = search
       end
-  
+
       def template
         tr class: "bg-gray-100" do
           th colspan: "2", class: "p-0 align-middle" do
@@ -21,7 +21,7 @@ module Views
               div class: "flex flex-1 items-center justify-between" do
                 div class: "flex flex-col text-left" do
                   small Book.human_attribute_name(@search.batch_attribute), class: "uppercase font-bold text-gray-600"
-                  span @group_name, class: "h5 mb-0"
+                  span @group_name.to_s, class: "h5 mb-0"
                 end
                 div do
                   small "Count", class: "font-normal"
