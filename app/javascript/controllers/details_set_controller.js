@@ -1,10 +1,7 @@
-import { Controller } from "@hotwired/stimulus"
+import ApplicationController from "./application_controller"
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static targets = ['child']
-
-  initialize () {
-  }
 
   connect () {
     this.childTargets.forEach(details => details.addEventListener('toggle', (event) => {
@@ -18,4 +15,3 @@ export default class extends Controller {
     }))
   }
 }
-

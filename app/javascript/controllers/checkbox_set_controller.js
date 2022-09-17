@@ -1,6 +1,6 @@
-import { Controller } from "@hotwired/stimulus"
+import ApplicationController from "./application_controller"
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static targets = ['child']
 
   deselectAll(e) {
@@ -13,10 +13,9 @@ export default class extends Controller {
 
   selectAll(e) {
     e.preventDefault()
-  
+
     this.childTargets.forEach(checkbox => {
       checkbox.checked = true
     })
   }
 }
-
