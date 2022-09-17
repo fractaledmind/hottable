@@ -17,6 +17,15 @@ module Ransack
       self
     end
 
+
+    def default_fields=(args)
+      @default_fields = args.map { |field| Nodes::Attribute.new(@context, field) }
+    end
+
+    def default_fields
+      @default_fields ||= []
+    end
+
     def fields=(args)
       @fields ||= []
 
