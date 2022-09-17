@@ -3347,7 +3347,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 12216,Three Plays: Desire Under the Elms / Strange Interlude / Mourning Becomes Electra,Eugene O'Neill/Luann Walther,4.08,0679763961,9780679763963,eng,424,1596,36,10/31/1995,Vintage
 12220,A Streetcar Named Desire,Tennessee Williams,3.98,0822210894,9780822210894,eng,107,235224,2409,12/1/1952,Dramatists Play Service
 12222,A Streetcar Named Desire,Tennessee Williams/Arthur  Miller,3.98,0811216020,9780811216029,en-US,192,3458,337,9/17/2004,New Directions
-12224,Streetcar Suburbs: The Process of Growth in Boston  1870-1900,Sam Bass Warner, Jr./Sam B. Warner,3.58,0674842111,9780674842113,en-US,236,61,6,4/20/2004,Harvard University Press
+12224,Streetcar Suburbs: The Process of Growth in Boston  1870-1900,"Sam Bass Warner, Jr./Sam B. Warner",3.58,0674842111,9780674842113,en-US,236,61,6,4/20/2004,Harvard University Press
 12225,A Streetcar Named Desire (SparkNotes Literature Guide),SparkNotes,3.29,1586634496,9781586634490,eng,96,0,0,7/15/2002,SparkNotes
 12226,CliffNotes on Williams' Glass Menagerie & Streetcar Named Desire (Cliffs Notes),James Lamar Roberts/Tennessee Williams/CliffsNotes,3.70,0822005336,9780822005339,en-GB,88,10,0,1/5/1965,Cliffs Notes
 12230,Pygmalion,George Bernard Shaw/Dan H. Laurence/Nicholas Grene,3.90,0141439505,9780141439501,eng,122,2085,179,1/30/2003,Penguin Books
@@ -4701,7 +4701,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 16900,Civil Disobedience and Other Essays,Henry David Thoreau,4.06,1420925229,9781420925227,eng,188,13736,189,1/1/2005,Digireads.com
 16902,Walden,Henry David Thoreau,3.79,0691096120,9780691096124,eng,352,128351,3652,4/18/2004,Princeton University Press
 16908,Interrupted Music: The Making of Tolkien's Mythology,Verlyn Flieger,4.21,0873388240,9780873388245,eng,192,131,8,3/31/2005,Kent State University Press
-16914,The Tolkien Fan's Medieval Reader,David E. Smith (Turgon of TheOneRing.net, one of the founding members of this Tolkien website)/Verlyn Flieger/Turgon (=David E. Smith),3.58,1593600119,9781593600112,eng,400,26,4,4/6/2004,Cold Spring Press
+16914,The Tolkien Fan's Medieval Reader,David E. Smith/Verlyn Flieger,3.58,1593600119,9781593600112,eng,400,26,4,4/6/2004,Cold Spring Press
 16918,Touchy and Feely (Sissy Sawyer  #1),Graham Masterton,3.37,072789160X,9780727891600,eng,208,86,12,2/1/2007,Severn House Publishers
 16919,Prey,Graham Masterton,3.83,0843946334,9780843946338,eng,352,812,51,11/1/1999,Leisure Books
 16920,Hidden World,Graham Masterton,3.47,0727859625,9780727859624,eng,182,58,5,3/1/2003,Severn House Publishers
@@ -5876,7 +5876,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 22123,The Coming Economic Collapse: How You Can Thrive When Oil Costs $200 a Barrel,Stephen Leeb/Glen C. Strathy,3.40,0446699004,9780446699006,en-US,211,34,3,2/1/2007,Business Plus
 22126,Betrayal of Trust: The Collapse of Global Public Health,Laurie Garrett/Steven M. Wolinsky,4.12,0786884401,9780786884407,eng,768,1126,50,8/15/2001,Hachette Books
 22127,Crash Proof: How to Profit from the Coming Economic Collapse,Peter D. Schiff/John Downes,3.78,0470043601,9780470043608,eng,272,1086,89,2/1/2007,John Wiley & Sons
-22128,Patriots (The Coming Collapse),James Wesley, Rawles,3.63,156384155X,9781563841552,eng,342,38,4,1/15/1999,Huntington House Publishers
+22128,Patriots (The Coming Collapse),James Wesley Rawles,3.63,156384155X,9781563841552,eng,342,38,4,1/15/1999,Huntington House Publishers
 22133,The World  the Text  and the Critic,Edward W. Said/إدوارد سعيد,4.18,0674961870,9780674961876,eng,336,198,6,6/10/2006,Harvard University Press
 22135,Culture and Imperialism,Edward W. Said,4.15,0679750541,9780679750543,eng,380,4053,123,5/31/1994,Vintage
 22141,La economía Long Tail,Chris Anderson/Federico Villegas Silva Lezama,3.81,8493464260,9788493464264,spa,318,24,3,7/1/2007,Ediciones Urano
@@ -8179,7 +8179,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 31365,With No One as Witness (Inspector Lynley  #13),Elizabeth  George,4.04,0060545615,9780060545611,eng,784,9952,529,2/28/2006,Harper
 31366,Deception on His Mind (Inspector Lynley  #9),Elizabeth  George,4.05,0553575090,9780553575095,eng,716,8028,289,10/6/1998,Bantam Books
 31371,Becoming a Woman of Beauty and Strength: Esther,Elizabeth George,4.27,0736904891,9780736904896,eng,160,80,14,1/1/2001,Harvest House Publishers
-31373,In Pursuit of the Proper Sinner (Inspector Lynley  #10),Elizabeth  George,4.10,0553575104,9780553575101,eng,718,10608,295,11/31/2000,Bantam Books
+31373,In Pursuit of the Proper Sinner (Inspector Lynley  #10),Elizabeth  George,4.10,0553575104,9780553575101,eng,718,10608,295,11/30/2000,Bantam Books
 31378,A Woman's High Calling Growth and Study Guide,Elizabeth George,4.15,0736904948,9780736904940,eng,160,13,1,8/15/2001,Harvest House Publishers
 31382,Living with Passion and Purpose: Luke (Woman After God's Own Heart),Elizabeth George,4.00,0736908161,9780736908160,eng,160,22,4,9/15/2005,Harvest House Publishers
 31384,Loving God with All Your Mind,Elizabeth George,4.43,0736913823,9780736913829,en-US,304,1488,77,1/1/2005,Harvest House Publishers
@@ -8978,7 +8978,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 34871,The Complete Clive Barker's The Great And Secret Show,Chris Ryall/Gabriel Rodríguez/Clive Barker,4.23,1600100295,9781600100291,eng,136,17422,67,11/8/2006,IDW Publishing
 34873,The Great And Secret Show (Book of the Art #1),Clive Barker,4.05,000617695X,9780006176954,eng,698,275,17,4/26/1990,Fontana Books
 34881,Star Bright (Star Power  #8),Catherine Hapka,3.67,068987670X,9780689876707,eng,160,3,0,4/26/2005,Aladdin Paperbacks
-34889,Brown's Star Atlas: Showing All The Bright Stars With Full Instructions How To Find And Use Them For Navigational Purposes And Department Of Trade Examinations.,Brown, Son & Ferguson,0.00,0851742718,9780851742717,eng,49,0,0,5/1/1977,Brown Son & Ferguson Ltd.
+34889,Brown's Star Atlas: Showing All The Bright Stars With Full Instructions How To Find And Use Them For Navigational Purposes And Department Of Trade Examinations.,"Brown, Son & Ferguson",0.00,0851742718,9780851742717,eng,49,0,0,5/1/1977,Brown Son & Ferguson Ltd.
 34892,Bright Star's Promise,Karen A. Bale,2.77,0821746219,9780821746219,eng,444,13,3,7/1/1994,Zebra
 34895,Dragon Quest VIII: Journey of the Cursed King Official Strategy Guide,Dan Birlew,4.14,0744005833,9780744005837,eng,240,35,0,11/8/2005,BradyGames
 34897,The Dragon Reborn (The Wheel of Time  #3),Robert Jordan,4.25,0765305119,9780765305114,eng,624,183950,2671,9/14/2002,Tor Books
@@ -11097,7 +11097,7 @@ bookID,title,authors,average_rating,isbn,isbn13,language_code,num_pages,ratings_
 45516,The Die Broke Financial Problem Solver,Stephen M. Pollan/Mark LeVine,2.33,0066619912,9780066619910,en-US,272,3,0,12/26/2000,William Morrow Paperbacks
 45529,Montaillou: The Promised Land of Error,Emmanuel Le Roy Ladurie/Barbara Bray,3.96,0394729641,9780394729640,eng,416,1142,62,7/12/1979,Vintage/Random House (NY)
 45530,Montaillou: Cathars and Catholics in a French Village 1294-1324,Emmanuel Le Roy Ladurie/Barbara Bray,3.96,0140137009,9780140137002,eng,400,80,14,12/5/2002,Penguin
-45531,Montaillou  village occitan de 1294 à 1324,Emmanuel Le Roy Ladurie/Emmanuel Le Roy-Ladurie,3.96,2070323285,9782070323289,fre,640,15,2,6/31/1982,Folio histoire
+45531,Montaillou  village occitan de 1294 à 1324,Emmanuel Le Roy Ladurie/Emmanuel Le Roy-Ladurie,3.96,2070323285,9782070323289,fre,640,15,2,6/30/1982,Folio histoire
 45533,Montaillou: Cathars and Catholics in a French Village  1294-1324,Emmanuel Le Roy Ladurie/Barbara Bray,3.96,0140054715,9780140054712,en-GB,400,17,2,5/29/1980,Penguin Books Ltd.
 45536,On the Road,Jack Kerouac/Ann Charters,3.63,0142437255,9780142437254,en-US,307,3271,342,1/3/2006,Penguin Classics
 45546,Undaunted Courage: The Pioneering First Mission to Explore America's Wild Frontier,Stephen E. Ambrose,4.21,074347788X,9780743477888,eng,592,41236,1830,10/6/2003,Simon & Schuster
