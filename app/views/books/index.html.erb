@@ -235,36 +235,8 @@
       <% if @search.batch_attribute.present? %>
         <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
           <tbody class="divide-y divide-gray-200 bg-white">
-            <tr class="bg-gray-100">
-              <th colspan="1" class="p-0 align-middle">
-                <button class="p-2 w-full flex items-center"
-                        aria-haspopup="true"
-                        aria-expanded="<%= @search.batch.expanded %>"
-                        data-action="groupable#toggle"
-                        data-groupable-target="button">
-                  <span class="mr-6 ml-2">
-                    <i class="bi-chevron-down"></i>
-                  </span>
-                  <div class="flex flex-1 items-center justify-between">
-                    <div class="flex flex-col text-left">
-                      <small class="uppercase font-bold text-gray-600">
-                        <%= Book.human_attribute_name(@search.batch_attribute) %>
-                      </small>
-                      <span class="h5 mb-0">
-                        <%= group_name %>
-                      </span>
-                    </div>
-                    <div>
-                      <small class="font-normal">Count</small>
-                      <span class="inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers">
-                        <%= group_records.count %>
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              </th>
-              <td colspan="<%= @search.field_attributes.size - 1 %>"></td>
-            </tr>
+            <%= render Views::Table::GroupHeader.new(group_name, group_records, search: @search) %>
+
             <% group_records.each do |record| %>
               <%= render Views::Table::Row.new(record, search: @search) %>
             <% end %>
@@ -278,28 +250,7 @@
         </tbody>
       <% end %>
 
-      <tfoot>
-        <tr>
-          <td colspan="<%= Book.ransortable_attributes.size %>">
-            <div class="flex items-center justify-between p-2">
-              <div class="">
-                <%= form_tag(search_books_path, method: :post) do %>
-                  <%= select_tag :page_items, options_for_select([10, 20, 50, 100], selected = params[:page_items]) %>
-                  <%= submit_tag("Update", class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto") %>
-                <% end %>
-              </div>
-              <div class="flex items-center justify-center">
-                <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-                <%== pagy_nav(@pagy) %>
-              </div>
-              <div class="">
-                <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-                <%== pagy_info(@pagy) %>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
+      <%= render Views::Table::Footer.new(@search, pagy: @pagy) %>
     </table>
   </div>
 <% end %>
