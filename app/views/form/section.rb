@@ -1,13 +1,16 @@
 module Views
   module Form
     class Section < Base
-      def initialize(form, id:)
+      attr_reader :attributes
+
+      def initialize(form, id:, **attributes)
         @form = form
         @id = id
+        @attributes = attributes
       end
 
       def template(&)
-        details class: "relative inline-block text-left z-20", id: @id do
+        details class: "relative inline-block text-left z-20", id: @id, **attributes do
           content(&)
         end
       end

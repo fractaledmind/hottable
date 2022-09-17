@@ -4,10 +4,10 @@
   <%= search_form_for(
     @search,
     url: search_books_path,
-    html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" }, class: "py-4 space-x-2" }
+    html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "details-set" }, class: "py-4 space-x-2" }
   ) do |f| %>
 
-    <%= render Views::Form::Section.new(f, id: "detailsFields") do |section| %>
+    <%= render Views::Form::Section.new(f, id: "detailsFields", data: { 'details-set-target': "child" }) do |section| %>
       <%= section.title icon: "eye-slash", colored: f.object.hidden_fields.any?, classes: "bg-blue-300 hover:border-blue-500" do %>
         <%= f.object.hidden_fields.any? ? pluralize(f.object.hidden_fields.size, 'hidden field') : "Hide fields" %>
       <% end %>
@@ -44,7 +44,7 @@
       <% end %>
     <% end %>
 
-    <%= render Views::Form::Section.new(f, id: "detailsSort") do |section| %>
+    <%= render Views::Form::Section.new(f, id: "detailsSort", data: { 'details-set-target': "child" }) do |section| %>
       <%= section.title icon: "arrow-down-up", colored: f.object.sorts.any?, classes: "bg-orange-300 hover:border-orange-500" do %>
         <%= f.object.sorts.any? ? "Sorted by #{pluralize(f.object.sorts.count, 'field')}" : "Sort" %>
       <% end %>
@@ -70,7 +70,7 @@
       <% end %>
     <% end %>
     
-    <%= render Views::Form::Section.new(f, id: "detailsForm") do |section| %>
+    <%= render Views::Form::Section.new(f, id: "detailsForm", data: { 'details-set-target': "child" }) do |section| %>
       <%= section.title icon: "filter", colored: f.object.condition_attributes.any?, classes: "bg-green-300 hover:border-green-500" do %>
         <%= f.object.condition_attributes.any? ? "Filtered by #{f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ')}" : "Filter" %>
       <% end %>
@@ -121,7 +121,7 @@
       <% end %>
     <% end %>
     
-    <%= render Views::Form::Section.new(f, id: "detailsBatch") do |section| %>
+    <%= render Views::Form::Section.new(f, id: "detailsBatch", data: { 'details-set-target': "child" }) do |section| %>
       <%= section.title icon: "card-list", colored: f.object.batch.present?, classes: "bg-purple-300 hover:border-purple-500" do %>
         <%= f.object.batch.present? ? "Grouped by #{Book.human_attribute_name(f.object.batch_attribute)}" : "Group" %>
       <% end %>
