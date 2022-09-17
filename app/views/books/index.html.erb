@@ -1,9 +1,0 @@
-<%= render Views::Layout.new do %>
-  <h1>Books#index</h1>
-
-  <%= render "books/form", search: @search %>
-
-  <div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
-    <%= render Views::Table.new(@records, search: @search, pagy: @pagy) %>
-  </div>
-<% end %>
