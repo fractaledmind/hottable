@@ -7,19 +7,17 @@
     html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" }, class: "py-4 space-x-2" }
   ) do |f| %>
 
-    <details class="relative inline-block text-left z-20" id="detailsFields">
-      <summary class="marker:hidden cursor-pointer">
-        <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-blue-300 hover:border-blue-500' if f.object.hidden_fields.any? %>" id="detailsFieldsButton" aria-expanded="true" aria-haspopup="true">
-          <i class="bi-eye-slash text-xl" aria-hidden="true"></i>
-          <% if f.object.hidden_fields.any? %>
-            <span><%= pluralize(f.object.hidden_fields.size, 'hidden field') %></span>
-          <% else %>
-            <span>Hide fields</span>
-          <% end %>
-          <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
-        </div>
-      </summary>
-      <div class="absolute left-0 z-10 mt-1 min-w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsFieldsButton" tabindex="-1">
+
+    <%= render Views::Form::Section.new(f, id: "detailsFields") do |section| %>
+      <%= section.title icon: "eye-slash" do %>
+        <% if f.object.hidden_fields.any? %>
+          <%= pluralize(f.object.hidden_fields.size, 'hidden field') %>
+        <% else %>
+          Hide fields
+        <% end %>
+      <% end %>
+
+      <%= section.body do %>
         <%= tag.fieldset class: "p-2" do %>
           <%= f.collection_check_boxes(:f, f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] }, :first, :last) do |builder| %>
             <%= builder.label(class: "cursor-pointer py-1 px-2 flex justify-start items-center gap-2 hover:bg-gray-200") do %>
@@ -46,8 +44,8 @@
           </button>
           <%= f.submit "Set", name: "field", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
         </div>
-      </div>
-    </details>
+      <% end %>
+    <% end %>
 
     <details class="relative inline-block text-left z-20" id="detailsSort">
       <summary class="marker:hidden cursor-pointer">
