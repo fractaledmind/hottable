@@ -1,0 +1,25 @@
+<%= render Views::Books::Form::Section.new(f, id: "detailsSort", data: { 'details-set-target': "child" }) do |section| %>
+  <%= section.title icon: "arrow-down-up", colored: f.object.sorts.any?, classes: "bg-orange-300 hover:border-orange-500" do %>
+    <%= f.object.sorts.any? ? "Sorted by #{pluralize(f.object.sorts.count, 'field')}" : "Sort" %>
+  <% end %>
+
+  <%= section.body do %>
+    <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Sort by</h3>
+
+    <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
+      <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
+      <%= f.sort_fields(sort_object) do |s| %>
+        <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>">
+          <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+      <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
+        Cancel
+      </button>
+      <%= f.submit "Sort", name: "sort", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,50 @@
+<%= render Views::Books::Form::Section.new(f, id: "detailsFilter", data: { 'details-set-target': "child" }) do |section| %>
+  <%= section.title icon: "filter", colored: f.object.condition_attributes.any?, classes: "bg-green-300 hover:border-green-500" do %>
+    <%= f.object.condition_attributes.any? ? "Filtered by #{f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ')}" : "Filter" %>
+  <% end %>
+
+  <%= section.body do %>
+    <fieldset class="bg-white rounded space-y-2 text-sm">
+      <legend class="border-b w-full font-bold p-2 whitespace-nowrap">
+        In this view, show records where
+        <%= f.combinator_select({}, class: "rounded py-1") %>
+        of the following are true&hellip;
+      </legend>
+      <div class="p-2 space-y-2">
+        <% condition_object = f.object.conditions.any? ? f.object.conditions : f.object.build_condition %>
+        <%= f.condition_fields(condition_object) do |c| %>
+          <%= tag.fieldset class: "fields condition flex items-center gap-2", 'data-object-name': c.object_name do %>
+            <legend></legend>
+
+            <div class="flex flex-nowrap items-start gap-2">
+              <%= c.attribute_fields do |a| %>
+                <span class="fields" data-object-name="<%= a.object_name %>">
+                  <%= a.attribute_select({}, class: "text-sm border-gray-400 rounded p-1.5 pr-6 bg-[right_0.125rem_center]") %>
+                </span>
+              <% end %>
+
+              <span class="fields predicate">
+                <%= c.predicate_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+              </span>
+
+              <span class="flex flex-col items-start gap-2">
+                <%= c.value_fields do |v| %>
+                  <span class="fields flex border border-gray-400 rounded overflow-hidden" data-object-name="<%= v.object_name %>">
+                    <%= v.text_field(:value, class: "text-sm p-1.5 border-0") %>
+                  </span>
+                <% end %>
+              </span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </fieldset>
+
+    <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+      <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsFilter.removeAttribute('open')">
+        Cancel
+      </button>
+      <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+    </div>
+  <% end %>
+<% end %>

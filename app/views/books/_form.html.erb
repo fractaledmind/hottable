@@ -1,0 +1,11 @@
+<%= search_form_for(
+  search,
+  url: search_books_path,
+  html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "details-set" }, class: "py-4 space-x-2" }
+) do |f| %>
+
+  <%= render "books/form/fields", f: %>
+  <%= render "books/form/sort", f: %>
+  <%= render "books/form/filter", f: %>
+  <%= render "books/form/batch", f: %>
+<% end %>
