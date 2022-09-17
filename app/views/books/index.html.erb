@@ -66,7 +66,7 @@
       <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
         <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
         <%= f.sort_fields(sort_object) do |s| %>
-          <div class="fields flex items-center justify-between space-x-2" data-object-name="<%= s.object_name %>">
+          <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>">
             <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
           </div>
         <% end %>
@@ -135,6 +135,86 @@
           Cancel
         </button>
         <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+      </div>
+    </div>
+  </details>
+
+  <details class="relative inline-block text-left z-20" id="detailsBatch">
+    <summary class="marker:hidden cursor-pointer">
+      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-offset-gray-100 <%= 'bg-purple-300 border-purple-500' if f.object.batch.present? %>" id="detailsBatchButton" aria-expanded="true" aria-haspopup="true">
+        <i class="bi-card-list text-xl"></i>
+        <% if f.object.batch.present? %>
+          <span>Grouped by <%= Book.human_attribute_name(f.object.batch_attribute) %></span>
+        <% else %>
+          <span>Group</span>
+        <% end %>
+        <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
+      </div>
+    </summary>
+    <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsBatchButton" tabindex="-1">
+      <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Group by</h3>
+
+      <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
+        <% batch_object = f.object.batch.present? ? f.object.batch : f.object.build_batch %>
+        <%= f.fields_for(:b, batch_object) do |b| %>
+          <div class="fields flex items-center justify-start gap-2" data-object-name="<%= b.object_name %>">
+            <%= b.collection_select(
+                  :name,
+                  f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] },
+                  :first, :last,
+                  {},
+                  class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+            <%= b.collection_select(
+                  :dir,
+                  b.send(:sort_array),
+                  :first, :last,
+                  {},
+                  class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+          </div>
+
+          <fieldset class="py-1 px-0">
+            <legend class="sr-only">Select group behavior</legend>
+
+            <div class="flex items-center justify-between gap-2">
+              <%= b.label :expanded, value: true, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
+                <%= b.radio_button :expanded, true, checked: b.object.expanded == true, class: "sr-only peer" %>
+                <span class="flex flex-1">
+                  <span class="flex flex-col">
+                    <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Expand all</span>
+                  </span>
+                </span>
+                
+                <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
+                </svg>
+                
+                <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
+              <% end %>
+
+              <%= b.label :expanded, value: false, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
+                <%= b.radio_button :expanded, false, checked: b.object.expanded == false, class: "sr-only peer" %>
+                <span class="flex flex-1">
+                  <span class="flex flex-col">
+                    <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Collapse all</span>
+                  </span>
+                </span>
+                
+                <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
+                </svg>
+                
+                <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
+              <% end %>
+            </div>
+          </fieldset>
+        <% end %>
+      <% end %>
+
+      <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+        <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsBatch.removeAttribute('open')">
+          Cancel
+        </button>
+        <%= f.submit "Group", name: "batch", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
       </div>
     </div>
   </details>

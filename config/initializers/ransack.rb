@@ -1,10 +1,30 @@
 module Ransack
+  module Nodes
+    class Batch < Sort
+      attr_accessor :expanded
+
+      def build(params)
+        params.with_indifferent_access.each do |key, value|
+          send("#{key}=", value) if key.match(/^(name|dir|ransacker_args|expanded)$/)
+        end
+
+        self
+      end
+
+      def expanded=(value)
+        @expanded = value == 'true' ? true : false
+      end
+    end
+  end
+
   class Search
     def build(params)
       collapse_multiparameter_attributes!(params).each do |key, value|
         if ['s'.freeze, 'sorts'.freeze].freeze.include?(key)
           send("#{key}=", value)
         elsif ['f'.freeze, 'fields'.freeze].freeze.include?(key)
+          send("#{key}=", value)
+        elsif ['b'.freeze, 'batch'.freeze].freeze.include?(key)
           send("#{key}=", value)
         elsif @context.ransackable_scope?(key, @context.object)
           add_scope(key, value)
@@ -17,6 +37,34 @@ module Ransack
       self
     end
 
+    def batch=(args)
+      @batch ||= nil
+
+      case args
+      when Hash
+        @batch = Nodes::Batch.new(@context).build(args)
+      when Nodes::Batch
+        @batch = args
+      end
+    end
+    alias b= batch=
+
+    def batch
+      @batch ||= nil
+
+      @batch
+    end
+    alias b batch
+
+    def build_batch(opts = {})
+      new_batch(opts).tap do |batch|
+        self.batch = batch
+      end
+    end
+
+    def new_batch(opts = {})
+      Nodes::Batch.new(@context).build(opts)
+    end
 
     def default_fields=(args)
       @default_fields = args.map { |field| Nodes::Attribute.new(@context, field) }
@@ -78,5 +126,8 @@ module Ransack
       default_fields - fields
     end
 
+    def batch_attribute
+      batch.attr_name
+    end
   end
 end
