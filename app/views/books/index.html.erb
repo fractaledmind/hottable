@@ -1,5 +1,36 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
+<div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
+  <table class="border-gray-300 h-full w-full">
+    <caption id="booksTableCaption" class="h-0 overflow-hidden">
+      <i class="bi-table" aria-hidden="true"></i>
+      Main View
+    </caption>
+
+    <thead>
+      <tr>
+        <% Book.ransortable_attributes.each do |attribute_name| %>
+          <th>
+            <%= Book.human_attribute_name(attribute_name) %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @records.each do |record| %>
+        <tr>
+          <% Book.ransortable_attributes.each do |attribute_name| %>
+            <td>
+              <%= record.public_send(attribute_name) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
 <%== pagy_nav(@pagy) %>
