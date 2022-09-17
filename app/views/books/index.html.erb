@@ -240,7 +240,7 @@
         </tr>
       </thead>
 
-      <% if @search.batch.present? %>
+      <% if @search.batch_attribute.present? %>
         <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
           <tbody class="divide-y divide-gray-200 bg-white">
             <tr class="bg-gray-100">
