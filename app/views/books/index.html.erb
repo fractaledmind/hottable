@@ -3,12 +3,12 @@
 <%= search_form_for(
   @search,
   url: search_books_path,
-  html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" } }
+  html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" }, class: "py-4 space-x-2" }
 ) do |f| %>
 
   <details class="relative inline-block text-left z-20" id="detailsFields">
     <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-offset-gray-100 <%= 'bg-blue-300 border-blue-500' if f.object.hidden_fields.any? %>" id="detailsFieldsButton" aria-expanded="true" aria-haspopup="true">
+      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-blue-300 hover:border-blue-500' if f.object.hidden_fields.any? %>" id="detailsFieldsButton" aria-expanded="true" aria-haspopup="true">
         <i class="bi-eye-slash text-xl" aria-hidden="true"></i>
         <% if f.object.hidden_fields.any? %>
           <span><%= pluralize(f.object.hidden_fields.size, 'hidden field') %></span>
@@ -50,7 +50,7 @@
 
   <details class="relative inline-block text-left z-20" id="detailsSort">
     <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-offset-gray-100 <%= 'bg-orange-300 border-orange-500' if f.object.sorts.any? %>" id="detailsSortButton" aria-expanded="true" aria-haspopup="true">
+      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-orange-300 hover:border-orange-500' if f.object.sorts.any? %>" id="detailsSortButton" aria-expanded="true" aria-haspopup="true">
         <i class="bi-arrow-down-up text-xl" aria-hidden="true"></i>
         <% if f.object.sorts.any? %>
           <span>Sorted by <%= pluralize(f.object.sorts.count, 'field') %></span>
@@ -83,7 +83,7 @@
 
   <details class="relative inline-block text-left z-20" id="detailsForm">
     <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-offset-gray-100 <%= 'bg-green-300 border-green-500' if f.object.condition_attributes.any? %>" id="detailsFilterButton" aria-expanded="true" aria-haspopup="true">
+      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-green-300 hover:border-green-500' if f.object.condition_attributes.any? %>" id="detailsFilterButton" aria-expanded="true" aria-haspopup="true">
         <i class="bi-filter text-xl" aria-hidden="true"></i>
         <% if f.object.condition_attributes.any? %>
           <span>Filtered by <%= f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ') %></span>
@@ -141,7 +141,7 @@
 
   <details class="relative inline-block text-left z-20" id="detailsBatch">
     <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-offset-gray-100 <%= 'bg-purple-300 border-purple-500' if f.object.batch.present? %>" id="detailsBatchButton" aria-expanded="true" aria-haspopup="true">
+      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-purple-300 hover:border-purple-500' if f.object.batch.present? %>" id="detailsBatchButton" aria-expanded="true" aria-haspopup="true">
         <i class="bi-card-list text-xl"></i>
         <% if f.object.batch.present? %>
           <span>Grouped by <%= Book.human_attribute_name(f.object.batch_attribute) %></span>
