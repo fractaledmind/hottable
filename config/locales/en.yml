@@ -31,3 +31,17 @@
 
 en:
   hello: "Hello world"
+  
+  activerecord:
+    attributes:
+      book:
+        title: "Title"
+        average_rating: "Avg. Rating"
+        isbn: "ISBN"
+        isbn13: "ISBN13"
+        language_code: "Language"
+        num_pages: "# of pages"
+        ratings_count: "# of ratings"
+        text_reviews_count: "# of reviews"
+        published_on: "Published"
+        publisher: "Publisher"
