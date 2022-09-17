@@ -14,7 +14,7 @@ module Views
       def template
         tfoot do
           tr do
-            td colspan: attributes.size do
+            td colspan: attributes.size + 1 do
               div class: "flex items-center justify-between p-2" do
                 page_items_form
                 raw pagy_nav(@pagy)

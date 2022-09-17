@@ -21,7 +21,7 @@ module Views
               render Views::Table::GroupHeader.new(group_name, group_records, search: @search)
 
               group_records.each do |record|
-                render Views::Table::Row.new(record, search: @search)
+                render Views::Table::Row.new(record, search: @search, expanded: @search.batch.expanded)
               end
             end
           end

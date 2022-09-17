@@ -1,13 +1,15 @@
 module Views
   class Table
     class Row < Base
-      def initialize(record, search:)
+      def initialize(record, search:, expanded: true)
         @record = record
         @search = search
+        @expanded = expanded
       end
 
       def template
-        tr class: "divide-x divide-gray-200 row-group hover:bg-gray-100" do
+        tr **classes("divide-x divide-gray-200 row-group hover:bg-gray-100",
+               -> { !@expanded } => "sr-only") do
           select_cell
           attributes.each do |attribute|
             render Column.new(@record, attribute:, search: @search)

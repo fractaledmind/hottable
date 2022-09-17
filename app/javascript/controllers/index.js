@@ -4,5 +4,7 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import CheckboxSetController from "./checkbox_set_controller"
+import DetailsSetController from "./details_set_controller"
+application.register("checkbox-set", CheckboxSetController)
+application.register("details-set", DetailsSetController)
