@@ -1,278 +1,292 @@
-<h1>Books#index</h1>
+<%= render Views::Layout.new do %>
+  <h1>Books#index</h1>
 
-<%= search_form_for(
-  @search,
-  url: search_books_path,
-  html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" }, class: "py-4 space-x-2" }
-) do |f| %>
+  <%= search_form_for(
+    @search,
+    url: search_books_path,
+    html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "search" }, class: "py-4 space-x-2" }
+  ) do |f| %>
 
-  <details class="relative inline-block text-left z-20" id="detailsFields">
-    <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-blue-300 hover:border-blue-500' if f.object.hidden_fields.any? %>" id="detailsFieldsButton" aria-expanded="true" aria-haspopup="true">
-        <i class="bi-eye-slash text-xl" aria-hidden="true"></i>
-        <% if f.object.hidden_fields.any? %>
-          <span><%= pluralize(f.object.hidden_fields.size, 'hidden field') %></span>
-        <% else %>
-          <span>Hide fields</span>
-        <% end %>
-        <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
-      </div>
-    </summary>
-    <div class="absolute left-0 z-10 mt-1 min-w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsFieldsButton" tabindex="-1">
-      <%= tag.fieldset class: "p-2" do %>
-        <%= f.collection_check_boxes(:f, f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] }, :first, :last) do |builder| %>
-          <%= builder.label(class: "cursor-pointer py-1 px-2 flex justify-start items-center gap-2 hover:bg-gray-200") do %>
-            <%= builder.check_box(checked: f.object.field_attributes.include?(builder.value), class: "rounded") %>
-            <span class="font-medium text-gray-700 mb-0 normal-case">
-              <%= builder.text %>
-            </span>
+    <details class="relative inline-block text-left z-20" id="detailsFields">
+      <summary class="marker:hidden cursor-pointer">
+        <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-blue-300 hover:border-blue-500' if f.object.hidden_fields.any? %>" id="detailsFieldsButton" aria-expanded="true" aria-haspopup="true">
+          <i class="bi-eye-slash text-xl" aria-hidden="true"></i>
+          <% if f.object.hidden_fields.any? %>
+            <span><%= pluralize(f.object.hidden_fields.size, 'hidden field') %></span>
+          <% else %>
+            <span>Hide fields</span>
           <% end %>
-        <% end %>
-      <% end %>
-
-      <div class="hidden flex items-center justify-between gap-2 py-1 px-2">
-        <button type="button" class="flex-1 inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 shadow-sm hover:bg-gray-300">
-          Hide all
-        </button>
-        <button type="button" class="flex-1 inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 shadow-sm hover:bg-gray-300">
-          Show all
-        </button>
-      </div>
-
-      <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-        <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsFields.removeAttribute('open')">
-          Cancel
-        </button>
-        <%= f.submit "Set", name: "field", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
-      </div>
-    </div>
-  </details>
-
-  <details class="relative inline-block text-left z-20" id="detailsSort">
-    <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-orange-300 hover:border-orange-500' if f.object.sorts.any? %>" id="detailsSortButton" aria-expanded="true" aria-haspopup="true">
-        <i class="bi-arrow-down-up text-xl" aria-hidden="true"></i>
-        <% if f.object.sorts.any? %>
-          <span>Sorted by <%= pluralize(f.object.sorts.count, 'field') %></span>
-        <% else %>
-          <span>Sort</span>
-        <% end %>
-        <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
-      </div>
-    </summary>
-    <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsSortButton" tabindex="-1">
-      <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Sort by</h3>
-
-      <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
-        <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
-        <%= f.sort_fields(sort_object) do |s| %>
-          <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>">
-            <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-        <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
-          Cancel
-        </button>
-        <%= f.submit "Sort", name: "sort", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
-      </div>
-    </div>
-  </details>
-
-  <details class="relative inline-block text-left z-20" id="detailsForm">
-    <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-green-300 hover:border-green-500' if f.object.condition_attributes.any? %>" id="detailsFilterButton" aria-expanded="true" aria-haspopup="true">
-        <i class="bi-filter text-xl" aria-hidden="true"></i>
-        <% if f.object.condition_attributes.any? %>
-          <span>Filtered by <%= f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ') %></span>
-        <% else %>
-          <span>Filter</span>
-        <% end %>
-        <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
-      </div>
-    </summary>
-    <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsFilterButton" tabindex="-1">
-      <fieldset class="bg-white rounded space-y-2 text-sm">
-        <legend class="border-b w-full font-bold p-2 whitespace-nowrap">
-          In this view, show records where
-          <%= f.combinator_select({}, class: "rounded py-1") %>
-          of the following are true&hellip;
-        </legend>
-        <div class="p-2 space-y-2">
-          <% condition_object = f.object.conditions.any? ? f.object.conditions : f.object.build_condition %>
-          <%= f.condition_fields(condition_object) do |c| %>
-            <%= tag.fieldset class: "fields condition flex items-center gap-2", 'data-object-name': c.object_name do %>
-              <legend></legend>
-
-              <div class="flex flex-nowrap items-start gap-2">
-                <%= c.attribute_fields do |a| %>
-                  <span class="fields" data-object-name="<%= a.object_name %>">
-                    <%= a.attribute_select({}, class: "text-sm border-gray-400 rounded p-1.5 pr-6 bg-[right_0.125rem_center]") %>
-                  </span>
-                <% end %>
-
-                <span class="fields predicate">
-                  <%= c.predicate_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
-                </span>
-
-                <span class="flex flex-col items-start gap-2">
-                  <%= c.value_fields do |v| %>
-                    <span class="fields flex border border-gray-400 rounded overflow-hidden" data-object-name="<%= v.object_name %>">
-                      <%= v.text_field(:value, class: "text-sm p-1.5 border-0") %>
-                    </span>
-                  <% end %>
-                </span>
-              </div>
+          <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
+        </div>
+      </summary>
+      <div class="absolute left-0 z-10 mt-1 min-w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsFieldsButton" tabindex="-1">
+        <%= tag.fieldset class: "p-2" do %>
+          <%= f.collection_check_boxes(:f, f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] }, :first, :last) do |builder| %>
+            <%= builder.label(class: "cursor-pointer py-1 px-2 flex justify-start items-center gap-2 hover:bg-gray-200") do %>
+              <%= builder.check_box(checked: f.object.field_attributes.include?(builder.value), class: "rounded") %>
+              <span class="font-medium text-gray-700 mb-0 normal-case">
+                <%= builder.text %>
+              </span>
             <% end %>
           <% end %>
+        <% end %>
+
+        <div class="hidden flex items-center justify-between gap-2 py-1 px-2">
+          <button type="button" class="flex-1 inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 shadow-sm hover:bg-gray-300">
+            Hide all
+          </button>
+          <button type="button" class="flex-1 inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 shadow-sm hover:bg-gray-300">
+            Show all
+          </button>
         </div>
-      </fieldset>
 
-      <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-        <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
-          Cancel
-        </button>
-        <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+        <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+          <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsFields.removeAttribute('open')">
+            Cancel
+          </button>
+          <%= f.submit "Set", name: "field", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+        </div>
       </div>
-    </div>
-  </details>
+    </details>
 
-  <details class="relative inline-block text-left z-20" id="detailsBatch">
-    <summary class="marker:hidden cursor-pointer">
-      <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-purple-300 hover:border-purple-500' if f.object.batch.present? %>" id="detailsBatchButton" aria-expanded="true" aria-haspopup="true">
-        <i class="bi-card-list text-xl"></i>
-        <% if f.object.batch.present? %>
-          <span>Grouped by <%= Book.human_attribute_name(f.object.batch_attribute) %></span>
-        <% else %>
-          <span>Group</span>
-        <% end %>
-        <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
-      </div>
-    </summary>
-    <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsBatchButton" tabindex="-1">
-      <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Group by</h3>
+    <details class="relative inline-block text-left z-20" id="detailsSort">
+      <summary class="marker:hidden cursor-pointer">
+        <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-orange-300 hover:border-orange-500' if f.object.sorts.any? %>" id="detailsSortButton" aria-expanded="true" aria-haspopup="true">
+          <i class="bi-arrow-down-up text-xl" aria-hidden="true"></i>
+          <% if f.object.sorts.any? %>
+            <span>Sorted by <%= pluralize(f.object.sorts.count, 'field') %></span>
+          <% else %>
+            <span>Sort</span>
+          <% end %>
+          <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
+        </div>
+      </summary>
+      <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsSortButton" tabindex="-1">
+        <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Sort by</h3>
 
-      <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
-        <% batch_object = f.object.batch.present? ? f.object.batch : f.object.build_batch %>
-        <%= f.fields_for(:b, batch_object) do |b| %>
-          <div class="fields flex items-center justify-start gap-2" data-object-name="<%= b.object_name %>">
-            <%= b.collection_select(
-                  :name,
-                  f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] },
-                  :first, :last,
-                  { include_blank: true },
-                  class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
-            <%= b.collection_select(
-                  :dir,
-                  b.send(:sort_array),
-                  :first, :last,
-                  { include_blank: true },
-                  class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
-          </div>
-
-          <fieldset class="py-1 px-0">
-            <legend class="sr-only">Select group behavior</legend>
-
-            <div class="flex items-center justify-between gap-2">
-              <%= b.label :expanded, value: true, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
-                <%= b.radio_button :expanded, true, checked: b.object.expanded == true, class: "sr-only peer" %>
-                <span class="flex flex-1">
-                  <span class="flex flex-col">
-                    <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Expand all</span>
-                  </span>
-                </span>
-                
-                <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
-                </svg>
-                
-                <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
-              <% end %>
-
-              <%= b.label :expanded, value: false, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
-                <%= b.radio_button :expanded, false, checked: b.object.expanded == false, class: "sr-only peer" %>
-                <span class="flex flex-1">
-                  <span class="flex flex-col">
-                    <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Collapse all</span>
-                  </span>
-                </span>
-                
-                <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
-                </svg>
-                
-                <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
-              <% end %>
+        <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
+          <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
+          <%= f.sort_fields(sort_object) do |s| %>
+            <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>">
+              <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
             </div>
-          </fieldset>
-        <% end %>
-      <% end %>
-
-      <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-        <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsBatch.removeAttribute('open')">
-          Cancel
-        </button>
-        <%= f.submit "Group", name: "batch", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
-      </div>
-    </div>
-  </details>
-
-  <%= f.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
-<% end %>
-
-<div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
-  <table class="h-full min-w-full divide-y divide-gray-300">
-    <caption id="booksTableCaption" class="h-0 overflow-hidden">
-      <i class="bi-table" aria-hidden="true"></i>
-      Main View
-    </caption>
-
-    <thead class="bg-gray-50">
-      <tr class="divide-x divide-gray-200">
-        <% @search.field_attributes.each do |field| %>
-          <%= tag.th(scope: :col, class: class_names("sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900", 'bg-orange-300': @search.sort_attributes.include?(field), 'bg-green-300': @search.condition_attributes.include?(field))) do %>
-            <%= Book.human_attribute_name(field) %>
           <% end %>
         <% end %>
-      </tr>
-    </thead>
 
-    <% if @search.batch.present? %>
-      <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
-        <tbody class="divide-y divide-gray-200 bg-white">
-          <tr class="bg-gray-100">
-            <th colspan="1" class="p-0 align-middle">
-              <button class="p-2 w-full flex items-center"
-                      aria-haspopup="true"
-                      aria-expanded="<%= @search.batch.expanded %>"
-                      data-action="groupable#toggle"
-                      data-groupable-target="button">
-                <span class="mr-6 ml-2">
-                  <i class="bi-chevron-down"></i>
-                </span>
-                <div class="flex flex-1 items-center justify-between">
-                  <div class="flex flex-col text-left">
-                    <small class="uppercase font-bold text-gray-600">
-                      <%= Book.human_attribute_name(@search.batch_attribute) %>
-                    </small>
-                    <span class="h5 mb-0">
-                      <%= group_name %>
+        <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+          <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
+            Cancel
+          </button>
+          <%= f.submit "Sort", name: "sort", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+        </div>
+      </div>
+    </details>
+
+    <details class="relative inline-block text-left z-20" id="detailsForm">
+      <summary class="marker:hidden cursor-pointer">
+        <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-green-300 hover:border-green-500' if f.object.condition_attributes.any? %>" id="detailsFilterButton" aria-expanded="true" aria-haspopup="true">
+          <i class="bi-filter text-xl" aria-hidden="true"></i>
+          <% if f.object.condition_attributes.any? %>
+            <span>Filtered by <%= f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ') %></span>
+          <% else %>
+            <span>Filter</span>
+          <% end %>
+          <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
+        </div>
+      </summary>
+      <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsFilterButton" tabindex="-1">
+        <fieldset class="bg-white rounded space-y-2 text-sm">
+          <legend class="border-b w-full font-bold p-2 whitespace-nowrap">
+            In this view, show records where
+            <%= f.combinator_select({}, class: "rounded py-1") %>
+            of the following are true&hellip;
+          </legend>
+          <div class="p-2 space-y-2">
+            <% condition_object = f.object.conditions.any? ? f.object.conditions : f.object.build_condition %>
+            <%= f.condition_fields(condition_object) do |c| %>
+              <%= tag.fieldset class: "fields condition flex items-center gap-2", 'data-object-name': c.object_name do %>
+                <legend></legend>
+
+                <div class="flex flex-nowrap items-start gap-2">
+                  <%= c.attribute_fields do |a| %>
+                    <span class="fields" data-object-name="<%= a.object_name %>">
+                      <%= a.attribute_select({}, class: "text-sm border-gray-400 rounded p-1.5 pr-6 bg-[right_0.125rem_center]") %>
                     </span>
-                  </div>
-                  <div>
-                    <small class="font-normal">Count</small>
-                    <span class="inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers">
-                      <%= group_records.count %>
-                    </span>
-                  </div> 
+                  <% end %>
+
+                  <span class="fields predicate">
+                    <%= c.predicate_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+                  </span>
+
+                  <span class="flex flex-col items-start gap-2">
+                    <%= c.value_fields do |v| %>
+                      <span class="fields flex border border-gray-400 rounded overflow-hidden" data-object-name="<%= v.object_name %>">
+                        <%= v.text_field(:value, class: "text-sm p-1.5 border-0") %>
+                      </span>
+                    <% end %>
+                  </span>
                 </div>
-              </button>
-            </th>
-            <td colspan="<%= @search.field_attributes.size - 1 %>"></td>
-          </tr>
-          <% group_records.each do |record| %>
+              <% end %>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+          <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
+            Cancel
+          </button>
+          <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+        </div>
+      </div>
+    </details>
+
+    <details class="relative inline-block text-left z-20" id="detailsBatch">
+      <summary class="marker:hidden cursor-pointer">
+        <div class="inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100 <%= 'bg-purple-300 hover:border-purple-500' if f.object.batch.present? %>" id="detailsBatchButton" aria-expanded="true" aria-haspopup="true">
+          <i class="bi-card-list text-xl"></i>
+          <% if f.object.batch.present? %>
+            <span>Grouped by <%= Book.human_attribute_name(f.object.batch_attribute) %></span>
+          <% else %>
+            <span>Group</span>
+          <% end %>
+          <i class="bi-chevron-down text-gray-500 group-hover:text-gray-900" aria-hidden="true"></i>
+        </div>
+      </summary>
+      <div class="absolute left-0 z-10 mt-1 min-w-96 origin-top-right rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="detailsBatchButton" tabindex="-1">
+        <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Group by</h3>
+
+        <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
+          <% batch_object = f.object.batch.present? ? f.object.batch : f.object.build_batch %>
+          <%= f.fields_for(:b, batch_object) do |b| %>
+            <div class="fields flex items-center justify-start gap-2" data-object-name="<%= b.object_name %>">
+              <%= b.collection_select(
+                    :name,
+                    f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] },
+                    :first, :last,
+                    { include_blank: true },
+                    class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+              <%= b.collection_select(
+                    :dir,
+                    b.send(:sort_array),
+                    :first, :last,
+                    { include_blank: true },
+                    class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+            </div>
+
+            <fieldset class="py-1 px-0">
+              <legend class="sr-only">Select group behavior</legend>
+
+              <div class="flex items-center justify-between gap-2">
+                <%= b.label :expanded, value: true, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
+                  <%= b.radio_button :expanded, true, checked: b.object.expanded == true, class: "sr-only peer" %>
+                  <span class="flex flex-1">
+                    <span class="flex flex-col">
+                      <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Expand all</span>
+                    </span>
+                  </span>
+
+                  <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
+                  </svg>
+
+                  <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
+                <% end %>
+
+                <%= b.label :expanded, value: false, class: "flex-1 relative flex cursor-pointer rounded-lg border bg-white px-2.5 py-1.5 shadow-sm focus:outline-none" do %>
+                  <%= b.radio_button :expanded, false, checked: b.object.expanded == false, class: "sr-only peer" %>
+                  <span class="flex flex-1">
+                    <span class="flex flex-col">
+                      <span id="grouping_behavior-0-label" class="block text-sm font-medium text-gray-900">Collapse all</span>
+                    </span>
+                  </span>
+
+                  <svg class="invisible peer-checked:visible h-5 w-5 text-blue-600 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>
+                  </svg>
+
+                  <span class="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent peer-checked:border-blue-500" aria-hidden="true"></span>
+                <% end %>
+              </div>
+            </fieldset>
+          <% end %>
+        <% end %>
+
+        <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+          <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsBatch.removeAttribute('open')">
+            Cancel
+          </button>
+          <%= f.submit "Group", name: "batch", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+        </div>
+      </div>
+    </details>
+
+    <%= f.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
+  <% end %>
+
+  <div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
+    <table class="h-full min-w-full divide-y divide-gray-300">
+      <caption id="booksTableCaption" class="h-0 overflow-hidden">
+        <i class="bi-table" aria-hidden="true"></i>
+        Main View
+      </caption>
+
+      <thead class="bg-gray-50">
+        <tr class="divide-x divide-gray-200">
+          <% @search.field_attributes.each do |field| %>
+            <%= tag.th(scope: :col, class: class_names("sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900", 'bg-orange-300': @search.sort_attributes.include?(field), 'bg-green-300': @search.condition_attributes.include?(field))) do %>
+              <%= Book.human_attribute_name(field) %>
+            <% end %>
+          <% end %>
+        </tr>
+      </thead>
+
+      <% if @search.batch.present? %>
+        <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr class="bg-gray-100">
+              <th colspan="1" class="p-0 align-middle">
+                <button class="p-2 w-full flex items-center"
+                        aria-haspopup="true"
+                        aria-expanded="<%= @search.batch.expanded %>"
+                        data-action="groupable#toggle"
+                        data-groupable-target="button">
+                  <span class="mr-6 ml-2">
+                    <i class="bi-chevron-down"></i>
+                  </span>
+                  <div class="flex flex-1 items-center justify-between">
+                    <div class="flex flex-col text-left">
+                      <small class="uppercase font-bold text-gray-600">
+                        <%= Book.human_attribute_name(@search.batch_attribute) %>
+                      </small>
+                      <span class="h5 mb-0">
+                        <%= group_name %>
+                      </span>
+                    </div>
+                    <div>
+                      <small class="font-normal">Count</small>
+                      <span class="inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers">
+                        <%= group_records.count %>
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              </th>
+              <td colspan="<%= @search.field_attributes.size - 1 %>"></td>
+            </tr>
+            <% group_records.each do |record| %>
+              <tr class="divide-x divide-gray-200">
+                <% @search.field_attributes.each do |field| %>
+                  <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
+                    <%= record.public_send(field) %>
+                  <% end %>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      <% else %>
+        <tbody class="divide-y divide-gray-200 bg-white">
+          <% @records.each do |record| %>
             <tr class="divide-x divide-gray-200">
               <% @search.field_attributes.each do |field| %>
                 <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
@@ -283,41 +297,29 @@
           <% end %>
         </tbody>
       <% end %>
-    <% else %>
-      <tbody class="divide-y divide-gray-200 bg-white">
-        <% @records.each do |record| %>
-          <tr class="divide-x divide-gray-200">
-            <% @search.field_attributes.each do |field| %>
-              <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
-                <%= record.public_send(field) %>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    <% end %>
 
-    <tfoot>
-      <tr>
-        <td colspan="<%= Book.ransortable_attributes.size %>">
-          <div class="flex items-center justify-between p-2">
-            <div class="">
-              <%= form_tag(search_books_path, method: :post) do %>
-                <%= select_tag :page_items, options_for_select([10, 20, 50, 100], selected = params[:page_items]) %>
-                <%= submit_tag("Update", class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto") %>
-              <% end %>
+      <tfoot>
+        <tr>
+          <td colspan="<%= Book.ransortable_attributes.size %>">
+            <div class="flex items-center justify-between p-2">
+              <div class="">
+                <%= form_tag(search_books_path, method: :post) do %>
+                  <%= select_tag :page_items, options_for_select([10, 20, 50, 100], selected = params[:page_items]) %>
+                  <%= submit_tag("Update", class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto") %>
+                <% end %>
+              </div>
+              <div class="flex items-center justify-center">
+                <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
+                <%== pagy_nav(@pagy) %>
+              </div>
+              <div class="">
+                <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
+                <%== pagy_info(@pagy) %>
+              </div>
             </div>
-            <div class="flex items-center justify-center">
-              <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-              <%== pagy_nav(@pagy) %>
-            </div>
-            <div class="">
-              <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-              <%== pagy_info(@pagy) %>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+<% end %>

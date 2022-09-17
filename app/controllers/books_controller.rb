@@ -4,6 +4,7 @@ class BooksController < ApplicationController
     @search = Book.ransack(params[:q])
     @search.default_fields = Book.ransortable_attributes
     @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, 20))
+    render :index, layout: false
   end
 
   # GET|POST /users/search
