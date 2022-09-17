@@ -3,6 +3,7 @@ module Views
     class Section < Base
       def initialize(form, id:)
         @form = form
+        @id = id
       end
 
       def template(&)
@@ -11,12 +12,12 @@ module Views
         end
       end
 
-      def title(icon:, &block)
+      def title(icon:, colored:, classes:, &block)
         summary class: "marker:hidden cursor-pointer" do
           div id: "#{@id}Button",
             aria: { expanded: "true", haspopup: "true" },
             **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:border-gray-300 focus:ring-offset-gray-100",
-              hidden_fields?: "bg-blue-300 hover:border-blue-500") do
+              -> { colored } => classes) do
 
             i class: "text-xl bi-#{icon}", aria: { hidden: "true" }
 
@@ -34,10 +35,6 @@ module Views
           tabindex: "-1",
           &block
       end
-
-      private
-
-      def hidden_fields? = @form.object.hidden_fields.any?
     end
   end
 end
