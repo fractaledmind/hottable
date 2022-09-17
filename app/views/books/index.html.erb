@@ -73,8 +73,28 @@
         </tr>
       <% end %>
     </tbody>
+    
+    <tfoot>
+      <tr>
+        <td colspan="<%= Book.ransortable_attributes.size %>">
+          <div class="flex items-center justify-between p-2">
+            <div class="">
+              <%= form_tag(search_books_path, method: :post) do %>
+                <%= select_tag :page_items, options_for_select([10, 20, 50, 100], selected = params[:page_items]) %>
+                <%= submit_tag("Update", class: "rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 font-medium text-gray-900") %>
+              <% end %>
+            </div>
+            <div class="flex items-center justify-center">
+              <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
+              <%== pagy_nav(@pagy) %>
+            </div>
+            <div class="">
+              <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
+              <%== pagy_info(@pagy) %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>
-
-<%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-<%== pagy_nav(@pagy) %>
