@@ -30,7 +30,7 @@ module Views
               end
             end
           end
-          td colspan: @search.field_attributes.size - 2
+          td colspan: @search.field_attributes.size - 1
         end
       end
     end
