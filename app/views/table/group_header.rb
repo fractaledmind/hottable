@@ -1,5 +1,5 @@
 module Views
-  module Table
+  class Table
     class GroupHeader < Base
       def initialize(group_name, group_records, search:)
         @group_name = group_name

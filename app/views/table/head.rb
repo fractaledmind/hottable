@@ -1,5 +1,5 @@
 module Views
-  module Table
+  class Table
     class Head < Base
       def initialize(search:)
         @search = search

@@ -1,5 +1,5 @@
 module Views
-  module Table
+  class Table
     class Row < Base
       def initialize(record, search:)
         @record = record

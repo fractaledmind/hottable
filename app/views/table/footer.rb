@@ -1,5 +1,5 @@
 module Views
-  module Table
+  class Table
     class Footer < Base
       include Pagy::Frontend
 

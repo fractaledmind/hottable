@@ -1,5 +1,5 @@
 module Views
-  module Table
+  class Table
     class Header < Base
       def initialize(attribute, search:)
         @attribute = attribute

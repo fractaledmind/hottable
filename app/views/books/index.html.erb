@@ -222,33 +222,6 @@
   <% end %>
 
   <div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
-    <table class="h-full min-w-full divide-y divide-gray-300">
-      <caption id="booksTableCaption" class="h-0 overflow-hidden">
-        <i class="bi-table" aria-hidden="true"></i>
-        Main View
-      </caption>
-
-      <%= render Views::Table::Head.new(search: @search) %>
-
-      <% if @search.batch_attribute.present? %>
-        <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
-          <tbody class="divide-y divide-gray-200 bg-white">
-            <%= render Views::Table::GroupHeader.new(group_name, group_records, search: @search) %>
-
-            <% group_records.each do |record| %>
-              <%= render Views::Table::Row.new(record, search: @search) %>
-            <% end %>
-          </tbody>
-        <% end %>
-      <% else %>
-        <tbody class="divide-y divide-gray-200 bg-white">
-          <% @records.each do |record| %>
-            <%= render Views::Table::Row.new(record, search: @search) %>
-          <% end %>
-        </tbody>
-      <% end %>
-
-      <%= render Views::Table::Footer.new(@search, pagy: @pagy) %>
-    </table>
+    <%= render Views::Table.new(@records, search: @search, pagy: @pagy) %>
   </div>
 <% end %>
