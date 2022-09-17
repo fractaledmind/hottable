@@ -274,13 +274,7 @@
               <td colspan="<%= @search.field_attributes.size - 1 %>"></td>
             </tr>
             <% group_records.each do |record| %>
-              <tr class="divide-x divide-gray-200">
-                <% @search.field_attributes.each do |field| %>
-                  <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
-                    <%= record.public_send(field) %>
-                  <% end %>
-                <% end %>
-              </tr>
+              <%= render Views::Table::Row.new(record, search: @search) %>
             <% end %>
           </tbody>
         <% end %>
