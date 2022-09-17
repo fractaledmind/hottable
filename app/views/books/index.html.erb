@@ -42,11 +42,11 @@
     </div>
   </details>
   
-  <%= f.submit class: "rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 font-medium text-gray-900" %>
+  <%= f.submit class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
 <% end %>
 
 <div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
-  <table class="min-w-full divide-y divide-gray-300">
+  <table class="h-full min-w-full divide-y divide-gray-300">
     <caption id="booksTableCaption" class="h-0 overflow-hidden">
       <i class="bi-table" aria-hidden="true"></i>
       Main View
@@ -55,9 +55,9 @@
     <thead class="bg-gray-50">
       <tr class="divide-x divide-gray-200">
         <% Book.ransortable_attributes.each do |attribute_name| %>
-          <th scope="col" class="sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+          <%= tag.th(scope: :col, class: class_names("sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900", 'bg-orange-300': @search.sorts.map(&:attr_name).uniq.include?(attribute_name.to_s))) do %>
             <%= Book.human_attribute_name(attribute_name) %>
-          </th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -66,9 +66,9 @@
       <% @records.each do |record| %>
         <tr class="divide-x divide-gray-200">
           <% Book.ransortable_attributes.each do |attribute_name| %>
-            <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+            <%= tag.td(class: class_names("whitespace-nowrap px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(attribute_name.to_s))) do %>
               <%= record.public_send(attribute_name) %>
-            </td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>
@@ -81,7 +81,7 @@
             <div class="">
               <%= form_tag(search_books_path, method: :post) do %>
                 <%= select_tag :page_items, options_for_select([10, 20, 50, 100], selected = params[:page_items]) %>
-                <%= submit_tag("Update", class: "rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 font-medium text-gray-900") %>
+                <%= submit_tag("Update", class: "cursor-pointer inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto") %>
               <% end %>
             </div>
             <div class="flex items-center justify-center">
