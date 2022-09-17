@@ -17,7 +17,7 @@ module Views
     def title(icon:, colored:, classes:, &block)
       summary class: "marker:hidden cursor-pointer" do
         div id: "#{@id}Button",
-          aria: { expanded: "true", haspopup: "true" },
+          aria: { expanded: "false", haspopup: "true" },
           **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 group-open:border-gray-200 hover:border-gray-300 focus:ring-offset-gray-100",
             -> { colored } => classes) do
 
