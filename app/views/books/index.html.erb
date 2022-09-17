@@ -1,28 +1,27 @@
 <h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
 
 <div class="grow flex items-start -mt-px" role="region" aria-labelledby="booksTableCaption" tabindex="0">
-  <table class="border-gray-300 h-full w-full">
+  <table class="min-w-full divide-y divide-gray-300">
     <caption id="booksTableCaption" class="h-0 overflow-hidden">
       <i class="bi-table" aria-hidden="true"></i>
       Main View
     </caption>
 
-    <thead>
-      <tr>
+    <thead class="bg-gray-50">
+      <tr class="divide-x divide-gray-200">
         <% Book.ransortable_attributes.each do |attribute_name| %>
-          <th>
+          <th scope="col" class="sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
             <%= Book.human_attribute_name(attribute_name) %>
           </th>
         <% end %>
       </tr>
     </thead>
     
-    <tbody>
+    <tbody class="divide-y divide-gray-200 bg-white">
       <% @records.each do |record| %>
-        <tr>
+        <tr class="divide-x divide-gray-200">
           <% Book.ransortable_attributes.each do |attribute_name| %>
-            <td>
+            <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
               <%= record.public_send(attribute_name) %>
             </td>
           <% end %>
