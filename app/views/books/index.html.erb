@@ -239,17 +239,63 @@
       </tr>
     </thead>
 
-    <tbody class="divide-y divide-gray-200 bg-white">
-      <% @records.each do |record| %>
-        <tr class="divide-x divide-gray-200">
-          <% @search.field_attributes.each do |field| %>
-            <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
-              <%= record.public_send(field) %>
-            <% end %>
+    <% if @search.batch.present? %>
+      <% @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records| %>
+        <tbody class="divide-y divide-gray-200 bg-white">
+          <tr class="bg-gray-100">
+            <th colspan="1" class="p-0 align-middle">
+              <button class="p-2 w-full flex items-center"
+                      aria-haspopup="true"
+                      aria-expanded="<%= @search.batch.expanded %>"
+                      data-action="groupable#toggle"
+                      data-groupable-target="button">
+                <span class="mr-6 ml-2">
+                  <i class="bi-chevron-down"></i>
+                </span>
+                <div class="flex flex-1 items-center justify-between">
+                  <div class="flex flex-col text-left">
+                    <small class="uppercase font-bold text-gray-600">
+                      <%= Book.human_attribute_name(@search.batch_attribute) %>
+                    </small>
+                    <span class="h5 mb-0">
+                      <%= group_name %>
+                    </span>
+                  </div>
+                  <div>
+                    <small class="font-normal">Count</small>
+                    <span class="inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers">
+                      <%= group_records.count %>
+                    </span>
+                  </div> 
+                </div>
+              </button>
+            </th>
+            <td colspan="<%= @search.field_attributes.size - 1 %>"></td>
+          </tr>
+          <% group_records.each do |record| %>
+            <tr class="divide-x divide-gray-200">
+              <% @search.field_attributes.each do |field| %>
+                <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
+                  <%= record.public_send(field) %>
+                <% end %>
+              <% end %>
+            </tr>
           <% end %>
-        </tr>
+        </tbody>
       <% end %>
-    </tbody>
+    <% else %>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <% @records.each do |record| %>
+          <tr class="divide-x divide-gray-200">
+            <% @search.field_attributes.each do |field| %>
+              <%= tag.td(class: class_names("px-2 py-2 text-sm text-gray-500", 'bg-orange-200': @search.sorts.map(&:attr_name).uniq.include?(field), 'bg-green-200': @search.condition_attributes.include?(field))) do %>
+                <%= record.public_send(field) %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
 
     <tfoot>
       <tr>
