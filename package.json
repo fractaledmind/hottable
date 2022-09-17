@@ -10,8 +10,11 @@
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
   },
+  "devDependencies": {
+    "esbuild-rails": "^1.0.3"
+  },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build": "node esbuild.config.js",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
   }
 }
