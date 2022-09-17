@@ -162,13 +162,13 @@
                   :name,
                   f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] },
                   :first, :last,
-                  {},
+                  { include_blank: true },
                   class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
             <%= b.collection_select(
                   :dir,
                   b.send(:sort_array),
                   :first, :last,
-                  {},
+                  { include_blank: true },
                   class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
           </div>
 
