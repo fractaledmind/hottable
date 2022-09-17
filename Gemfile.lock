@@ -115,6 +115,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     pg (1.4.3)
     propshaft (0.6.4)
       actionpack (>= 7.0.0)
@@ -190,6 +192,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   jsbundling-rails
+  pagy (~> 5.10)
   pg (~> 1.1)
   propshaft
   puma (~> 5.0)
