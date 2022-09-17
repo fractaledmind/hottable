@@ -21,11 +21,15 @@ module Views
           **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 hover:border-gray-300 focus:ring-offset-gray-100",
             -> { colored } => classes) do
 
-          i class: "text-xl bi-#{icon}", aria: { hidden: "true" }
+          render Bootstrap::Icon.new(icon),
+            class: "text-xl",
+            aria: { hidden: "true" }
 
           span(&block)
 
-          i class: "bi-chevron-down text-gray-500 group-hover:text-gray-900", aria: { hidden: "true" }
+          render Bootstrap::Icon.new("chevron-down",
+            class: "text-gray-500 group-hover:text-gray-900",
+            aria: { hidden: "true" })
         end
       end
     end

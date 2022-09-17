@@ -41,9 +41,8 @@
     </fieldset>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-      <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsFilter.removeAttribute('open')">
-        Cancel
-      </button>
+      <%= render Views::Button.new("Cancel") %>
+
       <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
     </div>
   <% end %>

@@ -4,7 +4,7 @@
   <% end %>
 
   <%= section.body do %>
-    <h3 class="border-b mb-2 pb-1 font-bold px-2 py-1">Sort by</h3>
+    <%= render(Views::Books::Form::Section::Heading.new) { "Sort by" } %>
 
     <%= tag.fieldset class: "p-2 pt-0 space-y-2" do %>
       <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
@@ -16,9 +16,8 @@
     <% end %>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-      <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 hover:bg-gray-300" onclick="detailsSort.removeAttribute('open')">
-        Cancel
-      </button>
+      <%= render Views::Button.new("Cancel") %>
+
       <%= f.submit "Sort", name: "sort", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
     </div>
   <% end %>
