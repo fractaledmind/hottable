@@ -17,7 +17,7 @@ class BooksController < ApplicationController
 
   # GET|POST /users/search
   def search
-    index
-    redirect_to books_path(params.to_unsafe_hash.except(:authenticity_token, :action, :controller, :commit))
+    redirect_to books_path(
+      params.to_unsafe_hash.except(:authenticity_token, :action, :controller, :commit))
   end
 end
