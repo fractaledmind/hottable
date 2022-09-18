@@ -20,7 +20,7 @@ module Views
 
       def filtered? = @search.condition_attributes.include? @attribute
       def sorted? = @search.sort_attributes.include? @attribute
-      
+
       def attribute_icon
         type = Book.attribute_schema.fetch(@attribute.to_sym)
         {
