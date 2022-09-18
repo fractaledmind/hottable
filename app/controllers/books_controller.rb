@@ -72,7 +72,7 @@ class BooksController < ApplicationController
   # GET|POST /books/search
   def search
     redirect_to books_path(
-      params.to_unsafe_hash.except(:authenticity_token, :action, :controller, :commit, :filter, :batch, :field)
+      params.to_unsafe_hash.except(:view_name, :authenticity_token, :action, :controller, :commit, :filter, :batch, :field)
     )
   end
 
