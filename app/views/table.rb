@@ -7,7 +7,7 @@ module Views
     end
 
     def template
-      table class: "h-full" do
+      table class: "h-full border-r border-gray-300" do
         caption id: "booksTableCaption", class: "h-0 overflow-hidden" do
           i class: "bi-table", aria_hidden: "true"
           "Main View"
