@@ -36,7 +36,7 @@ module Views
       def cell
         if @attribute.to_s == Book.primary_attribute.to_s
           th scope: "row",
-             **classes("text-sm font-medium text-gray-900 text-left sticky left-12 bg-white row-group-has-checked:bg-blue-100 row-group-has-checked:text-blue-900",
+             **classes("text-sm font-medium text-gray-900 text-left sticky left-12 bg-white row-group-has-checked:bg-blue-100 row-group-has-checked:text-blue-900 cursor-pointer",
                  filtered?: "bg-green-100",
                  sorted?: "bg-orange-100",
                  grouped?: "bg-purple-100",
@@ -54,7 +54,7 @@ module Views
             body
           end
         else
-          td **classes("text-sm text-gray-500",
+          td **classes("text-sm text-gray-500 cursor-pointer",
                 filtered?: "bg-green-100 row-group-has-checked:bg-green-100/50",
                 sorted?: "bg-orange-100 row-group-has-checked:bg-orange-100/50",
                 grouped?: "bg-purple-100 row-group-has-checked:bg-purple-100/50",

@@ -5,31 +5,28 @@ import { createPopper } from '@popperjs/core'
 export default class extends ApplicationController {
   static targets = ["tooltip", "tooltipTemplate"]
 
-  update (event) {
+  async update (event) {
+    if (event instanceof KeyboardEvent) {
+      if (event.key !== "Enter") return
+    }
+
     const form = (event.target instanceof HTMLFormElement) ? event.target : event.target.closest("form")
-
-    if (!this.updatable) return
-
-    form.requestSubmit()
-
-    this.updatable = false
+    await form.requestSubmit()
   }
 
-  abort (event) {
+  async abort (event) {
     event.preventDefault()
 
-    this.requestEdit(event.target, { "book_edit": "false" })
-    this.updatable = false
+    await this.requestEdit(event.target, { "book_edit": "false" })
   }
 
   async edit (event) {
     this.clearSelection()
 
-    this.requestEdit(event.target, { "book_edit": "true" })
-    this.updatable = true
+    await this.requestEdit(event.target, { "book_edit": "true" })
   }
 
-  requestEdit(target, query = {}) {
+  async requestEdit(target, query = {}) {
     const { editUrl, attribute } = target.closest("td, th").dataset
 
     await get(editUrl, {
@@ -51,7 +48,7 @@ export default class extends ApplicationController {
 
   tooltipTargetConnected(target) {
     this.popper = createPopper(target, this.tooltipTemplateTarget, {
-      placement: 'top'
+      placement: "top"
     })
   }
 

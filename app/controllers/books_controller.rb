@@ -19,13 +19,14 @@ class BooksController < ApplicationController
 
     if true # type == "column"
       attribute = params["book_attribute"]
-      column_class = params["book_edit"] == "true" ? Views::Table::ColumnEdit : Views::Table::Column
+      inline_edit = params["book_edit"] == "true"
+      column_class = inline_edit ? Views::Table::ColumnEdit : Views::Table::Column
 
       html = column_class.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
       id = dom_id(book, "column_#{attribute}")
 
       parts << turbo_stream.replace(id, html)
-      parts << turbo_stream.set_focus("##{id} input, ##{id} select")
+      parts << turbo_stream.set_focus("##{id} input, ##{id} select") if inline_edit
     else
       html = Views::Table::Row.new(book, search: ransack_search, inline_edit: true).call(view_context:).html_safe
       id = dom_id(book, :row)
