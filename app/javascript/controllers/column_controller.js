@@ -18,33 +18,27 @@ export default class extends ApplicationController {
   abort (event) {
     event.preventDefault()
 
-    const { editUrl, attribute } = event.target.closest("td, th").dataset
-
-    get(editUrl, {
-      query: {
-        'book_edit': "false",
-        'book_attribute': attribute,
-      },
-      responseKind: "turbo-stream"
-    })
-
+    this.requestEdit(event.target, { "book_edit": "false" })
     this.updatable = false
   }
 
   async edit (event) {
     this.clearSelection()
 
-    const { editUrl, attribute } = event.target.closest("td, th").dataset
+    this.requestEdit(event.target, { "book_edit": "true" })
+    this.updatable = true
+  }
+
+  requestEdit(target, query = {}) {
+    const { editUrl, attribute } = target.closest("td, th").dataset
 
     await get(editUrl, {
       query: {
-        'book_edit': "true",
+        ...query,
         'book_attribute': attribute,
       },
       responseKind: "turbo-stream"
     })
-
-    this.updatable = true
   }
 
   clearSelection() {
