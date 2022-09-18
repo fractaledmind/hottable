@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :views, only: [:create, :update, :destroy]
+  resources :views, only: [:create, :destroy] do
+    member do
+      post :update
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
