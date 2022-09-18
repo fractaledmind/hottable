@@ -39,7 +39,7 @@ module Views
               end
               div class: "hidden sm:block border-b border-gray-200" do
                 nav class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs" do
-                  details class: "relative z-20 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium", 'aria-current': "page" do
+                  details class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium", 'aria-current': "page" do
                     summary class: "marker:hidden cursor-pointer p-4" do
                       div class: "flex items-center gap-2" do
                         span "Books"
@@ -78,7 +78,7 @@ module Views
                     end
                   end
 
-                  details class: "relative z-20 border-transparent text-white hover:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
+                  details class: "relative z-40 border-transparent text-white hover:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
                     summary class: "marker:hidden cursor-pointer p-4" do
                       div class: "flex items-center gap-1" do
                         render Bootstrap::Icon.new("plus-lg"), aria: { hidden: "true" }

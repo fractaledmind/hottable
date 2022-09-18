@@ -17,6 +17,7 @@ export default class extends ApplicationController {
 
   remove(event) {
     event.preventDefault()
+    event.stopPropagation()
 
     event.target.closest(".fields").remove()
     this.updateIndexes()

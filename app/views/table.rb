@@ -7,7 +7,7 @@ module Views
     end
 
     def template
-      table class: "h-full border-r border-gray-300" do
+      table class: "h-full border-r border-gray-300", id: 'table' do
         caption id: "booksTableCaption", class: "h-0 overflow-hidden" do
           i class: "bi-table", aria_hidden: "true"
           "Main View"
@@ -33,8 +33,21 @@ module Views
           end
         end
 
+        tfoot class: "sticky bottom-0 z-20 bg-gray-100" do
+          tr class: "h-12" do
+            td do
+            end
+            attributes.each do |attribute|
+              render Views::Table::ColumnSummary.new(nil, attribute: attribute, calculation: "")
+            end
+          end
+        end
         render Views::Table::Footer.new(@search, pagy: @pagy)
       end
     end
+
+    private
+
+    def attributes = @search.field_attributes
   end
 end
