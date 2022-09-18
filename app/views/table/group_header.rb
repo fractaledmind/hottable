@@ -12,7 +12,7 @@ module Views
           th colspan: "2", scope: "rowgroup", class: "sticky left-0 p-0 align-middle bg-gray-100" do
             button class: "p-2 w-full flex items-center border-r border-gray-300",
                    aria_haspopup: "true",
-                   aria_expanded: @search.batch.expanded,
+                   aria_expanded: @search.batch.expanded.to_s,
                    data_action: "groupable#toggle",
                    data_groupable_target: "button" do
               span class: "mr-6 ml-2" do
