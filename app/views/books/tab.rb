@@ -8,7 +8,7 @@ module Views
     end
 
     def template
-      a href: books_path(@view&.parameters),
+      a id: tab_id, href: books_path(@view&.parameters),
         **classes("relative z-40 group rounded-t inline-flex items-center font-medium text-white border-b border-transparent p-4  hover:border-white",
           current_page?: "bg-white text-gray-800 hover:bg-gray-100",
           -> { !current_page? } => "hover:bg-violet-900"),
@@ -18,6 +18,12 @@ module Views
     end
 
     private
+
+    def tab_id
+      dom_id(@view, :tab)
+    rescue
+      "default_tab"
+    end
 
     def current_page?
       clean_params = params.to_unsafe_hash.except(:views, :authenticity_token, :controller, :action)

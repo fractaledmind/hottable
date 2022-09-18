@@ -5,9 +5,15 @@ class ViewsController < ApplicationController
       parameters: params.to_unsafe_hash.except(:views, :authenticity_token, :controller, :action)
     )
 
+    parts = []
     html = Views::Books::Tab.new(view).call(view_context:).html_safe
 
-    render turbo_stream: turbo_stream.append("book_tabs", html)
+    parts << turbo_stream.prepend("new_tab", html)
+
+    html = Views::Books::Tab.new(OpenStruct.new(name: "Books", parameters: {})).call(view_context:).html_safe
+
+    parts << turbo_stream.replace("default_tab", html)
+    render turbo_stream: parts.join(" ")
   end
 
   def destroy

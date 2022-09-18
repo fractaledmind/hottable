@@ -25,6 +25,8 @@ module Views
             render Books::Tab.new(view)
           end
 
+          div id: "new_tab"
+
           details class: "relative z-40 border-transparent text-white hover:bg-violet-900 open:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
             summary class: "marker:hidden cursor-pointer p-4" do
               div class: "flex items-center gap-1" do
