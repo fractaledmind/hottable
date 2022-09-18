@@ -5,6 +5,25 @@ GIT
     phlex (0.2.1)
       zeitwerk (~> 2.6)
 
+GIT
+  remote: https://github.com/marcoroth/turbo-rails.git
+  revision: 7dc45696aef909cfd07447b92952ee0b44f398f2
+  branch: custom-action-helpers
+  specs:
+    turbo-rails (1.1.1)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+
+GIT
+  remote: https://github.com/marcoroth/turbo_pack-rails.git
+  revision: 0b6973058b2b730797e769f6d4f0af0d60952430
+  branch: main
+  specs:
+    turbo_power (0.1.1)
+      turbo-rails
+      turbo_ready
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -179,10 +198,9 @@ GEM
     strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)
-    turbo-rails (1.1.1)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
+    turbo_ready (0.0.7)
+      rails (>= 6.1)
+      turbo-rails (>= 1.1)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     web-console (4.2.0)
@@ -214,7 +232,8 @@ DEPENDENCIES
   ransack (~> 3.2)
   redis (~> 4.0)
   stimulus-rails
-  turbo-rails
+  turbo-rails!
+  turbo_power!
   tzinfo-data
   web-console
 

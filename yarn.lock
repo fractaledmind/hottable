@@ -712,6 +712,24 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+turbo-morph@^0.1.0-beta.3:
+  version "0.1.0-beta.7"
+  resolved "https://registry.yarnpkg.com/turbo-morph/-/turbo-morph-0.1.0-beta.7.tgz#3a3839c711c2c32fb9f1c9a163cdc8ebbd700795"
+  integrity sha512-PeQgyXN9GOtOnXVs9sH+nzEKKZ1h4mBqN538v3F2uivJUU/w+crwObf3e6Q7kj7mUBfDoDDFefEfYwvhNKR1uA==
+
+turbo_power@^0.1.0-beta.2:
+  version "0.1.0-beta.2"
+  resolved "https://registry.yarnpkg.com/turbo_power/-/turbo_power-0.1.0-beta.2.tgz#ca80e658548ed19fad79d954db619a38c3fc6c39"
+  integrity sha512-h7Ohf7MqZ21joPYFrd7MSvBU1uC8OcX4fu9suGAG3daDMZ0lu2/tdIyjc2My5D7LXQ8kLVPODBwQk/DGp+FNbA==
+  dependencies:
+    turbo-morph "^0.1.0-beta.3"
+    turbo_ready "^0.0.6"
+
+turbo_ready@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/turbo_ready/-/turbo_ready-0.0.6.tgz#7e3f01e4af26e38e5dad3291d6307ba82be220ff"
+  integrity sha512-cyHh5VZjRxdsGPckRMmYbaDwkKY0O59I0Lp/uWffYNbAU70GofTJ6dUP1mjnkrYNVa5UA7sAUcKWXkz6rQnUYg==
+
 update-browserslist-db@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.9.tgz#2924d3927367a38d5c555413a7ce138fc95fcb18"
