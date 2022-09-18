@@ -18,7 +18,7 @@ module Views
         end
       end
       div class: "hidden sm:block border-b border-gray-200" do
-        nav id: "book_tabs", class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs" do
+        nav id: "book_tabs", class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs", data_controller: "details-set" do
           @views.each do |view|
             render Books::Tab.new(view)
           end
