@@ -3,7 +3,7 @@ import { get } from "@rails/request.js"
 
 export default class extends ApplicationController {
 
-  click (event) {
+  update (event) {
     event.target.closest("form").requestSubmit()
   }
 

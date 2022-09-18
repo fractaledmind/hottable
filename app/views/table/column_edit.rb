@@ -9,14 +9,14 @@ module Views
           if attribute_type != :enum
             return input(
               value: value,
-              data: { action: "change->column#click" },
+              data: { action: "change->column#update" },
               name: "book[#{@attribute}]",
               class: "w-full",
               type: input_type(attribute_type)
             )
           end
 
-          select(data: { action: "change->column#click" }, name: "book[#{@attribute}]") do
+          select(data: { action: "change->column#update" }, name: "book[#{@attribute}]") do
             option(value: "") { "" }
 
             Book.all.distinct.pluck(@attribute).sort.each do |code|
