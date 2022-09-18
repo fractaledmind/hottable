@@ -9,7 +9,14 @@ module Views
     end
 
     def template(&)
-      details class: "relative inline-block text-left z-20 group", id: @id, **attributes.deep_merge(data: { controller: "details-dropdown" }) do
+      props = attributes.deep_merge(data: { controller: "details-dropdown" }) do |key, oldval, newval|
+        if ["class", "controller"].include?(key.to_s)
+          [newval, oldval].join(' ')
+        else
+          newval
+        end
+      end
+      details class: "relative inline-block text-left z-30 group", id: @id, **props do
         content(&)
       end
     end
@@ -36,7 +43,7 @@ module Views
     end
 
     def body(&block)
-      div class: "absolute left-0 mt-1 min-w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none",
+      div class: "absolute left-0 mt-1 min-w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg overflow-auto max-h-[calc(100vh-250px)] focus:outline-none",
         role: "menu",
         aria: { orientation: "vertical", labelledby: "#{@id}Button" },
         tabindex: "-1",

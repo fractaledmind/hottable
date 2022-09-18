@@ -1,0 +1,25 @@
+<%= tag.fieldset class: "fields grouping bg-gray-900/5 px-4 py-2 space-y-2", 'data-object-name': f.object_name do %>
+  <legend class="w-full float-left mb-2">
+    <div class="flex items-center justify-between">
+      <div>
+        Where
+        <%= f.combinator_select({}, class: "text-sm rounded p-1 pr-6 bg-[right_0.125rem_center]") %>
+        of the following are true&hellip;
+      </div>
+      <div>
+        <%= button_to_remove_fields %>
+      </div>
+    </div>
+  </legend>
+  
+  <% condition_object = f.object.conditions.any? ? f.object.conditions : f.object.build_condition %>
+  <%= f.condition_fields(condition_object) do |c| %>
+    <%= render 'filter/condition_fields', f: c %>
+  <% end %>
+  <%= button_to_add_fields(f, :condition) %>
+  
+  <%= f.grouping_fields do |g| %>
+    <%= render 'filter/grouping_fields', f: g %>
+  <% end %>
+  <%= button_to_nest_fields(:grouping) %>
+<% end %>

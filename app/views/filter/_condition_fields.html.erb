@@ -1,0 +1,23 @@
+<%= tag.fieldset class: "fields condition flex items-center gap-2", 'data-object-name': f.object_name do %>
+  <legend></legend>
+  
+  <div class="flex flex-nowrap items-start gap-2">
+    <%= f.attribute_fields do |a| %>
+      <%= render 'filter/attribute_fields', f: a %>
+    <% end %>
+    
+    <span class="fields predicate">
+      <%= f.predicate_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+    </span>
+    
+    <span class="flex flex-col items-start gap-2">
+      <%= f.value_fields do |v| %>
+        <%= render 'filter/value_fields', f: v %>
+      <% end %>
+      
+      <%= button_to_add_fields(f, :value) %>
+    </span>
+    
+    <%= button_to_remove_fields %>
+  </div>
+<% end %>
