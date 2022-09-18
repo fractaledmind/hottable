@@ -105,7 +105,7 @@ class BooksController < ApplicationController
 
   def set_data
     @search = ransack_search
-    @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, 20))
+    @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, Pagy::DEFAULT[:items]))
   end
 
   def book_params
