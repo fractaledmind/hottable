@@ -11,7 +11,7 @@ module Views
               value: value,
               data: { action: "change->column#update" },
               name: "book[#{@attribute}]",
-              class: "w-full",
+              class: "w-full px-2 py-2 text-sm",
               type: input_type(attribute_type)
             )
           end

@@ -36,7 +36,7 @@ module Views
       def cell
         if @attribute.to_s == Book.primary_attribute.to_s
           th scope: "row",
-             **classes("px-2 py-2 text-sm font-medium text-gray-900 text-left sticky left-12 bg-white row-group-has-checked:bg-blue-100 row-group-has-checked:text-blue-900",
+             **classes("text-sm font-medium text-gray-900 text-left sticky left-12 bg-white row-group-has-checked:bg-blue-100 row-group-has-checked:text-blue-900",
                  filtered?: "bg-green-200",
                  sorted?: "bg-orange-200",
                  grouped?: "bg-purple-200",
@@ -75,7 +75,7 @@ module Views
       end
 
       def body
-        return value if attribute_type != :enum
+        return span(value, class: "px-2 py-2") if attribute_type != :enum
 
         color = tailwind_color_for_enum
         span @record.public_send(@attribute).to_s, **classes("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", tailwind_color_for_enum)
