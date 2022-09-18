@@ -46,3 +46,5 @@ BookAuthor.upsert_all(
     end
   end
 )
+
+View.create!(name: "Books", parameters: {})
