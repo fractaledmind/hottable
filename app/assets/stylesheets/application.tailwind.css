@@ -28,7 +28,7 @@ tfoot td {
 }
 
 .pagy-nav {
-  @apply flex items-start justify-between border-t border-gray-200 px-4 sm:px-0 min-w-72;
+  @apply flex items-start justify-between px-4 sm:px-0 min-w-72;
 }
 
 .pagy-nav .page.prev,
