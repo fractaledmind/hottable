@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(id: "detailsFilter", data: { 'details-set-target': "child", controller: "filter-by" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsFilter", data: { 'details-set-target': "child", controller: "filter-by clearable" }) do |section| %>
   <%= section.title icon: "filter", colored: f.object.condition_attributes.any?, classes: "bg-green-300 hover:border-green-500" do %>
     <%= f.object.condition_attributes.any? ? "Filtered by #{f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ')}" : "Filter" %>
   <% end %>
@@ -22,7 +22,7 @@
           <%= render 'filter/condition_fields', f: c %>
         <% end %>
         <%= button_to_add_fields(f, :condition) %>
-      
+
         <%= f.grouping_fields do |g| %>
           <%= render 'filter/grouping_fields', f: g %>
         <% end %>
@@ -31,6 +31,7 @@
     </fieldset>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
+      <%= render(Views::Button.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
       <%= render(Views::Button.new) { "Cancel" } %>
 
       <%= f.submit "Filter", name: "filter", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>

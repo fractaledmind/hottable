@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(id: "detailsSort", data: { 'details-set-target': "child", controller: "sort-by" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsSort", data: { 'details-set-target': "child", controller: "sort-by clearable" }) do |section| %>
   <%= section.title icon: "arrow-down-up", colored: f.object.sorts.any?, classes: "bg-orange-300 hover:border-orange-500" do %>
     <%= f.object.sorts.any? ? "Sorted by #{pluralize(f.object.sorts.count, 'field')}" : "Sort" %>
   <% end %>
@@ -10,7 +10,7 @@
       <% sort_object = f.object.sorts.any? ? f.object.sorts : f.object.build_sort %>
       <%= f.sort_fields(sort_object) do |s| %>
         <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>" data-sort-by-target="field" }>
-          <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]") %>
+          <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]", "data-clearable-target": "input") %>
           <%= render(Views::Button.new(data: { action: "click->sort-by#remove" })) { "Remove" } %>
         </div>
       <% end %>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-      <%= render(Views::Button.new(data: { action: "click->sort-by#clear" })) { "Clear" } %>
+      <%= render(Views::Button.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
       <%= render(Views::Button.new(primary: true, name: "sort")) { "Sort" } %>
     </div>
   <% end %>

@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <div>
         Where
-        <%= f.combinator_select({}, class: "text-sm rounded p-1 pr-6 bg-[right_0.125rem_center]") %>
+        <%= f.combinator_select({}, "data-clearable-target": "input", class: "text-sm rounded p-1 pr-6 bg-[right_0.125rem_center]") %>
         of the following are true&hellip;
       </div>
       <div>
@@ -11,13 +11,13 @@
       </div>
     </div>
   </legend>
-  
+
   <% condition_object = f.object.conditions.any? ? f.object.conditions : f.object.build_condition %>
   <%= f.condition_fields(condition_object) do |c| %>
     <%= render 'filter/condition_fields', f: c %>
   <% end %>
   <%= button_to_add_fields(f, :condition) %>
-  
+
   <%= f.grouping_fields do |g| %>
     <%= render 'filter/grouping_fields', f: g %>
   <% end %>
