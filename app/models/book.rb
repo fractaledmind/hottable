@@ -19,7 +19,7 @@ class Book < ApplicationRecord
   def self.attribute_schema
     {
       title: { type: :text, width: "500px", sort: { asc: "A ⮕ Z", desc: "Z ⮕ A", icon: "alpha" } },
-      average_rating: { type: :numeric, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      average_rating: { type: :decimal, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
       isbn: { type: :numeric, width: nil, sort: { asc: "0 ⮕ 9", desc: "9 ⮕ 0", icon: "numeric" } },
       isbn13: { type: :numeric, width: nil, sort: { asc: "0 ⮕ 9", desc: "9 ⮕ 0", icon: "numeric" } },
       language_code: { type: :enum, width: nil, sort: { asc: "first ⮕ last", desc: "last ⮕ first", icon: nil } },

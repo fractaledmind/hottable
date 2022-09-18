@@ -20,6 +20,7 @@ module Views
         "bg-pink-300 text-pink-800",
         "bg-rose-300 text-rose-800",
       ]
+      include ActionView::Helpers::NumberHelper
 
       def initialize(record, attribute:, search:)
         @record = record
@@ -40,7 +41,7 @@ module Views
                  filtered?: "bg-green-100",
                  sorted?: "bg-orange-100",
                  grouped?: "bg-purple-100",
-                 -> { attribute_type == :numeric } => "text-right",
+                 -> { [:numeric, :decimal].include? attribute_type } => "text-right",
                  -> { attribute_type == :enum } => "text-center"),
                 id: dom_id(@record, "column_#{@attribute}"),
                 data: {
@@ -58,7 +59,7 @@ module Views
                 filtered?: "bg-green-100 row-group-has-checked:bg-green-100/50",
                 sorted?: "bg-orange-100 row-group-has-checked:bg-orange-100/50",
                 grouped?: "bg-purple-100 row-group-has-checked:bg-purple-100/50",
-                -> { attribute_type == :numeric } => "text-right",
+                -> { [:numeric, :decimal].include? attribute_type } => "text-right",
                 -> { attribute_type == :enum } => "text-center"),
                 id: dom_id(@record, "column_#{@attribute}"),
                 data: {
@@ -75,6 +76,7 @@ module Views
       end
 
       def body
+        return div(number_with_precision(value, precision: Book.columns_hash[@attribute].sql_type_metadata.scale), class: "px-2 py-2") if attribute_type == :decimal
         return div(value, class: "px-2 py-2") if attribute_type != :enum
 
         color = tailwind_color_for_enum

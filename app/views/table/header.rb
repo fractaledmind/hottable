@@ -53,6 +53,7 @@ module Views
           text: "text-paragraph",
           date: "calendar",
           numeric: "hash",
+          decimal: "hash",
           enum: "usb-c-fill",
           datetime: "clock-fill"
         }.fetch(attribute_schema[:type])
