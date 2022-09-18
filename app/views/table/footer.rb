@@ -33,7 +33,7 @@ module Views
         form action: search_books_path, method: "post", accept_charset: "UTF-8", class: "space-x-2", data: { controller: "element" } do
           select name: "page_items", id: "page_items", class: "rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm", data: { action: "change->element#click" }, autocomplete: "off" do
             [10, 20, 50, 100].map do |item|
-              option item.to_s, value: item.to_s, selected: Array(params[:page_items]).include?(item.to_s)
+              option item.to_s, value: item.to_s, selected: Array(params[:page_items]).include?(item.to_s) || Pagy::DEFAULT[:items] == item
             end
           end
           noscript do
