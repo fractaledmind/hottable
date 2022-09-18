@@ -18,18 +18,18 @@ class Book < ApplicationRecord
 
   def self.attribute_schema
     {
-      title: :text,
-      average_rating: :numeric,
-      isbn: :string,
-      isbn13: :string,
-      language_code: :enum,
-      num_pages: :numeric,
-      ratings_count: :numeric,
-      text_reviews_count: :numeric,
-      published_on: :date,
-      publisher: :string,
-      created_at: :datetime,
-      updated_at: :datetime
+      title: { type: :text, width: "500px" },
+      average_rating: { type: :numeric, width: nil },
+      isbn: { type: :string, width: nil },
+      isbn13: { type: :string, width: nil },
+      language_code: { type: :enum, width: nil },
+      num_pages: { type: :numeric, width: nil },
+      ratings_count: { type: :numeric, width: nil },
+      text_reviews_count: { type: :numeric, width: nil },
+      published_on: { type: :date, width: nil },
+      publisher: { type: :string, width: nil },
+      created_at: { type: :datetime, width: nil },
+      updated_at: { type: :datetime, width: nil }
     }
   end
   

@@ -84,7 +84,8 @@ module Views
       def filtered? = @search.condition_attributes.include? @attribute
       def sorted? = @search.sort_attributes.include? @attribute
       def grouped? = @search.batch_attribute == @attribute
-      def attribute_type = Book.attribute_schema.fetch(@attribute.to_sym)
+      def attribute_schema = Book.attribute_schema.fetch(@attribute.to_sym)
+      def attribute_type = attribute_schema[:type]
 
       def value = @record.public_send(@attribute).to_s
 
