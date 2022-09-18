@@ -2,13 +2,13 @@ class ViewsController < ApplicationController
   def create
     view = View.create(
       name: view_params[:name],
-      parameters: view_parameters
+      parameters: view_parameters.merge(
+        current_view: view_params[:name]
+      )
     )
 
     redirect_to books_path(
-      view_parameters.merge(
-        current_view: view.name
-      )
+      view.parameters
     )
   end
 
