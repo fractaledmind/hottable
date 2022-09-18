@@ -34,6 +34,6 @@ module Views
       "default_tab"
     end
 
-    def current_page? = params.dig(:current_view) == @view.id
+    def current_page? = params.dig(:current_view) == @view.name
   end
 end
