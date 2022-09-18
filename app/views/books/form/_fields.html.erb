@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(f, id: "detailsFields", data: { 'details-set-target': "child" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsFields", data: { 'details-set-target': "child" }) do |section| %>
   <%= section.title icon: "eye-slash", colored: f.object.hidden_fields.any?, classes: "bg-blue-300 hover:border-blue-500" do %>
     <%= f.object.hidden_fields.any? ? pluralize(f.object.hidden_fields.size, 'hidden field') : "Hide fields" %>
   <% end %>

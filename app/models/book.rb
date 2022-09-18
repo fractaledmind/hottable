@@ -18,18 +18,18 @@ class Book < ApplicationRecord
 
   def self.attribute_schema
     {
-      title: { type: :text, width: "500px" },
-      average_rating: { type: :numeric, width: nil },
-      isbn: { type: :string, width: nil },
-      isbn13: { type: :string, width: nil },
-      language_code: { type: :enum, width: nil },
-      num_pages: { type: :numeric, width: nil },
-      ratings_count: { type: :numeric, width: nil },
-      text_reviews_count: { type: :numeric, width: nil },
-      published_on: { type: :date, width: nil },
-      publisher: { type: :string, width: nil },
-      created_at: { type: :datetime, width: nil },
-      updated_at: { type: :datetime, width: nil }
+      title: { type: :text, width: "500px", sort: { asc: "A ⮕ Z", desc: "Z ⮕ A", icon: "alpha" } },
+      average_rating: { type: :numeric, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      isbn: { type: :numeric, width: nil, sort: { asc: "0 ⮕ 9", desc: "9 ⮕ 0", icon: "numeric" } },
+      isbn13: { type: :numeric, width: nil, sort: { asc: "0 ⮕ 9", desc: "9 ⮕ 0", icon: "numeric" } },
+      language_code: { type: :enum, width: nil, sort: { asc: "first ⮕ last", desc: "last ⮕ first", icon: nil } },
+      num_pages: { type: :numeric, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      ratings_count: { type: :numeric, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      text_reviews_count: { type: :numeric, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      published_on: { type: :date, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      publisher: { type: :string, width: nil, sort: { asc: "A ⮕ Z", desc: "Z ⮕ A", icon: "alpha" } },
+      created_at: { type: :datetime, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } },
+      updated_at: { type: :datetime, width: nil, sort: { asc: "1 ⮕ 9", desc: "9 ⮕ 1", icon: "numeric" } }
     }
   end
   

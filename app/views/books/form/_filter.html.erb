@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(f, id: "detailsFilter", data: { 'details-set-target': "child", controller: "filter-by" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsFilter", data: { 'details-set-target': "child", controller: "filter-by" }) do |section| %>
   <%= section.title icon: "filter", colored: f.object.condition_attributes.any?, classes: "bg-green-300 hover:border-green-500" do %>
     <%= f.object.condition_attributes.any? ? "Filtered by #{f.object.condition_attributes.map {|a| Book.human_attribute_name(a)}.join(', ')}" : "Filter" %>
   <% end %>

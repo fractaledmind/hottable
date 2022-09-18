@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(f, id: "detailsBatch", data: { 'details-set-target': "child" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsBatch", data: { 'details-set-target': "child" }) do |section| %>
   <%= section.title icon: "card-list", colored: f.object.batch.present?, classes: "bg-purple-300 hover:border-purple-500" do %>
     <%= f.object.batch.present? ? "Grouped by #{Book.human_attribute_name(f.object.batch_attribute)}" : "Group" %>
   <% end %>

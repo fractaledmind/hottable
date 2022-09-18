@@ -2,9 +2,10 @@ module Views
   class Books::Form::Section < Base
     attr_reader :attributes
 
-    def initialize(form, id:, **attributes)
-      @form = form
+    def initialize(id:, type: :button, pinned: :right, **attributes)
       @id = id
+      @type = type
+      @pinned = pinned
       @attributes = attributes
     end
 
@@ -16,17 +17,20 @@ module Views
           newval
         end
       end
-      details class: "relative inline-block text-left z-30 group", id: @id, **props do
+      details **classes("relative inline-block text-left z-30 group", -> { @type == :header } => "w-full h-full"), id: @id, **props do
         content(&)
       end
     end
 
-    def title(icon:, colored:, classes:, &block)
-      summary class: "marker:hidden cursor-pointer" do
+    def title(icon:, colored: false, classes: {}, &block)
+      summary **classes("marker:hidden cursor-pointer flex items-center",
+                -> { @type == :header } => "h-full p-2 hover:bg-gray-300") do
         div id: "#{@id}Button",
           aria: { expanded: "false", haspopup: "true" },
           data: { action: "click@window->details-dropdown#hide touchend@window->details-dropdown#hide", 'details-dropdown-target': "button" },
-          **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 focus:ring-offset-gray-100",
+          **classes(
+            -> { @type == :button } => "inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 focus:ring-offset-gray-100",
+            -> { @type == :header } => "flex items-center justify-between gap-2",
             -> { colored } => classes,
             -> { !colored } => "group-open:border-gray-200 hover:border-gray-300") do
 
@@ -44,7 +48,10 @@ module Views
     end
 
     def body(&block)
-      div class: "absolute right-0 mt-1 min-w-72 origin-top-left divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg overflow-auto max-h-[calc(100vh-250px)] focus:outline-none",
+      div **classes("absolute mt-1 divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg overflow-auto max-h-[calc(100vh-250px)] focus:outline-none",
+            -> { @type == :button } => "min-w-72",
+            -> { @pinned == :right } => "origin-top-left right-0",
+            -> { @pinned == :left } => "origin-top-right left-0"),
         role: "menu",
         aria: { orientation: "vertical", labelledby: "#{@id}Button" },
         tabindex: "-1",
