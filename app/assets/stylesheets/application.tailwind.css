@@ -26,6 +26,10 @@ html, body { height: 100% }
   @apply bg-purple-200/50;
 }
 
+body:has([data-row-checkbox]:checked) .body-has-checked\:visible {
+  @apply visible;
+}
+
 td, th {
   /* fake border with background-image so "borders" stay put when scrolling */
   background-image:

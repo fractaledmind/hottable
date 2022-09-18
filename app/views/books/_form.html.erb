@@ -1,11 +1,25 @@
 <%= search_form_for(
   search,
   url: search_books_path,
-  html: { method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "details-set" }, class: "flex justify-between items-center space-x-2" }
+  html: { id: "searchForm", method: :post, autocomplete: :off, autocapitalize: :none, class: "", data: { controller: "details-set" }, class: "flex justify-between items-center w-full" }
 ) do |f| %>
 
-  <%= render "books/form/fields", f: %>
-  <%= render "books/form/sort", f: %>
-  <%= render "books/form/filter", f: %>
-  <%= render "books/form/batch", f: %>
+  <div class="body-has-checked:visible invisible justify-between items-center ml-0.5">
+    <span class="inline-flex items-center rounded-full bg-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-800"
+          data-checkbox-set-target="count">0</span>
+    <span class="ml-1 mr-2">items selected</span>
+
+    <button name="export" type="submit" formmethod="get" formaction="<%= export_books_path(format: :csv) %>"
+            class="inline-flex items-center rounded-md border border-transparent bg-transparent px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2 hover:bg-gray-200">
+      <i class="bi bi-file-earmark-arrow-down"></i>
+      <span>Export Selected</span>
+    </button>
+  </div>
+
+  <div class="space-x-2">
+    <%= render "books/form/fields", f: %>
+    <%= render "books/form/sort", f: %>
+    <%= render "books/form/filter", f: %>
+    <%= render "books/form/batch", f: %>
+  </div>
 <% end %>

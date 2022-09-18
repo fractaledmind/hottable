@@ -28,7 +28,12 @@ module Views
           input type: "checkbox",
                 id: "selectAll",
                 class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500",
-                'data-action': "checkbox-set#matchAll"
+                name: "selectAll",
+                form: "searchForm",
+                data: {
+                  action: "checkbox-set#matchAll",
+                  checkbox_set_target: "parent"
+                }
         end
       end
     end

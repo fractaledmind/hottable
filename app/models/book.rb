@@ -32,4 +32,22 @@ class Book < ApplicationRecord
       updated_at: :datetime
     }
   end
+  
+  def self.to_csv(csv_attributes = [], include_blank = false)
+    attributes = if defined?(csv_attributes) && csv_attributes.any?
+      csv_attributes
+    else
+      attribute_names - ["created_at", "updated_at"]
+    end
+  
+    CSV.generate(headers: true, col_sep: ";") do |csv|
+      csv << attributes
+  
+      all.each do |record|
+        csv << record.attributes.values_at(*attributes)
+      end
+  
+      csv << [nil] * attributes.size if include_blank
+    end
+  end
 end

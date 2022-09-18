@@ -105,7 +105,7 @@ module Views
               end
             end
 
-            div class: "grow bg-violet-100 flex flex-col overflow-hidden" do
+            div class: "grow bg-violet-100 flex flex-col overflow-hidden", data: { controller: "checkbox-set", checkbox_set_total_value: @search.result.size } do
               div class: "shrink flex justify-between items-center flex-wrap bg-white p-2 min-h-16 border-b" do
                 render "books/form", search: @search
               end

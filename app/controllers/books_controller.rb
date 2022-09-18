@@ -1,28 +1,16 @@
+require "csv"
+
 class BooksController < ApplicationController
   layout false
+  before_action :set_data
 
-  # GET /users
+  # GET /books
   def index
-    pagy, records = pagy(ransack_search.result, items: params.fetch(:page_items, 20))
-
-    respond_to do |format|
-      format.html do
-        render Views::Books::Index.new(
-          search: ransack_search,
-          records: records,
-          pagy: pagy
-        )
-      end
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('table') {
-          Views::Table.new(
-            records,
-            search: ransack_search,
-            pagy: pagy
-          ).call(view_context:).html_safe
-        }
-      end
-    end
+    render Views::Books::Index.new(
+      search: @search,
+      records: @records,
+      pagy: @pagy
+    )
   end
 
   def edit
@@ -52,24 +40,24 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET|POST /users/search
+  # GET|POST /books/search
   def search
     redirect_to books_path(
       params.to_unsafe_hash.except(:authenticity_token, :action, :controller, :commit, :filter, :batch, :field)
     )
   end
 
+  # GET books/export
   def summarize
-    records = ransack_search.result
-
+    data = @search.result
     total = case params[:calculation]
             when ""
             when "nil"
-              records.where(params[:attribute] => nil).size
+              data.where(params[:attribute] => nil).size
             when "not_nil"
-              records.where.not(params[:attribute] => nil).size
+              data.where.not(params[:attribute] => nil).size
             when "unique"
-              records.select(params[:attribute]).distinct.size
+              data.select(params[:attribute]).distinct.size
             end
 
     render turbo_stream: turbo_stream.replace([params[:attribute], "summary"].join("_")) {
@@ -81,7 +69,27 @@ class BooksController < ApplicationController
     }
   end
 
+  # GET books/export
+  def export
+    data = params[:selectAll].present? ? @search.result : @records.where(id: params.fetch(:select, {}).keys)
+
+    respond_to do |format|
+      format.csv do
+        send_data data.to_csv(@search.field_attributes), filename: "books-#{Time.now.utc.to_formatted_s(:number)}.csv", disposition: (Rails.env.development? ? :inline : :attachment)
+      end
+    end
+  end
+
   private
+  
+  def set_data
+    @search = ransack_search
+    @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, 20))
+p '*' * 100
+p @search.default_fields
+p @search.fields
+p @search.hidden_fields
+  end
 
   def book_params
     params.require(:book).permit(
