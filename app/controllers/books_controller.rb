@@ -85,10 +85,6 @@ class BooksController < ApplicationController
   def set_data
     @search = ransack_search
     @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, 20))
-p '*' * 100
-p @search.default_fields
-p @search.fields
-p @search.hidden_fields
   end
 
   def book_params
