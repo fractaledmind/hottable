@@ -1,23 +1,28 @@
 module Views
   class Table
     class Row < Base
-      def initialize(record, search:, expanded: true)
+      def initialize(record, search:, expanded: true, inline_edit: false)
         @record = record
         @search = search
         @expanded = expanded
+        @inline_edit = inline_edit
       end
 
       def template
         tr **classes("row-group hover:bg-gray-100 has-checked:bg-blue-100",
-               -> { !@expanded } => "sr-only") do
+               -> { !@expanded } => "sr-only"), id: dom_id(@record, :row) do
           select_cell
           attributes.each do |attribute|
-            render Column.new(@record, attribute:, search: @search)
+            render column_class.new(@record, attribute:, search: @search)
           end
         end
       end
 
       private
+
+      def column_class
+        @inline_edit ? ColumnEdit : Column
+      end
 
       def attributes
         @search.field_attributes
@@ -37,7 +42,7 @@ module Views
           div class: "absolute inset-y-0 left-0 w-1 bg-blue-600 hidden peer-checked:block"
         end
       end
-      
+
       def select_identifier
         dom_id(@record, "select")
       end

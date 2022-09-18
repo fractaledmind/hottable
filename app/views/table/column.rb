@@ -41,7 +41,16 @@ module Views
                  sorted?: "bg-orange-200",
                  grouped?: "bg-purple-200",
                  -> { attribute_type == :numeric } => "text-right",
-                 -> { attribute_type == :enum } => "text-center") do
+                 -> { attribute_type == :enum } => "text-center"),
+                id: dom_id(@record, "column_#{@attribute}"),
+                data: {
+                  id: @record.id,
+                  controller: "column",
+                  action: "dblclick->column#edit",
+                  attribute: @attribute,
+                  attribute_type: attribute_type,
+                  edit_url: edit_book_path(@record),
+                } do
             body
           end
         else
@@ -50,7 +59,16 @@ module Views
                 sorted?: "bg-orange-200 row-group-has-checked:bg-orange-200/50",
                 grouped?: "bg-purple-200 row-group-has-checked:bg-purple-200/50",
                 -> { attribute_type == :numeric } => "text-right",
-                -> { attribute_type == :enum } => "text-center") do
+                -> { attribute_type == :enum } => "text-center"),
+                id: dom_id(@record, "column_#{@attribute}"),
+                data: {
+                  id: @record.id,
+                  controller: "column",
+                  action: "dblclick->column#edit",
+                  attribute: @attribute,
+                  attribute_type: attribute_type,
+                  edit_url: edit_book_path(@record),
+                } do
             body
           end
         end

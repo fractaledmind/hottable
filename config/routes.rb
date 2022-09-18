@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :books, only: [:index] do
+  resources :books, only: [:index, :update, :edit] do
     collection do
       match 'search' => 'books#search', via: [:get, :post], as: :search
       match 'summarize' => 'books#summarize', via: [:get, :post], as: :summarize
