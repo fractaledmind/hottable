@@ -2,7 +2,7 @@ class ViewsController < ApplicationController
   def create
     view = View.create(
       name: view_params[:name],
-      parameters: params.to_unsafe_hash.except(:authenticity_token, :controller, :action)
+      parameters: view_parameters
     )
 
     parts = []
@@ -17,7 +17,7 @@ class ViewsController < ApplicationController
   end
 
   def update
-    View.find(view_params[:id]).update(parameters: params.to_unsafe_hash.except(:authenticity_token, :controller, :action))
+    View.find(view_params[:id]).update(parameters: view_parameters)
   end
 
   def destroy
@@ -28,5 +28,9 @@ class ViewsController < ApplicationController
 
   def view_params
     params.require(:views).permit(:id, :name)
+  end
+  
+  def view_parameters
+    params.to_unsafe_hash.except(:authenticity_token, :controller, :action)
   end
 end
