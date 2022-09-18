@@ -7,6 +7,26 @@ html, body { height: 100% }
 .marker\:hidden::marker { content: "" }
 .marker\:hidden::-webkit-details-marker { display: none }
 
+td, th {
+  /* fake border with background-image so "borders" stay put when scrolling */
+  background-image:
+    linear-gradient(to right, #CBD5E0, #CBD5E0),
+    linear-gradient(to bottom, #CBD5E0, #CBD5E0),
+    linear-gradient(to left, #CBD5E0, #CBD5E0),
+    linear-gradient(to top, #CBD5E0, #CBD5E0);
+  background-origin: border-box;
+  background-position: top left, top right, bottom right, bottom left;
+  background-repeat: no-repeat;
+}
+td, th {
+  /* only put "borders" on right and bottom */
+  background-size: 100% 1px, 0px 100%, 100% 0px, 1px 100%;
+}
+tfoot td {
+  /* only put "borders" on top */
+  background-size: 100% 1px, 0px 100%, 100% 0px, 0px 100%;
+}
+
 .pagy-nav {
   @apply flex items-start justify-between border-t border-gray-200 px-4 sm:px-0 min-w-72;
 }

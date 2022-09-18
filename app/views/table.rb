@@ -7,7 +7,7 @@ module Views
     end
 
     def template
-      table class: "h-full divide-y divide-gray-300" do
+      table class: "h-full" do
         caption id: "booksTableCaption", class: "h-0 overflow-hidden" do
           i class: "bi-table", aria_hidden: "true"
           "Main View"
@@ -17,7 +17,7 @@ module Views
 
         if @search.batch_attribute.present?
           @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
-            tbody class: "divide-y divide-gray-200 bg-white" do
+            tbody class: "bg-white" do
               render Views::Table::GroupHeader.new(group_name, group_records, search: @search)
 
               group_records.each do |record|
@@ -26,7 +26,7 @@ module Views
             end
           end
         else
-          tbody class: "divide-y divide-gray-200 bg-white" do
+          tbody class: "bg-white" do
             @records.each do |record|
               render Views::Table::Row.new(record, search: @search)
             end

@@ -8,7 +8,7 @@ module Views
       end
 
       def template
-        tr **classes("divide-x divide-gray-200 row-group hover:bg-gray-100",
+        tr **classes("row-group hover:bg-gray-100",
                -> { !@expanded } => "sr-only") do
           select_cell
           attributes.each do |attribute|
