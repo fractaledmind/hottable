@@ -65,6 +65,13 @@ module Views
             div class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium p-4", 'aria-current': "page" do
               span "Books"
             end
+            
+            View.all.each do |view|
+              a href: books_path(view.parameters), class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium p-4" do
+                span view.name
+              end
+            end
+            
             details class: "relative z-40 border-transparent text-white hover:bg-violet-900 open:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
               summary class: "marker:hidden cursor-pointer p-4" do
                 div class: "flex items-center gap-1" do
@@ -76,7 +83,7 @@ module Views
                   div class: "p-2" do
                     label "Name", for: "views_name", class: "block text-sm font-medium text-gray-700"
                     div class: "mt-1" do
-                      input type: "text", name: "views[name]", id: "views_name", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", placeholder: "e.g. 20th century English novels"
+                      input type: "text", name: "views[name]", form: "searchForm", id: "views_name", class: "block w-full text-gray-900 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", placeholder: "e.g. 20th century English novels"
                     end
                   end
 
