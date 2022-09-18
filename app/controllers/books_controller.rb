@@ -19,10 +19,10 @@ class BooksController < ApplicationController
     if true # type == "column"
       attribute = params["book"]["attribute"]
 
-      html = Views::Table::ColumnEdit.new(book, search: @search, attribute: attribute).call(view_context:).html_safe
+      html = Views::Table::ColumnEdit.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
       id = dom_id(book, "column_#{attribute}")
     else
-      html = Views::Table::Row.new(book, search: @search, inline_edit: true).call(view_context:).html_safe
+      html = Views::Table::Row.new(book, search: ransack_search, inline_edit: true).call(view_context:).html_safe
       id = dom_id(book, :row)
     end
 
@@ -33,8 +33,23 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
 
     if book.update(book_params)
-      row = Views::Table::Row.new(book, search: ransack_search).call(view_context:).html_safe
-      render turbo_stream: turbo_stream.replace(dom_id(book, :row), row)
+      parts = []
+
+      if true # type == "column"
+        (book.previous_changes.keys - ["updated_at"]).each do |key|
+          html = Views::Table::Column.new(book, search: ransack_search, attribute: key).call(view_context:).html_safe
+          id = dom_id(book, "column_#{key}")
+
+          parts << turbo_stream.replace(id, html)
+        end
+      else
+        html = Views::Table::Row.new(book, search: ransack_search).call(view_context:).html_safe
+        id = dom_id(book, :row)
+
+        parts << turbo_stream.replace(id, html)
+      end
+
+      render turbo_stream: parts.join(" ")
     else
       throw
     end
@@ -81,7 +96,7 @@ class BooksController < ApplicationController
   end
 
   private
-  
+
   def set_data
     @search = ransack_search
     @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, 20))
