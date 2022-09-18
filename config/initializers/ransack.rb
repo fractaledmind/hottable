@@ -25,6 +25,8 @@ module Ransack
         elsif key == 'f' || key == 'fields'
           send(:fields=, value)
         elsif key == 'b' || key == 'batch'
+          next if value["name"].blank? && value["dir"].blank?
+
           send(:batch=, value)
         elsif @context.ransackable_scope?(key, @context.object)
           add_scope(key, value)
