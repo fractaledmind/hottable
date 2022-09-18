@@ -17,11 +17,14 @@ module Views
 
         if @search.batch_attribute.present?
           @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
-            tbody class: "bg-white" do
+            tbody class: "bg-white", data_controller: "groupable" do
               render Views::Table::GroupHeader.new(group_name, group_records, search: @search)
 
               group_records.each do |record|
                 render Views::Table::Row.new(record, search: @search, expanded: @search.batch.expanded)
+              end
+              tr aria_hidden: "true", class: "bg-violet-100 h-full" do
+                td colspan: attributes.size + 1, class: "p-0 bg-none"
               end
             end
           end
@@ -29,6 +32,9 @@ module Views
           tbody class: "bg-white" do
             @records.each do |record|
               render Views::Table::Row.new(record, search: @search)
+            end
+            tr aria_hidden: "true", class: "bg-violet-100 h-full" do
+              td colspan: attributes.size + 1, class: "p-0 bg-none"
             end
           end
         end
