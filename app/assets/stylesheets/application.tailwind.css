@@ -6,3 +6,39 @@ html, body { height: 100% }
 
 .marker\:hidden::marker { content: "" }
 .marker\:hidden::-webkit-details-marker { display: none }
+
+.pagy-nav {
+  @apply flex items-start justify-between border-t border-gray-200 px-4 sm:px-0 min-w-72;
+}
+
+.pagy-nav .page.prev,
+.pagy-nav .page.next {
+  @apply -mt-px flex w-0 flex-1;
+}
+.pagy-nav .page.prev {
+  @apply justify-start mr-2;
+}
+.pagy-nav .page.next {
+  @apply justify-end ml-2;
+}
+.pagy-nav .page.prev,
+.pagy-nav .page.next {
+  @apply inline-flex items-center border-t-2 border-transparent text-sm font-medium text-gray-500 pt-1
+}
+.pagy-nav .page.prev:not(.disabled),
+.pagy-nav .page.next:not(.disabled) {
+  @apply hover:border-gray-300 hover:text-gray-700;
+}
+
+.pagy-nav .page:not(.prev):not(.next) {
+  @apply inline-flex items-center border-t-2 px-1;
+}
+.pagy-nav .page:not(.active):not(.prev):not(.next):not(.gap) {
+  @apply border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
+}
+.pagy-nav .page.active {
+  @apply border-indigo-500 text-indigo-600;
+}
+.pagy-nav .page.gap {
+  @apply border-transparent;
+}
