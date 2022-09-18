@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get :export
     end
   end
+
+  resources :views, only: :create
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
