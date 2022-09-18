@@ -1,4 +1,4 @@
 <span class="fields flex border border-gray-400 rounded overflow-hidden" data-object-name="<%= f.object_name %>">
-  <%= f.text_field(:value, class: "text-sm p-1.5 border-0") %>
+  <%= f.text_field(:value, "data-clearable-target": "input", class: "text-sm p-1.5 border-0") %>
   <%= button_to_remove_fields(labeled: false) %>
 </span>
