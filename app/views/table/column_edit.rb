@@ -9,7 +9,7 @@ module Views
           if attribute_type != :enum
             input(
               value: value,
-              data: { action: "blur->column#update", column_target: "tooltip" },
+              data: { action: "blur->column#abort", column_target: "tooltip" },
               name: "book[#{@attribute}]",
               class: "w-full px-2 py-2 text-sm",
               type: input_type(attribute_type)
