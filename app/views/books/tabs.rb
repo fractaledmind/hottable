@@ -3,7 +3,7 @@ module Views
     def initialize(views)
       @views = views
     end
-  
+
     def template
       div class: "sm:hidden px-2 space-y-2 mb-2" do
         label "Select a tab", for: "tabs", class: "sr-only"
@@ -18,7 +18,7 @@ module Views
         end
       end
       div class: "hidden sm:block border-b border-gray-200" do
-        nav class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs" do
+        nav id: "book_tabs", class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs" do
           render Books::Tab.new(OpenStruct.new(name: "Books", parameters: {}))
 
           @views.each do |view|
@@ -39,7 +39,7 @@ module Views
                     input type: "text", name: "views[name]", form: "searchForm", id: "views_name", class: "block w-full text-gray-900 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", placeholder: "e.g. 20th century English novels"
                   end
                 end
-      
+
                 div class: "flex items-center justify-end gap-2 py-2 px-4 bg-gray-200" do
                   input type: "submit", value: "Save", form: "searchForm", formaction: views_path, class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
                 end
