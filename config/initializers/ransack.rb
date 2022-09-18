@@ -130,7 +130,7 @@ module Ransack
     end
 
     def batch_attribute
-      batch.attr_name
+      batch&.attr_name
     end
 
     def recursive_compact(hash_or_array)
