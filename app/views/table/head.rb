@@ -22,7 +22,7 @@ module Views
 
       def select_cell
         th scope: 'col',
-           class: 'w-12 text-center sticky top-0 z-10 bg-opacity-75 backdrop-blur backdrop-filter whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900',
+           class: 'w-12 text-center sticky top-0 z-10 bg-gray-50 border-b whitespace-nowrap px-2 py-3.5 text-sm font-semibold text-gray-900',
            id: 'column_select' do
           label for: "selectAll", class: "sr-only"
           input type: "checkbox",

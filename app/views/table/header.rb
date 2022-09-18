@@ -8,7 +8,7 @@ module Views
 
       def template
         th scope: :col,
-           **classes("sticky top-0 z-10 bg-gray-50 border-b whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 space-x-1",
+           **classes("sticky top-0 bg-gray-50 border-b whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 space-x-1",
            filtered?: "bg-green-300",
            sorted?: "bg-orange-300") do
           render Bootstrap::Icon.new(attribute_icon), aria: { hidden: "true" }
