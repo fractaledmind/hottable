@@ -17,7 +17,7 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
 
     if true # type == "column"
-      attribute = params["book"]["attribute"]
+      attribute = params["book_attribute"]
 
       html = Views::Table::ColumnEdit.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
       id = dom_id(book, "column_#{attribute}")
@@ -39,7 +39,7 @@ class BooksController < ApplicationController
         changed_attributes = book.previous_changes.keys - ["updated_at"]
 
         if changed_attributes.empty?
-          changed_attributes << params["book"].try(:[], "attribute")
+          changed_attributes << params["book_attribute"]
         end
 
         changed_attributes.each do |attribute|

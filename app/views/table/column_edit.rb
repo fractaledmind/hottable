@@ -24,7 +24,7 @@ module Views
             end
           end
 
-          input type: "hidden", name: "book[attribute]", value: @attribute
+          input type: "hidden", name: "book_attribute", value: @attribute
         end
       end
 

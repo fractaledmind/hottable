@@ -20,9 +20,7 @@ export default class extends ApplicationController {
 
     get(editUrl, {
       query: {
-        'book[id]': id,
-        'book[attribute]': attribute,
-        'book[attribute_type]': attributeType
+        'book_attribute': attribute,
       },
       responseKind: "turbo-stream"
     })
