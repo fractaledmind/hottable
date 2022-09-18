@@ -106,7 +106,7 @@ module Views
             end
 
             div class: "grow bg-violet-100 flex flex-col overflow-hidden" do
-              div class: "shrink flex justify-between items-center flex-wrap bg-white p-2 h-16 border-b" do
+              div class: "shrink flex justify-between items-center flex-wrap bg-white p-2 min-h-16 border-b" do
                 render "books/form", search: @search
               end
               

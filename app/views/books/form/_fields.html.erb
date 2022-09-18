@@ -6,7 +6,7 @@
   <%= section.body do %>
     <div data-controller="checkbox-set">
       <%= tag.fieldset class: "p-2" do %>
-        <%= f.collection_check_boxes(:f, f.object.default_fields.map { |c| [c.name, Book.human_attribute_name(c.name)] }, :first, :last) do |builder| %>
+        <%= f.collection_check_boxes(:f, f.object.default_fields.reject {|c| c.name == Book.primary_attribute }.map { |c| [c.name, Book.human_attribute_name(c.name)] }, :first, :last) do |builder| %>
           <%= builder.label(class: "cursor-pointer py-1 px-2 flex justify-start items-center gap-2 hover:bg-gray-200") do %>
             <%= builder.check_box(checked: f.object.field_attributes.include?(builder.value), class: "rounded", data: {checkbox_set_target: "child"}) %>
             <span class="font-medium text-gray-700 mb-0 normal-case">

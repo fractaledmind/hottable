@@ -22,9 +22,9 @@ module Views
       def attributes
         @search.field_attributes
       end
-      
+
       def select_cell
-        td class: "text-center relative" do
+        td class: "text-center relative sticky left-0 bg-white" do
           input type: "checkbox",
                 id: select_identifier,
                 class: "hidden [.row-group:hover_&]:inline-block checked:inline-block peer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500",

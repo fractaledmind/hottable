@@ -9,7 +9,7 @@ module Views
 
       def template
         tr class: "bg-gray-100" do
-          th colspan: "2", class: "p-0 align-middle" do
+          th colspan: "2", class: "p-0 align-middle sticky left-0" do
             button class: "p-2 w-full flex items-center",
                    aria_haspopup: "true",
                    aria_expanded: @search.batch.expanded,
@@ -30,7 +30,9 @@ module Views
               end
             end
           end
-          td colspan: @search.field_attributes.size - 1
+          if (@search.field_attributes.size - 1) > 0
+            td colspan: @search.field_attributes.size - 1
+          end
         end
       end
     end

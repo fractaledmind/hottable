@@ -26,7 +26,7 @@ module Views
             class: "text-xl",
             aria: { hidden: "true" }
 
-          span(&block)
+          span class: "whitespace-nowrap", &block
 
           render Bootstrap::Icon.new("chevron-down",
             class: "text-gray-500 group-hover:text-gray-900",

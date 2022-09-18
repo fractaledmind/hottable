@@ -11,7 +11,11 @@ class Book < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     ransortable_attributes + _ransackers.keys
   end
-  
+
+  def self.primary_attribute
+    'title'
+  end
+
   def self.attribute_schema
     {
       title: :text,

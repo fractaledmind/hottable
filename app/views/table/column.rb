@@ -8,17 +8,33 @@ module Views
       end
 
       def template
-        td **classes("px-2 py-2 text-sm text-gray-500",
-              filtered?: "bg-green-200",
-              sorted?: "bg-orange-200",
-              grouped?: "bg-purple-200",
-              -> { attribute_type == :numeric} => "text-right",
-              -> { attribute_type == :enum} => "text-center") do
-          body
-        end
+        cell
       end
 
       private
+
+      def cell
+        if @attribute.to_s == Book.primary_attribute.to_s
+          th scope: "row",
+             **classes("px-2 py-2 text-sm font-medium text-gray-900 text-left sticky left-12 bg-white",
+                 filtered?: "bg-green-200",
+                 sorted?: "bg-orange-200",
+                 grouped?: "bg-purple-200",
+                 -> { attribute_type == :numeric} => "text-right",
+                 -> { attribute_type == :enum} => "text-center") do
+            body
+          end
+        else
+          td **classes("px-2 py-2 text-sm text-gray-500",
+                filtered?: "bg-green-200",
+                sorted?: "bg-orange-200",
+                grouped?: "bg-purple-200",
+                -> { attribute_type == :numeric} => "text-right",
+                -> { attribute_type == :enum} => "text-center") do
+            body
+          end
+        end
+      end
 
       def body
         return @record.public_send(@attribute).to_s if attribute_type != :enum
