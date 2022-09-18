@@ -24,7 +24,8 @@ class ViewsController < ApplicationController
   end
 
   def destroy
-    View.find(view_params[:id]).destroy
+    View.find(params[:id]).destroy
+    redirect_to root_path
   end
 
   private
