@@ -95,6 +95,10 @@ class BooksController < ApplicationController
               data.select(params[:attribute]).average(params[:attribute]).round(2)
             when "sum"
               data.select(params[:attribute]).sum(params[:attribute])
+            when "earliest"
+              data.select(params[:attribute]).reorder(params[:attribute] => :asc).limit(1).pluck(params[:attribute]).first
+            when "latest"
+              data.select(params[:attribute]).reorder(params[:attribute] => :desc).limit(1).pluck(params[:attribute]).first
             end
 
     render turbo_stream: turbo_stream.replace([params[:attribute], "summary"].join("_")) {

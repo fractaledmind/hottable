@@ -21,6 +21,8 @@ module Views
                 option "Max", value: "max", selected: (@calculation == "max") if [:numeric, :decimal].include?(attribute_type)
                 option "Average", value: "avg", selected: (@calculation == "avg") if [:numeric, :decimal].include?(attribute_type)
                 option "Sum", value: "sum", selected: (@calculation == "sum") if [:numeric, :decimal].include?(attribute_type)
+                option "Earliest Date", value: "earliest", selected: (@calculation == "earliest") if [:date, :datetime].include?(attribute_type)
+                option "Latest Date", value: "latest", selected: (@calculation == "latest") if [:date, :datetime].include?(attribute_type)
               end
 
               output @total.to_s, class: "inline-block text-left ml-2"
