@@ -16,15 +16,15 @@ module Views
                    data_action: "groupable#toggle",
                    data_groupable_target: "button" do
               span class: "mr-6 ml-2" do
-                i class: "bi-chevron-down"
+                i class: "expanded:bi-chevron-down bi-chevron-right"
               end
               div class: "flex flex-1 items-center justify-between" do
                 div class: "flex flex-col text-left" do
                   small Book.human_attribute_name(@search.batch_attribute), class: "uppercase font-bold text-gray-600"
                   span @group_name.to_s, class: "h5 mb-0 whitespace-nowrap"
                 end
-                div do
-                  small "Count", class: "font-normal"
+                div class: "space-x-1" do
+                  small "Count", class: "font-normal text-gray-500"
                   span @group_records.count.to_s, class: "inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers"
                 end
               end

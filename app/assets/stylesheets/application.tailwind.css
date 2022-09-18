@@ -30,6 +30,10 @@ body:has([data-row-checkbox]:checked) .body-has-checked\:visible {
   @apply visible;
 }
 
+[aria-expanded="true"] .expanded\:bi-chevron-down::before {
+  content: "\f282" !important;
+}
+
 td, th {
   /* fake border with background-image so "borders" stay put when scrolling */
   background-image:
