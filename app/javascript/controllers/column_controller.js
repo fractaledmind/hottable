@@ -4,7 +4,9 @@ import { get } from "@rails/request.js"
 export default class extends ApplicationController {
 
   update (event) {
-    event.target.closest("form").requestSubmit()
+    const form = (event.target instanceof HTMLFormElement) ? event.target : event.target.closest("form")
+
+    form.requestSubmit()
   }
 
   edit (event) {

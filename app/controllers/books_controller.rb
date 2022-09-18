@@ -36,9 +36,15 @@ class BooksController < ApplicationController
       parts = []
 
       if true # type == "column"
-        (book.previous_changes.keys - ["updated_at"]).each do |key|
-          html = Views::Table::Column.new(book, search: ransack_search, attribute: key).call(view_context:).html_safe
-          id = dom_id(book, "column_#{key}")
+        changed_attributes = book.previous_changes.keys - ["updated_at"]
+
+        if changed_attributes.empty?
+          changed_attributes << params["book"].try(:[], "attribute")
+        end
+
+        changed_attributes.each do |attribute|
+          html = Views::Table::Column.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
+          id = dom_id(book, "column_#{attribute}")
 
           parts << turbo_stream.replace(id, html)
         end

@@ -5,24 +5,26 @@ module Views
       private
 
       def body
-        form action: book_path(@record), method: "patch" do
+        form action: book_path(@record), method: "patch", data: { action: "submit->column#update" } do
           if attribute_type != :enum
-            return input(
+            input(
               value: value,
-              data: { action: "change->column#update debounced:input->column#update" },
+              data: { action: "blur->column#update" },
               name: "book[#{@attribute}]",
               class: "w-full px-2 py-2 text-sm",
               type: input_type(attribute_type)
             )
-          end
+          else
+            select(data: { action: "change->column#update" }, name: "book[#{@attribute}]") do
+              option(value: "") { "" }
 
-          select(data: { action: "change->column#update" }, name: "book[#{@attribute}]") do
-            option(value: "") { "" }
-
-            Book.all.distinct.pluck(@attribute).sort.each do |code|
-              option(value: code, selected: code == value) { code }
+              Book.all.distinct.pluck(@attribute).sort.each do |code|
+                option(value: code, selected: code == value) { code }
+              end
             end
           end
+
+          input type: "hidden", name: "book[attribute]", value: @attribute
         end
       end
 
