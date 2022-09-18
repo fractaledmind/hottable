@@ -16,7 +16,7 @@
     </button>
   </div>
 
-  <input type="hidden" name="views[name]" value="<%= params[:views][:name] %>">
+  <input type="hidden" name="views[name]" value="<%= params[:views]&[:name] %>">
 
   <div class="space-x-2">
     <%= render "books/form/fields", f: %>
