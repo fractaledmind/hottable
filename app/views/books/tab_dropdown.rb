@@ -18,7 +18,7 @@ module Views
         content(&)
       end
     end
-    
+
     def body(&block)
       div class: "absolute left-0 z-10 mt-1 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
         content(&block)
