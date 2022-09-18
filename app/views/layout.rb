@@ -1,6 +1,7 @@
 module Views
   class Layout < Base
     include Propshaft::Helper
+    include ActionView::Helpers::AssetTagHelper
 
     def template(&)
       doctype
@@ -11,6 +12,7 @@ module Views
           meta name: "viewport", content: "width=device-width, initial-scale=1"
           csp_meta_tag
           csrf_meta_tags
+          link href: asset_path("favicon.ico"), rel: "icon", type: "image/x-icon"
 
           link rel: "stylesheet",
             href: stylesheet_path("application"),
