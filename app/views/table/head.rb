@@ -7,7 +7,7 @@ module Views
 
       def template
         thead class: "bg-gray-50" do
-          tr class: "divide-x divide-gray-200" do
+          tr class: "divide-x divide-gray-200 h-12" do
             select_cell
             attributes.each do |attribute|
               render Header.new(attribute, search: @search)

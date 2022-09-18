@@ -8,8 +8,8 @@ module Views
       end
 
       def template
-        tr class: "bg-gray-100" do
-          th colspan: "2", class: "p-0 align-middle sticky left-0" do
+        tr class: "bg-gray-100 sticky left-0 top-12 z-10 bg-gray-100" do
+          th colspan: "2", class: "p-0 align-middle" do
             button class: "p-2 w-full flex items-center",
                    aria_haspopup: "true",
                    aria_expanded: @search.batch.expanded,
@@ -21,7 +21,7 @@ module Views
               div class: "flex flex-1 items-center justify-between" do
                 div class: "flex flex-col text-left" do
                   small Book.human_attribute_name(@search.batch_attribute), class: "uppercase font-bold text-gray-600"
-                  span @group_name.to_s, class: "h5 mb-0"
+                  span @group_name.to_s, class: "h5 mb-0 whitespace-nowrap"
                 end
                 div do
                   small "Count", class: "font-normal"

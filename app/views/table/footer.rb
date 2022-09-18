@@ -12,7 +12,7 @@ module Views
       end
 
       def template
-        tfoot class: "sticky bottom-0 bg-gray-100" do
+        tfoot class: "sticky bottom-0 z-20 bg-gray-100" do
           tr do
             td colspan: attributes.size + 1 do
               div class: "flex items-center justify-between py-2 px-4" do
