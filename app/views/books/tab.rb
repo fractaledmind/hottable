@@ -34,6 +34,10 @@ module Views
       "default_tab"
     end
 
-    def current_page? = params.dig(:current_view) == @view.name
+    def current_page?
+      return true if params[:current_view].nil? && @view.name == "Books"
+
+      params[:current_view] == @view.name
+    end
   end
 end
