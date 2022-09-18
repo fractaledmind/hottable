@@ -72,7 +72,7 @@ class BooksController < ApplicationController
             when "not_nil"
               data.where.not(params[:attribute] => nil).size
             when "unique"
-              data.select(params[:attribute]).distinct.size
+              data.select(params[:attribute]).distinct.reorder(nil).size
             end
 
     render turbo_stream: turbo_stream.replace([params[:attribute], "summary"].join("_")) {
