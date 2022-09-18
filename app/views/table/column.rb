@@ -46,7 +46,7 @@ module Views
                 data: {
                   id: @record.id,
                   controller: "column",
-                  action: "dblclick->column#edit",
+                  action: self.class == Views::Table::Column ? "dblclick->column#edit" : "",
                   attribute: @attribute,
                   attribute_type: attribute_type,
                   edit_url: edit_book_path(@record),
@@ -64,7 +64,7 @@ module Views
                 data: {
                   id: @record.id,
                   controller: "column",
-                  action: "dblclick->column#edit",
+                  action: self.class == Views::Table::Column ? "dblclick->column#edit" : "",
                   attribute: @attribute,
                   attribute_type: attribute_type,
                   edit_url: edit_book_path(@record),
