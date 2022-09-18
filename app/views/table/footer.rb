@@ -15,7 +15,7 @@ module Views
         tfoot class: "sticky bottom-0 bg-gray-100" do
           tr do
             td colspan: attributes.size + 1 do
-              div class: "flex items-center justify-between p-2" do
+              div class: "flex items-center justify-between py-2 px-4" do
                 page_items_form
                 raw pagy_nav(@pagy)
                 raw pagy_info(@pagy)
