@@ -54,7 +54,7 @@ module Views
             body
           end
         else
-          td **classes("px-2 py-2 text-sm text-gray-500",
+          td **classes("text-sm text-gray-500",
                 filtered?: "bg-green-100 row-group-has-checked:bg-green-100/50",
                 sorted?: "bg-orange-100 row-group-has-checked:bg-orange-100/50",
                 grouped?: "bg-purple-100 row-group-has-checked:bg-purple-100/50",
@@ -75,10 +75,10 @@ module Views
       end
 
       def body
-        return span(value, class: "px-2 py-2") if attribute_type != :enum
+        return div(value, class: "px-2 py-2") if attribute_type != :enum
 
         color = tailwind_color_for_enum
-        span @record.public_send(@attribute).to_s, **classes("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", tailwind_color_for_enum)
+        div @record.public_send(@attribute).to_s, **classes("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", tailwind_color_for_enum)
       end
 
       def filtered? = @search.condition_attributes.include? @attribute
