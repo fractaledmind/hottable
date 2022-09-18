@@ -16,6 +16,15 @@ html, body { height: 100% }
 .row-group:has(:checked) .row-group-has-checked\:bg-blue-100 {
   @apply bg-blue-100;
 }
+.row-group:has(:checked) .row-group-has-checked\:bg-green-200\/50 {
+  @apply bg-green-200/50;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-orange-200\/50 {
+  @apply bg-orange-200/50;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-purple-200\/50 {
+  @apply bg-purple-200/50;
+}
 
 td, th {
   /* fake border with background-image so "borders" stay put when scrolling */

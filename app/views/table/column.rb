@@ -25,10 +25,10 @@ module Views
             body
           end
         else
-          td **classes("px-2 py-2 text-sm text-gray-500 mix-blend-multiply",
-                filtered?: "bg-green-200",
-                sorted?: "bg-orange-200",
-                grouped?: "bg-purple-200",
+          td **classes("px-2 py-2 text-sm text-gray-500",
+                filtered?: "bg-green-200 row-group-has-checked:bg-green-200/50",
+                sorted?: "bg-orange-200 row-group-has-checked:bg-orange-200/50",
+                grouped?: "bg-purple-200 row-group-has-checked:bg-purple-200/50",
                 -> { attribute_type == :numeric} => "text-right",
                 -> { attribute_type == :enum} => "text-center") do
             body
