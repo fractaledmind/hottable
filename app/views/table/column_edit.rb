@@ -24,7 +24,7 @@ module Views
             end
           end
 
-          div data: { column_target: "tooltipTemplate" }, class: "w-inherit bg-gray-200 p-2 rounded mb-2 mt-2" do
+          div data: { column_target: "tooltipTemplate" }, class: "w-inherit bg-gray-200 p-2 rounded mb-2 mt-2 drop-shadow" do
             button class: "bg-red-400 hover:bg-red-500 py-1 px-2 mx-1 text-white rounded-full", data: { action: "click->column#abort" } do
               i class: "bi-x-circle-fill"
             end
