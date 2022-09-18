@@ -10,9 +10,13 @@ class ViewsController < ApplicationController
     render turbo_stream: turbo_stream.append("book_tabs", html)
   end
 
+  def destroy
+    View.find(view_params[:id]).destroy
+  end
+
   private
 
   def view_params
-    params.require(:views).permit(:name)
+    params.require(:views).permit(:id, :name)
   end
 end
