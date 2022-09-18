@@ -13,7 +13,14 @@ class ViewsController < ApplicationController
   end
 
   def update
-    View.find(view_params[:id]).update(parameters: view_parameters)
+    view = View.find(params[:id])
+    view.update(parameters: view_parameters)
+
+    redirect_to books_path(
+      view_parameters.merge(
+        current_view: view.name
+      )
+    )
   end
 
   def destroy
