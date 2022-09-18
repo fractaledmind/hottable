@@ -65,6 +65,26 @@ module Views
             div class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium p-4", 'aria-current': "page" do
               span "Books"
             end
+            details class: "relative z-40 border-transparent text-white hover:bg-violet-900 open:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
+              summary class: "marker:hidden cursor-pointer p-4" do
+                div class: "flex items-center gap-1" do
+                  render Bootstrap::Icon.new("plus-lg"), aria: { hidden: "true" }
+                  text "Save view"
+                end
+              end
+              div class: "absolute left-0 z-10 mt-1 w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
+                  div class: "p-2" do
+                    label "Name", for: "views_name", class: "block text-sm font-medium text-gray-700"
+                    div class: "mt-1" do
+                      input type: "text", name: "views[name]", id: "views_name", class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", placeholder: "e.g. 20th century English novels"
+                    end
+                  end
+
+                  div class: "flex items-center justify-end gap-2 py-2 px-4 bg-gray-200" do
+                    input type: "submit", value: "Save", form: "searchForm", formaction: views_path, class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
+                  end
+              end
+            end
           end
         end
       end
