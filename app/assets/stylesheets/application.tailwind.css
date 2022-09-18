@@ -7,6 +7,16 @@ html, body { height: 100% }
 .marker\:hidden::marker { content: "" }
 .marker\:hidden::-webkit-details-marker { display: none }
 
+.has-checked\:bg-blue-100:has(:checked) {
+  @apply bg-blue-100;
+}
+.row-group:has(:checked) .row-group-has-checked\:text-blue-900 {
+  @apply text-blue-900;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-blue-100 {
+  @apply bg-blue-100;
+}
+
 td, th {
   /* fake border with background-image so "borders" stay put when scrolling */
   background-image:

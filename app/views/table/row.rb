@@ -8,7 +8,7 @@ module Views
       end
 
       def template
-        tr **classes("row-group hover:bg-gray-100",
+        tr **classes("row-group hover:bg-gray-100 has-checked:bg-blue-100",
                -> { !@expanded } => "sr-only") do
           select_cell
           attributes.each do |attribute|
@@ -27,12 +27,13 @@ module Views
         td class: "text-center relative sticky left-0 bg-white" do
           input type: "checkbox",
                 id: select_identifier,
-                class: "hidden [.row-group:hover_&]:inline-block checked:inline-block peer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500",
+                class: "hidden [.row-group:hover_&]:inline-block checked:inline-block peer rounded border-gray-300 text-blue-600 focus:ring-blue-500",
                 aria: {
                   labelledby: "row_1 column_select"
                 }
-          span @record.id.to_s, class: "text-gray-600 inline-block [.row-group:hover_&]:hidden peer-checked:hidden"
+          span @record.id.to_s, class: "ml-1 text-gray-600 inline-block [.row-group:hover_&]:hidden peer-checked:hidden"
           label for: select_identifier, class: "absolute inset-0"
+          div class: "absolute inset-y-0 left-0 w-1 bg-blue-600 hidden peer-checked:block"
         end
       end
       
