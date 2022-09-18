@@ -16,6 +16,10 @@ class ViewsController < ApplicationController
     render turbo_stream: parts.join(" ")
   end
 
+  def update
+    View.find(view_params[:id]).update(parameters: params.to_unsafe_hash.except(:authenticity_token, :controller, :action))
+  end
+
   def destroy
     View.find(view_params[:id]).destroy
   end
