@@ -8,7 +8,7 @@ export default class extends ApplicationController {
   }
 
   edit (event) {
-    const { id, editUrl, attribute, attributeType } = event.target.dataset
+    const { id, editUrl, attribute, attributeType } = event.target.closest("td, th").dataset
 
     get(editUrl, {
       query: {

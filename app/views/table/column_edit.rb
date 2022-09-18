@@ -16,9 +16,12 @@ module Views
             )
           end
 
-          select do
-            option(value: "") { "" } if value.present?
-            option(value: value, selected: true) { value }
+          select(data: { action: "change->column#click" }, name: "book[#{@attribute}]") do
+            option(value: "") { "" }
+
+            Book.all.distinct.pluck(@attribute).sort.each do |code|
+              option(value: code, selected: code == value) { code }
+            end
           end
         end
       end
