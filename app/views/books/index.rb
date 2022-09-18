@@ -62,67 +62,8 @@ module Views
         end
         div class: "hidden sm:block border-b border-gray-200" do
           nav class: "-mb-px flex space-x-0.5 px-4", 'aria-label': "Tabs" do
-            details class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium", 'aria-current': "page" do
-              summary class: "marker:hidden cursor-pointer p-4" do
-                div class: "flex items-center gap-2" do
-                  span "Books"
-                  render Bootstrap::Icon.new("chevron-down"), aria: { hidden: "true" }, class: "text-gray-500 group-hover:text-gray-900"
-                end
-              end
-              div class: "absolute left-0 z-10 mt-1 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
-                div class: "py-1" do
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-0" do
-                    render Bootstrap::Icon.new("filetype-csv"), aria: { hidden: "true" }
-                    span "Import CSV file"
-                  end
-                end
-                div class: "py-1" do
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-2" do
-                    render Bootstrap::Icon.new("pencil"), aria: { hidden: "true" }
-                    span "Rename table"
-                  end
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-3" do
-                    render Bootstrap::Icon.new("sliders2"), aria: { hidden: "true" }
-                    span "Manage fields"
-                  end
-                end
-                div class: "py-1" do
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-4" do
-                    render Bootstrap::Icon.new("info-circle-fill"), aria: { hidden: "true" }
-                    span "Edit table description"
-                  end
-                end
-                div class: "py-1" do
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-6" do
-                    render Bootstrap::Icon.new("trash"), aria: { hidden: "true" }
-                    span "Delete table"
-                  end
-                end
-              end
-            end
-      
-            details class: "relative z-40 border-transparent text-white hover:bg-violet-900 hover:border-white group rounded-t rounded-b-none inline-flex items-center border-b font-medium" do
-              summary class: "marker:hidden cursor-pointer p-4" do
-                div class: "flex items-center gap-1" do
-                  render Bootstrap::Icon.new("plus-lg"), aria: { hidden: "true" }
-                  text "Add or import"
-                end
-              end
-              div class: "absolute left-0 z-10 mt-1 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
-                div class: "py-1", role: "none" do
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-0" do
-                    render Bootstrap::Icon.new("file-earmark-spreadsheet"), aria: { hidden: "true" }
-                    span "Create empty table"
-                  end
-                end
-                div class: "py-1" do
-                  h3 "Quick import from", class: "mt-4 mb-2 px-3 text-xs font-semibold text-gray-500"
-                  a href: "#", class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1", id: "menu-item-2" do
-                    render Bootstrap::Icon.new("filetype-csv"), aria: { hidden: "true" }
-                    span "CSV file"
-                  end
-                end
-              end
+            div class: "relative z-40 bg-white text-gray-800 group rounded-t inline-flex items-center font-medium p-4", 'aria-current': "page" do
+              span "Books"
             end
           end
         end
