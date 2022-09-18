@@ -15,7 +15,7 @@ module Views
               type: input_type(attribute_type)
             )
           else
-            select(data: { action: "change->column#update" }, name: "book[#{@attribute}]") do
+            select(data: { action: "change->column#update blur->column#abort" }, name: "book[#{@attribute}]") do
               option(value: "") { "" }
 
               Book.all.distinct.pluck(@attribute).sort.each do |code|

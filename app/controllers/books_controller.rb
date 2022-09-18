@@ -25,7 +25,7 @@ class BooksController < ApplicationController
       id = dom_id(book, "column_#{attribute}")
 
       parts << turbo_stream.replace(id, html)
-      parts << turbo_stream.set_focus("##{id} input")
+      parts << turbo_stream.set_focus("##{id} input, ##{id} select")
     else
       html = Views::Table::Row.new(book, search: ransack_search, inline_edit: true).call(view_context:).html_safe
       id = dom_id(book, :row)
