@@ -11,11 +11,11 @@ module Views
       if current_page?
         render(Books::TabDropdown.new(@view.name, active: current_page?)) do |t|
           t.body do
-            div class: "flex items-center justify-end gap-2 py-2 px-4 bg-gray-200" do
+            div class: "flex items-center justify-between gap-2 py-2 px-4 bg-gray-200" do
               input type: "submit", value: "Update", form: "searchForm", formaction: view_path(@view.id), class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
 
               unless @view.name == "Books"
-                a "Delete", href: view_path(@view.id), data: {
+                a "Delete", href: view_path(@view.id), class: "inline-flex items-center rounded-md border border-transparent bg-red-500 hover:bg-red-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2", data: {
                   turbo: {
                     method: "delete"
                   }
