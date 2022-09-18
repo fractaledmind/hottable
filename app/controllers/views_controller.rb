@@ -2,7 +2,7 @@ class ViewsController < ApplicationController
   def create
     view = View.create(
       name: view_params[:name],
-      parameters: params.to_unsafe_hash.except(:views, :authenticity_token, :controller, :action)
+      parameters: params.to_unsafe_hash.except(:authenticity_token, :controller, :action)
     )
 
     parts = []
