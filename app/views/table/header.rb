@@ -30,7 +30,7 @@ module Views
           text: "text-paragraph",
           date: "calendar",
           numeric: "hash",
-          enum: "circle-fill",
+          enum: "usb-c-fill",
           datetime: "clock-fill"
         }.fetch(type)
       end
