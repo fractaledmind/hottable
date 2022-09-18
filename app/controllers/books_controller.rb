@@ -63,7 +63,7 @@ class BooksController < ApplicationController
   def search_params
     q = params.fetch(:q, {})
     q[:f] ||= []
-    q[:f].insert(0, Book.primary_attribute)
+    q[:f].insert(0, Book.primary_attribute) if q[:f].any?
     q
   end
 end
