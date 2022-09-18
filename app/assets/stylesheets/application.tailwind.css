@@ -45,6 +45,10 @@ tfoot td {
   /* only put "borders" on top */
   background-size: 100% 1px, 0px 100%, 100% 0px, 0px 100%;
 }
+th[scope="rowgroup"] {
+  /* only put "borders" on top */
+  background-size: 100% 1px, 0px 100%, 100% 0px, 1px 100%;
+}
 
 .pagy-nav {
   @apply flex items-start justify-between px-4 sm:px-0 min-w-72;

@@ -8,9 +8,9 @@ module Views
       end
 
       def template
-        tr class: "bg-gray-100 sticky left-0 top-12 z-10 bg-gray-100" do
-          th colspan: "2", scope: "rowgroup", class: "p-0 align-middle" do
-            button class: "p-2 w-full flex items-center",
+        tr class: "bg-gray-100 sticky top-12 z-10 bg-gray-100" do
+          th colspan: "2", scope: "rowgroup", class: "sticky left-0 p-0 align-middle bg-gray-100" do
+            button class: "p-2 w-full flex items-center border-r border-gray-300",
                    aria_haspopup: "true",
                    aria_expanded: @search.batch.expanded,
                    data_action: "groupable#toggle",
