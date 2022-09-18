@@ -17,7 +17,7 @@ module Views
           end
         end
       else
-        a id: tab_id, href: books_path(@view&.parameters),
+        a id: tab_id, href: books_path(@view.parameters.merge(current_view: @view.name)),
           **classes("relative z-40 group rounded-t inline-flex items-center font-medium text-white border-b border-transparent p-4  hover:border-white hover:bg-violet-900",
             current_page?: "bg-white text-gray-800 hover:bg-gray-100"),
           aria_current: tokens(current_page?: "page") do
