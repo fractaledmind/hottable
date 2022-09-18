@@ -22,11 +22,13 @@ module Views
 
       def select_cell
         th scope: 'col',
-           class: 'w-12 text-center sticky top-0 left-0 z-10 bg-gray-50 border-b whitespace-nowrap px-2 py-3.5 text-sm font-semibold text-gray-900',
+           class: 'w-12 relative text-center sticky top-0 left-0 z-10 bg-gray-50 border-b whitespace-nowrap px-2 py-3.5 text-sm font-semibold text-gray-900',
            id: 'column_select' do
-          label for: "selectAll", class: "sr-only"
+          label for: "selectAll", class: "absolute inset-0"
           input type: "checkbox",
-                class: "rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                id: "selectAll",
+                class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500",
+                'data-action': "checkbox-set#matchAll"
         end
       end
     end
