@@ -10,6 +10,12 @@ export default class extends ApplicationController {
   edit (event) {
     const { id, editUrl, attribute, attributeType } = event.target.closest("td, th").dataset
 
+    if (window.getSelection) {
+      window.getSelection().removeAllRanges()
+    } else if (document.selection) {
+      document.selection.empty()
+    }
+
     get(editUrl, {
       query: {
         'book[id]': id,
