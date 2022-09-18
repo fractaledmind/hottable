@@ -9,7 +9,7 @@ module Views
           if attribute_type != :enum
             return input(
               value: value,
-              data: { action: "change->column#update" },
+              data: { action: "change->column#update debounced:input->column#update" },
               name: "book[#{@attribute}]",
               class: "w-full px-2 py-2 text-sm",
               type: input_type(attribute_type)
