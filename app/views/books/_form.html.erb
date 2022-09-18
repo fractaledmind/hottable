@@ -16,7 +16,7 @@
     </button>
   </div>
 
-  <input type="hidden" name="current_view" value="<%= params.dig(:views, :name) %>">
+  <input type="hidden" form="searchForm" name="current_view" value="<%= params.dig(:current_view) %>">
 
   <div class="space-x-2">
     <%= render "books/form/fields", f: %>
