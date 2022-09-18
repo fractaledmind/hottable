@@ -18,7 +18,7 @@ module Views
               div class: "shrink flex justify-between items-center flex-wrap bg-white p-2 min-h-16 border-b" do
                 render "books/form", search: @search
               end
-              
+
               div class: "grow flex items-start -mt-px overflow-scroll", role: "region", aria: { labelledby: "booksTableCaption" }, tabindex: "0" do
                 render Views::Table.new(@records, search: @search, pagy: @pagy)
               end
@@ -32,7 +32,7 @@ module Views
 
     def headline
       header class: "shrink text-white p-4 flex items-center justify-between" do
-        div class: "min-w-0 flex-1" do
+        a class: "min-w-0 flex-1", href: root_path do
           h2 "Workspace", class: "text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight"
         end
         div class: "mt-4 flex items-center md:mt-0 md:ml-4" do
