@@ -87,6 +87,14 @@ class BooksController < ApplicationController
               data.where.not(params[:attribute] => nil).size
             when "unique"
               data.select(params[:attribute]).distinct.reorder(nil).size
+            when "min"
+              data.select(params[:attribute]).minimum(params[:attribute])
+            when "max"
+              data.select(params[:attribute]).maximum(params[:attribute])
+            when "avg"
+              data.select(params[:attribute]).average(params[:attribute]).round(2)
+            when "sum"
+              data.select(params[:attribute]).sum(params[:attribute])
             end
 
     render turbo_stream: turbo_stream.replace([params[:attribute], "summary"].join("_")) {

@@ -17,6 +17,10 @@ module Views
                 option "Empty", value: "nil", selected: (@calculation == "nil")
                 option "Filled", value: "not_nil", selected: (@calculation == "not_nil")
                 option "Unique", value: "unique", selected: (@calculation == "unique")
+                option "Min", value: "min", selected: (@calculation == "min") if [:numeric, :decimal].include?(attribute_type)
+                option "Max", value: "max", selected: (@calculation == "max") if [:numeric, :decimal].include?(attribute_type)
+                option "Average", value: "avg", selected: (@calculation == "avg") if [:numeric, :decimal].include?(attribute_type)
+                option "Sum", value: "sum", selected: (@calculation == "sum") if [:numeric, :decimal].include?(attribute_type)
               end
 
               output @total.to_s, class: "inline-block text-left ml-2"
@@ -35,6 +39,9 @@ module Views
       end
       
       private
+
+      def attribute_schema = Book.attribute_schema.fetch(@attribute.to_sym)
+      def attribute_type = attribute_schema[:type]
       
       def authenticity_token_input
         input type: "hidden",
