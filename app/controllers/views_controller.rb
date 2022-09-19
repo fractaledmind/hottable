@@ -1,9 +1,9 @@
 class ViewsController < ApplicationController
   def create
     view = View.create(
-      name: view_params[:name],
+      name: create_view_params[:name],
       parameters: view_parameters.merge(
-        current_view: view_params[:name]
+        current_view: create_view_params[:name]
       )
     )
 
@@ -14,7 +14,12 @@ class ViewsController < ApplicationController
 
   def update
     view = View.find(params[:id])
-    view.update(parameters: view_parameters)
+    view.update(
+      name: update_view_params[:name],
+      parameters: view_parameters.merge(
+        current_view: update_view_params[:name]
+      )
+    )
 
     redirect_to books_path(
       view_parameters.merge(
@@ -30,8 +35,13 @@ class ViewsController < ApplicationController
 
   private
 
-  def view_params
+  def create_view_params
     params.require(:views).permit(:id, :name)
+  end
+  
+  def update_view_params
+    view_params = params.require(:views).to_unsafe_hash
+    view_params.fetch(params[:id], {})
   end
 
   def view_parameters

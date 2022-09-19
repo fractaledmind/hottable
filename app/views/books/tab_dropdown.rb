@@ -20,7 +20,7 @@ module Views
     end
 
     def body(&block)
-      div class: "absolute left-0 z-10 mt-1 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none w-64", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
+      div class: "absolute left-0 z-10 mt-1 origin-top-right divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg drop-shadow-lg focus:outline-none w-64 group", role: "menu", aria: { orientation: "vertical", labelledby: "menu-button" }, tabindex: "-1" do
         content(&block)
       end
     end

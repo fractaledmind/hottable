@@ -11,15 +11,38 @@ module Views
       if current_page?
         render(Books::TabDropdown.new(@view.name, active: current_page?)) do |t|
           t.body do
-            div class: "flex items-center justify-between gap-2 py-2 px-4 bg-gray-200" do
-              input type: "submit", value: "Update", form: "searchForm", formaction: view_path(@view.id), class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
+            div class: "block group-has-peer-checked:hidden divide-y divide-gray-100" do
+              div class: "py-1" do
+                label for: "rename_#{@view_name}", class: "cursor-pointer text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
+                  render Bootstrap::Icon.new("pencil"), aria: { hidden: "true" }
+                  span "Rename view"
+                  input id: "rename_#{@view_name}", type: "checkbox", checked: false, class: "sr-only peer"
+                end
+                button type: "submit", form: "searchForm", formaction: view_path(@view.id), class: "w-full text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
+                  render Bootstrap::Icon.new("sliders2"), aria: { hidden: "true" }
+                  span "Update view"
+                end
+              end
+              unless @view.name == "Books!"
+                div class: "py-1" do
+                  a href: view_path(@view.id), class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-red-200 hover:text-red-700", role: "menuitem", tabindex: "-1", data_turbo_method: "delete" do
+                    render Bootstrap::Icon.new("trash"), aria: { hidden: "true" }
+                    span "Delete view"
+                  end
+                end
+              end
+            end
 
-              unless @view.name == "Books"
-                a "Delete", href: view_path(@view.id), class: "inline-flex items-center rounded-md border border-transparent bg-red-500 hover:bg-red-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2", data: {
-                  turbo: {
-                    method: "delete"
-                  }
-                }
+            div class: "hidden group-has-peer-checked:block" do
+              div class: "p-2" do
+                label "Name", for: "views_name", class: "block text-sm font-medium text-gray-700"
+                div class: "mt-1" do
+                  input type: "text", value: @view.name, name: "views[#{@view.id}][name]", form: "searchForm", id: "views_name", class: "block w-full text-gray-900 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", placeholder: "e.g. 20th century English novels"
+                end
+              end
+              
+              div class: "flex items-center justify-end gap-2 py-2 px-4 bg-gray-200" do
+                input type: "submit", value: "Save", form: "searchForm", formaction: view_path(@view.id), class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
               end
             end
           end
