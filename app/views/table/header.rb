@@ -12,9 +12,11 @@ module Views
 
       def template
         th scope: :col,
-           **classes("sticky top-0 z-20 bg-gray-50 border-b whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
+           **classes("sticky top-0 z-20 border-b whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
              filtered?: "bg-green-300",
              sorted?: "bg-orange-300",
+             grouped?: "bg-purple-300",
+             -> { !filtered? && !sorted? && !grouped? } => "bg-gray-50",
              primary_attribute?: "left-12 z-10"),
            style: "width: #{attribute_schema.fetch(:width, "initial")}" do
           render Views::Books::Form::Section.new(id: "", type: :header, pinned: :left, data: { 'details-set-target': "child" }) do |section|
@@ -43,6 +45,7 @@ module Views
 
       def filtered? = @search.condition_attributes.include? @attribute
       def sorted? = @search.sort_attributes.include? @attribute
+      def grouped? = @search.batch_attribute == @attribute
       def primary_attribute? = Book.primary_attribute.to_s == @attribute.to_s
       def attribute_schema = Book.attribute_schema.fetch(@attribute.to_sym)
       def search_params = params.to_unsafe_hash[@search.context.search_key].presence || {}
