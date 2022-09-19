@@ -17,7 +17,7 @@ module Views
              sorted?: "bg-orange-300",
              grouped?: "bg-purple-300",
              -> { !filtered? && !sorted? && !grouped? } => "bg-gray-50",
-             primary_attribute?: "left-12 z-10"),
+             primary_attribute?: "left-12 z-30"),
            style: "width: #{attribute_schema.fetch(:width, "initial")}" do
           render Views::Books::Form::Section.new(id: "", type: :header, pinned: :left, data: { 'details-set-target': "child" }) do |section|
             section.title icon: attribute_icon do
