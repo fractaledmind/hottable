@@ -32,9 +32,6 @@ html, body { height: 100% }
 .row-group:has(:checked) .row-group-has-checked\:bg-purple-100\/50 {
   @apply bg-purple-100/50;
 }
-.row-group:hover .row-group-hover\:bg-gray-100 {
-  @apply bg-gray-100;
-}
 .group:has(.peer:checked) .group-has-peer-checked\:block {
   @apply block;
 }
