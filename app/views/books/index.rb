@@ -49,7 +49,7 @@ module Views
 
     def tabs
       div class: "shrink" do
-        render Books::Tabs.new(View.all)
+        render Books::Tabs.new(View.all.order(created_at: :asc))
       end
     end
   end
