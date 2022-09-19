@@ -1,7 +1,8 @@
 module Views
   class Table < Base
-    def initialize(records, search:, pagy:)
+    def initialize(records, result:, search:, pagy:)
       @records = records
+      @result = result
       @search = search
       @pagy = pagy
     end
@@ -16,9 +17,10 @@ module Views
         render Views::Table::Head.new(search: @search)
 
         if @search.batch_attribute.present?
-          @records.group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
+          group_counts = @result.group(:average_rating).order(:books_average_rating => :desc).count
+          @records.reorder(@search.batch.attr_name => @search.batch.dir).group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
             tbody class: "bg-white", data_controller: "groupable" do
-              render Views::Table::GroupHeader.new(group_name, group_records, search: @search)
+              render Views::Table::GroupHeader.new(group_name, group_counts[group_name], search: @search)
 
               group_records.each do |record|
                 render Views::Table::Row.new(record, search: @search, expanded: @search.batch.expanded)

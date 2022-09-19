@@ -8,6 +8,7 @@ class BooksController < ApplicationController
   def index
     render Views::Books::Index.new(
       search: @search,
+      result: @result,
       records: @records,
       pagy: @pagy
     )
@@ -125,7 +126,13 @@ class BooksController < ApplicationController
 
   def set_data
     @search = ransack_search
-    @pagy, @records = pagy(@search.result, items: params.fetch(:page_items, Pagy::DEFAULT[:items]))
+    @result = begin
+      _result = @search.result
+      _result = _result.reorder(@search.batch.attr_name => @search.batch.dir) if @search.batch
+
+      _result
+    end
+    @pagy, @records = pagy(@result, items: page_items)
   end
 
   def book_params
@@ -157,5 +164,9 @@ class BooksController < ApplicationController
     q[:f] ||= []
     q[:f].insert(0, Book.primary_attribute) if q[:f].any?
     q
+  end
+
+  def page_items
+    params.fetch(:page_items, Pagy::DEFAULT[:items])
   end
 end

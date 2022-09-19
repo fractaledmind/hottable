@@ -1,7 +1,8 @@
 module Views
   class Books::Index < Base
-    def initialize(records:, search:, pagy:)
+    def initialize(records:, result:, search:, pagy:)
       @records = records
+      @result = result
       @search = search
       @pagy = pagy
     end
@@ -14,13 +15,13 @@ module Views
           div class: "grow bg-violet-800 flex flex-col flex-nowrap overflow-hidden" do
             tabs
 
-            div class: "grow bg-violet-100 flex flex-col overflow-hidden", data: { controller: "checkbox-set", checkbox_set_total_value: @search.result.size } do
+            div class: "grow bg-violet-100 flex flex-col overflow-hidden", data: { controller: "checkbox-set", checkbox_set_total_value: @result.size } do
               div class: "shrink flex justify-between items-center flex-wrap bg-white p-2 min-h-16 border-b" do
                 render "books/form", search: @search
               end
 
               div class: "grow flex items-start -mt-px overflow-scroll", role: "region", aria: { labelledby: "booksTableCaption" }, tabindex: "0" do
-                render Views::Table.new(@records, search: @search, pagy: @pagy)
+                render Views::Table.new(@records, result: @result, search: @search, pagy: @pagy)
               end
             end
           end
