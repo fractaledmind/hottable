@@ -17,7 +17,7 @@ module Views
         render Views::Table::Head.new(search: @search)
 
         if @search.batch_attribute.present?
-          group_counts = @result.group(:average_rating).order(:books_average_rating => :desc).count
+          group_counts = @result.reorder('').group(:average_rating).order(:books_average_rating => :desc).count
           @records.reorder(@search.batch.attr_name => @search.batch.dir).group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
             tbody class: "bg-white", data_controller: "groupable" do
               render Views::Table::GroupHeader.new(group_name, group_counts[group_name], search: @search)
