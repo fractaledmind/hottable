@@ -32,6 +32,24 @@ html, body { height: 100% }
 .row-group:has(:checked) .row-group-has-checked\:bg-purple-100\/50 {
   @apply bg-purple-100/50;
 }
+.row-group:hover .row-group-hover\:bg-gray-green-100-mixed {
+  background-color: #E8F8EF;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-blue-green-100-mixed {
+  background-color: #DCF3F3;
+}
+.row-group:hover .row-group-hover\:bg-gray-orange-100-mixed {
+  background-color: #F9F1E6;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-blue-orange-100-mixed {
+  background-color: #EDECEA;
+}
+.row-group:hover .row-group-hover\:bg-gray-purple-100-mixed {
+  background-color: #F3EEFB;
+}
+.row-group:has(:checked) .row-group-has-checked\:bg-blue-purple-100-mixed {
+  background-color: #E7E9FF;
+}
 .group:has(.peer:checked) .group-has-peer-checked\:block {
   @apply block;
 }

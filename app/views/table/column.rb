@@ -37,11 +37,11 @@ module Views
       def cell
         if @attribute.to_s == Book.primary_attribute.to_s
           th scope: "row",
-             **classes("cursor-pointer text-sm font-medium text-gray-900 text-left sticky left-12 row-group-has-checked:bg-blue-100 row-group-has-checked:text-blue-900",
-                 filtered?: "bg-green-100/50",
-                 sorted?: "bg-orange-100/50",
-                 grouped?: "bg-purple-100/50",
-                 -> { !filtered? && !sorted? && !grouped? } => "bg-white/50",
+             **classes("cursor-pointer text-sm font-medium text-gray-900 text-left sticky left-12 row-group-has-checked:text-blue-900",
+                 filtered?: "bg-green-100 row-group-hover:bg-gray-green-100-mixed row-group-has-checked:bg-blue-green-100-mixed",
+                 sorted?: "bg-orange-100 row-group-hover:bg-gray-orange-100-mixed row-group-has-checked:bg-blue-orange-100-mixed",
+                 grouped?: "bg-purple-100 row-group-hover:bg-gray-purple-100-mixed row-group-has-checked:bg-blue-purple-100-mixed",
+                 -> { !filtered? && !sorted? && !grouped? } => "bg-white",
                  -> { [:numeric, :decimal].include? attribute_type } => "text-right",
                  -> { attribute_type == :enum } => "text-center"),
                 id: dom_id(@record, "column_#{@attribute}"),
@@ -57,9 +57,9 @@ module Views
           end
         else
           td **classes("text-sm text-gray-500 cursor-pointer",
-                filtered?: "bg-green-100 row-group-has-checked:bg-green-100/50",
-                sorted?: "bg-orange-100 row-group-has-checked:bg-orange-100/50",
-                grouped?: "bg-purple-100 row-group-has-checked:bg-purple-100/50",
+                filtered?: "bg-green-100 row-group-hover:bg-gray-green-100-mixed row-group-has-checked:bg-green-100/50",
+                sorted?: "bg-orange-100 row-group-hover:bg-gray-orange-100-mixed row-group-has-checked:bg-orange-100/50",
+                grouped?: "bg-purple-100 row-group-hover:bg-gray-purple-100-mixed row-group-has-checked:bg-purple-100/50",
                 -> { [:numeric, :decimal].include? attribute_type } => "text-right",
                 -> { attribute_type == :enum } => "text-center"),
                 id: dom_id(@record, "column_#{@attribute}"),
