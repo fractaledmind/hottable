@@ -30,7 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  pagy:
+    item_name:
+      one: "item"
+      other: "items"
+    nav:
+      prev: "&lsaquo;&nbsp;Prev"
+      next: "Next&nbsp;&rsaquo;"
+      gap: "&hellip;"
+    info:
+      no_items: "No %{item_name} found"
+      single_page: "<b>%{count}</b> %{item_name}"
+      multiple_pages: "<b>%{from}-%{to}</b> of <b>%{count}</b>"
   
   activerecord:
     attributes:
