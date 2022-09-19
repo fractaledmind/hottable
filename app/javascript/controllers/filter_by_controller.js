@@ -8,7 +8,6 @@ export default class extends ApplicationController {
   }
   
   addFields(event) {
-    console.log('addingFields')
     event.preventDefault()
     event.stopPropagation()
     
@@ -23,7 +22,6 @@ export default class extends ApplicationController {
   }
   
   removeFields(event) {
-    console.log('removingFields')
     event.preventDefault()
     event.stopPropagation()
     
@@ -32,7 +30,6 @@ export default class extends ApplicationController {
   }
   
   nestFields(event) {
-    console.log('nestingFields')
     event.preventDefault()
     event.stopPropagation()
     

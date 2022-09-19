@@ -3,9 +3,7 @@ import ApplicationController from "./application_controller"
 export default class extends ApplicationController {
   static targets = [ "row" ]
   
-  connect() {
-    console.log('groupable', this.element)
-  }
+  connect() {}
 
   toggle(event) {
     const buttonNode = event.currentTarget
