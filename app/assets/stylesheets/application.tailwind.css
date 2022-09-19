@@ -75,7 +75,7 @@ th[scope="rowgroup"] {
 }
 
 .pagy-nav {
-  @apply flex-1 max-w-96 flex items-start justify-between px-4 sm:px-0;
+  @apply flex-1 max-w-96 min-w-72 flex items-start justify-between px-4 sm:px-0;
 }
 .pagy-nav .page.prev,
 .pagy-nav .page.next {
