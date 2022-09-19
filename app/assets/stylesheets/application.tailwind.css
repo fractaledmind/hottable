@@ -62,9 +62,8 @@ th[scope="rowgroup"] {
 }
 
 .pagy-nav {
-  @apply flex items-start justify-between px-4 sm:px-0 min-w-72;
+  @apply flex-1 max-w-96 flex items-start justify-between px-4 sm:px-0;
 }
-
 .pagy-nav .page.prev,
 .pagy-nav .page.next {
   @apply -mt-px flex w-0 flex-1;
@@ -83,7 +82,6 @@ th[scope="rowgroup"] {
 .pagy-nav .page.next:not(.disabled) {
   @apply hover:border-gray-300 hover:text-gray-700;
 }
-
 .pagy-nav .page:not(.prev):not(.next) {
   @apply inline-flex items-center border-t-2 px-1;
 }
