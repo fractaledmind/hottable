@@ -1,9 +1,9 @@
 module Views
   class Table
     class GroupHeader < Base
-      def initialize(group_name, group_records, search:)
+      def initialize(group_name, group_count, search:)
         @group_name = group_name
-        @group_records = group_records
+        @group_count = group_count
         @search = search
       end
 
@@ -25,7 +25,7 @@ module Views
                 end
                 div class: "space-x-1" do
                   small "Count", class: "font-normal text-gray-500"
-                  span @group_records.count.to_s, class: "inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers"
+                  span @group_count.to_s, class: "monospace-numbers inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers"
                 end
               end
             end

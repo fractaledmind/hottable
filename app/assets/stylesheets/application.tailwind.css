@@ -7,6 +7,13 @@ html, body { height: 100% }
 .marker\:hidden::marker { content: "" }
 .marker\:hidden::-webkit-details-marker { display: none }
 
+.monospace-numbers {
+  /* enable tabular (monospaced) figures */
+  font-feature-settings: "tnum";
+  /* activating the set of figures where numbers are all of the same size, allowing them to be easily aligned like in tables */
+  font-variant-numeric: tabular-nums;
+}
+
 .has-checked\:bg-blue-100:has(:checked) {
   @apply bg-blue-100;
 }
