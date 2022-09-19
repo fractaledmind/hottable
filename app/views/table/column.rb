@@ -37,7 +37,7 @@ module Views
       def cell
         if @attribute.to_s == Book.primary_attribute.to_s
           th scope: "row",
-             **classes("cursor-pointer text-sm font-medium text-gray-900 text-left sticky left-12 row-group-has-checked:text-blue-900",
+             **classes("cursor-pointer text-sm font-medium text-gray-900 text-left sticky left-[calc(3rem+2px)] row-group-has-checked:text-blue-900",
                  filtered?: "bg-green-100 row-group-hover:bg-gray-green-100-mixed row-group-has-checked:bg-blue-green-100-mixed",
                  sorted?: "bg-orange-100 row-group-hover:bg-gray-orange-100-mixed row-group-has-checked:bg-blue-orange-100-mixed",
                  grouped?: "bg-purple-100 row-group-hover:bg-gray-purple-100-mixed row-group-has-checked:bg-blue-purple-100-mixed",

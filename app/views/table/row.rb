@@ -29,7 +29,7 @@ module Views
       end
 
       def select_cell
-        td class: "text-center relative sticky left-0 bg-white" do
+        td class: "text-center relative sticky left-px bg-white w-12 text-sm" do
           input type: "checkbox",
                 id: select_identifier,
                 class: "hidden [.row-group:hover_&]:inline-block checked:inline-block peer rounded border-gray-300 text-blue-600 focus:ring-blue-500",
