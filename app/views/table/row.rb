@@ -1,6 +1,6 @@
 module Views
   class Table
-    class Row < Base
+    class Row < ApplicationComponent
       def initialize(record, search:, expanded: true, inline_edit: false)
         @record = record
         @search = search

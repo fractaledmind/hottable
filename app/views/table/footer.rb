@@ -1,6 +1,6 @@
 module Views
   class Table
-    class Footer < Base
+    class Footer < ApplicationComponent
       include Pagy::Frontend
 
       delegate :request, to: :@_view_context

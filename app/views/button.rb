@@ -1,5 +1,5 @@
 module Views
-  class Button < Base
+  class Button < ApplicationComponent
     def initialize(primary: false, **attributes)
       @primary = primary
       @attributes = attributes

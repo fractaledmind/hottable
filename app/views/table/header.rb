@@ -1,6 +1,6 @@
 module Views
   class Table
-    class Header < Base
+    class Header < ApplicationComponent
       delegate :params, to: :@_view_context
 
       def initialize(attribute, search:)

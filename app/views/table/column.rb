@@ -1,6 +1,6 @@
 module Views
   class Table
-    class Column < Base
+    class Column < ApplicationComponent
       COLORS = [
         "bg-red-300 text-red-800",
         "bg-orange-300 text-orange-800",

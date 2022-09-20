@@ -1,6 +1,6 @@
 module Views
   class Table
-    class ColumnSummary < Base
+    class ColumnSummary < ApplicationComponent
       def initialize(total, attribute:, calculation: nil)
         @total = total || nil
         @attribute = attribute

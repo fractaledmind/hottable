@@ -1,5 +1,5 @@
 module Views
-  class Books::TabDropdown < Base
+  class Books::TabDropdown < ApplicationComponent
     def initialize(title, icon: nil, active: false)
       @title = title
       @icon = icon

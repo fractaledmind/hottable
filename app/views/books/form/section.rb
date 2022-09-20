@@ -1,5 +1,5 @@
 module Views
-  class Books::Form::Section < Base
+  class Books::Form::Section < ApplicationComponent
     attr_reader :attributes
 
     def initialize(id:, type: :button, pinned: :right, **attributes)

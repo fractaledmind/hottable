@@ -1,5 +1,5 @@
 module Views
-  class Layout < Base
+  class Layout < ApplicationComponent
     include Propshaft::Helper
     include ActionView::Helpers::AssetTagHelper
 

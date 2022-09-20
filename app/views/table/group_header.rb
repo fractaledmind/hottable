@@ -1,6 +1,6 @@
 module Views
   class Table
-    class GroupHeader < Base
+    class GroupHeader < ApplicationComponent
       def initialize(group_name, group_count, search:)
         @group_name = group_name
         @group_count = group_count

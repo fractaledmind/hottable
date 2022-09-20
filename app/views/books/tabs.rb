@@ -1,5 +1,5 @@
 module Views
-  class Books::Tabs < Base
+  class Books::Tabs < ApplicationComponent
     def initialize(views)
       @views = views
     end

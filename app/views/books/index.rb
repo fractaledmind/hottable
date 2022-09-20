@@ -1,5 +1,5 @@
 module Views
-  class Books::Index < Base
+  class Books::Index < ApplicationComponent
     def initialize(records:, result:, search:, pagy:)
       @records = records
       @result = result

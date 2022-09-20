@@ -1,5 +1,5 @@
 module Views
-  class Table < Base
+  class Table < ApplicationComponent
     def initialize(records, result:, search:, pagy:)
       @records = records
       @result = result
