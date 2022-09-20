@@ -4,7 +4,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js',
-    './app/views/**/*.rb'
+    './app/views/**/*.rb',
+    './app/components/**/*.rb'
   ],
   plugins: [
     require('@tailwindcss/forms'),
