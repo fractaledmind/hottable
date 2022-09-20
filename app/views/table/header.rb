@@ -1,8 +1,6 @@
 module Views
   class Table
     class Header < Base
-      include Ransack::Helpers::FormHelper
-
       delegate :params, to: :@_view_context
 
       def initialize(attribute, search:)
@@ -11,30 +9,18 @@ module Views
       end
 
       def template
-        th scope: :col,
-           **classes("sticky top-0 z-20 border-b whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
-             filtered?: "bg-green-300",
-             sorted?: "bg-orange-300",
-             grouped?: "bg-purple-300",
-             -> { !filtered? && !sorted? && !grouped? } => "bg-gray-50",
-             primary_attribute?: "left-[calc(3rem+2px)] z-30"),
-           style: "width: #{attribute_schema.fetch(:width, "initial")}" do
-          render Views::Books::Form::Section.new(id: "", type: :header, pinned: :left, data: { 'details-set-target': "child" }) do |section|
-            section.title icon: attribute_icon do
+        th **header_attributes do
+          render DetailsPopoverComponent.new(**popover_component_props) do |popover|
+            popover.trigger **popover_trigger_attributes do
+              render Bootstrap::IconComponent.new(attribute_icon)
               span Book.human_attribute_name(@attribute)
             end
-            section.body do
-              div class: "py-1", role: "none" do
-                render Views::MenuItem.new(
-                  search_and_sort_path(:asc),
-                  "Sort #{attribute_schema[:sort][:asc]}",
-                  icon: ["sort", attribute_schema[:sort][:icon], "down"].compact.join("-"))
-                render Views::MenuItem.new(
-                  search_and_sort_path(:desc),
-                  "Sort #{attribute_schema[:sort][:desc]}",
-                  icon: ["sort", attribute_schema[:sort][:icon], "down-alt"].compact.join("-"))
-                render Views::MenuItem.new(search_and_batch_path, "Group by this field", icon: "card-list")
-                render Views::MenuItem.new(search_and_fields_path, "Hide field", icon: "card-list")
+            popover.portal **popover_portal_attributes do
+              div class: "py-1" do
+                render MenuItemComponent.new(**sort_asc_menu_item_props)
+                render MenuItemComponent.new(**sort_desc_menu_item_props)
+                render MenuItemComponent.new(**group_menu_item_props)
+                render MenuItemComponent.new(**hide_field_menu_item_props)
               end
             end
           end
@@ -43,9 +29,81 @@ module Views
 
       private
 
+      def header_attributes
+        {
+          scope: :col,
+          style: "width: #{attribute_schema.fetch(:width, "initial")}",
+          class: tokens(
+            "sticky top-0 z-20 border-b whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
+            conditionless?: "bg-gray-50",
+            filtered?: "bg-#{SearchHelper.filter_color}-300",
+            sorted?: "bg-#{SearchHelper.sort_color}-300",
+            grouped?: "bg-#{SearchHelper.group_color}-300",
+            primary_attribute?: "left-[calc(3rem+2px)] z-30"
+          ),
+        }
+      end
+
+      def popover_component_props
+        {
+          role: :menu,
+          align: :start,
+          class: "inline-block text-left z-30 w-full h-full",
+          data: {
+            details_set_target: "child",
+            controller: "other",
+          },
+        }
+      end
+
+      def popover_trigger_attributes
+        {
+          class: "p-2 flex items-center gap-2",
+        }
+      end
+
+      def popover_portal_attributes
+        {
+          class: "divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg overflow-auto max-h-[calc(100vh-250px)] focus:outline-none origin-top-right",
+        }
+      end
+
+      def sort_asc_menu_item_props
+        {
+          url: search_and_sort_path(:asc),
+          text: "Sort #{attribute_schema[:sort][:asc]}",
+          icon: ["sort", attribute_schema[:sort][:icon], "down"].compact.join("-"),
+        }
+      end
+
+      def sort_desc_menu_item_props
+        {
+          url: search_and_sort_path(:desc),
+          text: "Sort #{attribute_schema[:sort][:desc]}",
+          icon: ["sort", attribute_schema[:sort][:icon], "down-alt"].compact.join("-"),
+        }
+      end
+
+      def group_menu_item_props
+        {
+          url: search_and_batch_path,
+          text: "Group by this field",
+          icon: "card-list",
+        }
+      end
+
+      def hide_field_menu_item_props
+        {
+          url: search_and_fields_path,
+          text: "Hide field",
+          icon: "eye-slash",
+        }
+      end
+
       def filtered? = @search.condition_attributes.include? @attribute
       def sorted? = @search.sort_attributes.include? @attribute
       def grouped? = @search.batch_attribute == @attribute
+      def conditionless? = !filtered? && !sorted? && !grouped?
       def primary_attribute? = Book.primary_attribute.to_s == @attribute.to_s
       def attribute_schema = Book.attribute_schema.fetch(@attribute.to_sym)
       def search_params = params.to_unsafe_hash[@search.context.search_key].presence || {}
