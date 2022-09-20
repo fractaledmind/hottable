@@ -28,7 +28,7 @@ This is an (minimal) [Airtable](https://airtable.com) clone. We left out any of 
 * X- and Y-axis scrollable table on overflow, with fixed headers, footers, and primary columns
 * Quick sort, group, hide options for each column in a column header dropdown
 * Inline editing of all table cells
-*CRUD of views, saving your configuration of a particular combination of fields, sorts, filters, grouping, and pagination
+* CRUD of views, saving your configuration of a particular combination of fields, sorts, filters, grouping, and pagination
 
 ## Built with
 
