@@ -10,7 +10,7 @@ module Views
       details **classes("relative z-40 border-transparent group rounded-t rounded-b-none inline-flex items-center border-b font-medium", inactive?: "text-white hover:bg-violet-900 open:bg-violet-900 hover:border-white", active?: "bg-white text-gray-800 hover:bg-gray-100"), data: { details_set_target: "child" } do
         summary class: "marker:hidden cursor-pointer p-4" do
           div class: "flex items-center gap-1" do
-            render(Bootstrap::Icon.new(@icon), aria: { hidden: "true" }) if @icon
+            render Bootstrap::IconComponent.new(@icon) if @icon
             text @title
           end
         end

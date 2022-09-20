@@ -14,19 +14,19 @@ module Views
             div class: "block group-has-peer-checked:hidden divide-y divide-gray-100" do
               div class: "py-1" do
                 label for: "rename_#{@view_name}", class: "cursor-pointer text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
-                  render Bootstrap::Icon.new("pencil"), aria: { hidden: "true" }
+                  render Bootstrap::IconComponent.new("pencil")
                   span "Rename view"
                   input id: "rename_#{@view_name}", type: "checkbox", checked: false, class: "sr-only peer"
                 end
                 button type: "submit", form: "searchForm", formaction: view_path(@view.id), class: "w-full text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
-                  render Bootstrap::Icon.new("sliders2"), aria: { hidden: "true" }
+                  render Bootstrap::IconComponent.new("sliders2")
                   span "Update view"
                 end
               end
               unless @view.name == "Books!"
                 div class: "py-1" do
                   a href: view_path(@view.id), class: "text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-red-200 hover:text-red-700", role: "menuitem", tabindex: "-1", data_turbo_method: "delete" do
-                    render Bootstrap::Icon.new("trash"), aria: { hidden: "true" }
+                    render Bootstrap::IconComponent.new("trash")
                     span "Delete view"
                   end
                 end

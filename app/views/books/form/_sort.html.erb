@@ -18,8 +18,7 @@
 
     <div class="flex items-center gap-2 px-2 py-1">
       <%= render Views::Button.new(data: { action: "click->sort-by#add" }) do %>
-        <%= render Views::Bootstrap::Icon.new("plus-lg"),
-              aria: { hidden: "true" } %>
+        <%= render Bootstrap::IconComponent.new("plus-lg") %>
         Add another sort
       <% end %>
     </div>
