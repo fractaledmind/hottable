@@ -10,7 +10,8 @@ class ApplicationComponent < Phlex::Component
     flat_provided_attributes = flatten_keys_of(provided_attributes)
 
     flat_default_attributes.deep_merge(flat_provided_attributes) do |attribute, oldval, newval|
-      next newval unless ["class", "data-controller"].include?(attribute.to_s)
+      next newval unless ["class", "data-controller"].include?(attribute)
+      next newval if attribute.end_with?("!")
 
       [newval, oldval].uniq.join(' ')
     end
