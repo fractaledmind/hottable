@@ -18,22 +18,15 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     parts = []
 
-    if true # type == "column"
-      attribute = params["book_attribute"]
-      inline_edit = params["book_edit"] == "true"
-      column_class = inline_edit ? Views::Table::ColumnEdit : Views::Table::Column
+    attribute = params["book_attribute"]
+    inline_edit = params["book_edit"] == "true"
+    column_class = inline_edit ? Views::Table::ColumnEdit : Views::Table::Column
 
-      html = column_class.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
-      id = dom_id(book, "column_#{attribute}")
+    html = column_class.new(book, search: ransack_search, attribute: attribute).call
+    id = dom_id(book, "column_#{attribute}")
 
-      parts << turbo_stream.replace(id, html)
-      parts << turbo_stream.set_focus("##{id} input, ##{id} select") if inline_edit
-    else
-      html = Views::Table::Row.new(book, search: ransack_search, inline_edit: true).call(view_context:).html_safe
-      id = dom_id(book, :row)
-
-      parts << turbo_stream.replace(id, html)
-    end
+    parts << turbo_stream.replace(id, html)
+    parts << turbo_stream.set_focus("##{id} input, ##{id} select") if inline_edit
 
     render turbo_stream: parts.join("")
   end
@@ -44,29 +37,20 @@ class BooksController < ApplicationController
     if book.update(book_params)
       parts = []
 
-      if true # type == "column"
-        changed_attributes = book.previous_changes.keys - ["updated_at"]
+      changed_attributes = book.previous_changes.keys - ["updated_at"]
 
-        if changed_attributes.empty?
-          changed_attributes << params["book_attribute"]
-        end
+      if changed_attributes.empty?
+        changed_attributes << params["book_attribute"]
+      end
 
-        changed_attributes.each do |attribute|
-          html = Views::Table::Column.new(book, search: ransack_search, attribute: attribute).call(view_context:).html_safe
-          id = dom_id(book, "column_#{attribute}")
-
-          parts << turbo_stream.replace(id, html)
-        end
-      else
-        html = Views::Table::Row.new(book, search: ransack_search).call(view_context:).html_safe
-        id = dom_id(book, :row)
+      changed_attributes.each do |attribute|
+        html = Views::Table::Column.new(book, search: ransack_search, attribute: attribute).call
+        id = dom_id(book, "column_#{attribute}")
 
         parts << turbo_stream.replace(id, html)
       end
 
       render turbo_stream: parts.join(" ")
-    else
-      throw
     end
   end
 
