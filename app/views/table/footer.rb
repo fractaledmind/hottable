@@ -15,7 +15,7 @@ module Views
         tfoot class: "sticky bottom-12 z-20 bg-gray-100" do
           tr do
             td colspan: attributes.size + 1 do
-              div class: "sticky left-0 flex flex-wrap items-center justify-between py-2 px-4 gap-4 w-screen", data_controller: "pagy" do
+              div class: "sticky left-0 flex flex-wrap items-center justify-between py-2 px-4 gap-4 max-w-screen", data_controller: "pagy" do
                 page_items_form
                 raw pagy_nav(@pagy)
                 raw pagy_info(@pagy)
