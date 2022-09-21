@@ -1,4 +1,4 @@
-<%= render Views::Books::Form::Section.new(id: "detailsSort", data: { 'details-set-target': "child", controller: "sort-by clearable" }) do |section| %>
+<%= render Views::Books::Form::Section.new(id: "detailsSort", data: { details_set_target: "child", controller: "sort-by clearable" }) do |section| %>
   <%= section.title icon: "arrow-down-up", colored: f.object.sorts.any?, classes: "bg-orange-300 hover:border-orange-500" do %>
     <%= f.object.sorts.any? ? "Sorted by #{pluralize(f.object.sorts.count, 'field')}" : "Sort" %>
   <% end %>
