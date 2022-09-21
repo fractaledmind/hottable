@@ -66,8 +66,8 @@
     <% end %>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-      <%= render(Views::Button.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
-      <%= render(Views::Button.new) { "Cancel" } %>
+      <%= render(ButtonComponent.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
+      <%= render(ButtonComponent.new) { "Cancel" } %>
 
       <%= f.submit "Group", name: "batch", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
     </div>

@@ -11,21 +11,21 @@
       <%= f.sort_fields(sort_object) do |s| %>
         <div class="fields flex items-center justify-start gap-2" data-object-name="<%= s.object_name %>" data-sort-by-target="field" }>
           <%= s.sort_select({}, class: "text-sm rounded p-1.5 pr-6 border-gray-400 bg-[right_0.125rem_center]", "data-clearable-target": "input") %>
-          <%= render(Views::Button.new(data: { action: "click->sort-by#remove" })) { "Remove" } %>
+          <%= render(ButtonComponent.new(data: { action: "click->sort-by#remove" })) { "Remove" } %>
         </div>
       <% end %>
     <% end %>
 
     <div class="flex items-center gap-2 px-2 py-1">
-      <%= render Views::Button.new(data: { action: "click->sort-by#add" }) do %>
+      <%= render ButtonComponent.new(data: { action: "click->sort-by#add" }) do %>
         <%= render Bootstrap::IconComponent.new("plus-lg") %>
         Add another sort
       <% end %>
     </div>
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
-      <%= render(Views::Button.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
-      <%= render(Views::Button.new(primary: true, name: "sort")) { "Sort" } %>
+      <%= render(ButtonComponent.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
+      <%= render(ButtonComponent.new(primary: true, name: "sort")) { "Sort" } %>
     </div>
   <% end %>
 <% end %>
