@@ -10,12 +10,12 @@ module Views
       def template
         tr class: "bg-gray-100 sticky top-12 z-10 bg-gray-100" do
           th colspan: "2", scope: "rowgroup", class: "sticky left-0 p-0 align-middle bg-gray-100" do
-            button class: "p-2 w-full flex items-center border-r border-gray-300",
+            button class: "group p-2 w-full flex items-center border-r border-gray-300",
                    aria_haspopup: "true",
                    aria_expanded: @search.batch.expanded.to_s,
                    data_action: "groupable#toggle",
                    data_groupable_target: "button" do
-              span class: "mr-6 ml-2" do
+              span class: "mr-6 ml-2 rounded w-6 h-6 group-hover:bg-gray-300" do
                 i class: "expanded:bi-chevron-down bi-chevron-right"
               end
               div class: "flex flex-1 items-center justify-between" do
