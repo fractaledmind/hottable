@@ -32,9 +32,9 @@ module Views
     private
 
     def headline
-      header class: "shrink text-white p-4 flex items-center justify-between" do
+      header class: "shrink text-white px-4 py-2 flex items-center justify-between" do
         a class: "min-w-0", href: root_path do
-          h2 "Workspace", class: "text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight"
+          h2 "Workspace", class: "text-xl font-bold leading-7 sm:truncate sm:text-2xl sm:tracking-tight"
         end
         div class: "mt-4 flex items-center md:mt-0 md:ml-4" do
           svg width: "40", height: "40", viewBox: "0 0 280 300", fill: "white", xmlns: "http://www.w3.org/2000/svg" do
