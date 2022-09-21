@@ -10,7 +10,7 @@ module Views
     end
 
     def template(&)
-      render DetailsPopoverComponent.new(align: :end, class: "inline-block text-left z-30", id: @id) do |popover|
+      render DetailsPopoverComponent.new(align: :end, class: "inline-block text-left z-30", id: @id, **attributes) do |popover|
         @popover = popover
 
         content(&)
