@@ -65,7 +65,7 @@ class DetailsPopoverComponent < ApplicationComponent
       },
       data: {
         action: "click@window->details-popover#hide touchend@window->details-popover#hide",
-        details_dropdown_target: "button",
+        details_popover_target: "button",
       },
     }
   end
