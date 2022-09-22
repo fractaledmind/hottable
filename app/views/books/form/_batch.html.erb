@@ -69,7 +69,7 @@
       <%= render(ButtonComponent.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
       <%= render(ButtonComponent.new) { "Cancel" } %>
 
-      <%= f.submit "Group", name: "batch", class: "cursor-pointer inline-flex items-center rounded-md border border-transparent bg-blue-500 px-2.5 py-1.5 text-base font-medium text-white shadow-sm hover:bg-blue-400" %>
+      <%= render(ButtonComponent.new(as: :input, type: :submit, name: "batch", value: "Group", primary: true)) %>
     </div>
   <% end %>
 <% end %>

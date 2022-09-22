@@ -25,7 +25,7 @@
 
     <div class="flex items-center justify-end gap-2 py-2 px-4 bg-gray-200">
       <%= render(ButtonComponent.new(data: { action: "click->clearable#clear" })) { "Clear" } %>
-      <%= render(ButtonComponent.new(primary: true, name: "sort")) { "Sort" } %>
+      <%= render(ButtonComponent.new(as: :input, type: :submit, name: "sort", value: "Sort", primary: true)) %>
     </div>
   <% end %>
 <% end %>
