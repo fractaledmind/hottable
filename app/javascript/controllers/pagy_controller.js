@@ -5,7 +5,9 @@ export default class extends ApplicationController {
 
   connect() {
     const recordsTotalElement = this.element.querySelector('.pagy-info b:nth-child(2)')
-    const recordsTotal = Number(recordsTotalElement.innerText)
-    recordsTotalElement.innerText = recordsTotal.toLocaleString()
+    if (recordsTotalElement) {
+      const recordsTotal = Number(recordsTotalElement.innerText)
+      recordsTotalElement.innerText = recordsTotal.toLocaleString()
+    }
   }
 }
