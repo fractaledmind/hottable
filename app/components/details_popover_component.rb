@@ -100,7 +100,7 @@ class DetailsPopoverComponent < ApplicationComponent
 
     Bootstrap::IconComponent.new(
       icon_name,
-      class: "text-gray-500 group-hover:text-gray-900"
+      class: "opacity-50 group-hover:opacity-100"
     )
   end
 
