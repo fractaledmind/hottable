@@ -1,23 +1,37 @@
 class ButtonComponent < ApplicationComponent
-  def initialize(primary: false, **attributes)
+  def self.attributes
+    {
+      type: "button",
+      class: [
+        "cursor-pointer inline-flex items-center rounded-md border border-transparent px-2.5 py-1.5 text-base font-medium gap-2",
+        primary?: "bg-blue-500 hover:bg-blue-400 text-white",
+        default?: "bg-gray-200 hover:bg-gray-300 text-gray-900"
+      ],
+    }
+  end
+
+  def initialize(as: :button, primary: false, **attributes)
+    @element = as
     @primary = primary
     @attributes = attributes
   end
 
   def template(&)
-    button **merge_attributes(button_attributes, @attributes), &
+    public_send(@element, **button_attributes, &)
   end
 
   private
 
   def button_attributes
-    {
-      class: tokens(
-        "inline-flex items-center rounded-md border border-transparent bg-gray-200 px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2 hover:bg-gray-300",
-        primary?: "bg-blue-500 hover:bg-blue-400 text-white"
-      ),
-    }
+    default_attributes = self.class.attributes.transform_values do |attribute_value|
+      case attribute_value
+      when String then attribute_value
+      when Array then tokens(*attribute_value[0..-2], **attribute_value[-1])
+      end
+    end
+    merge_attributes(default_attributes, @attributes)
   end
 
   def primary? = !!@primary
+  def default? = !primary?
 end

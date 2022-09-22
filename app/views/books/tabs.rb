@@ -8,12 +8,12 @@ module Views
       div class: "sm:hidden px-2 space-y-2 mb-2" do
         label "Select a tab", for: "tabs", class: "sr-only"
         select id: "tabs", name: "tabs", class: "block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500" do
-          option "Books", selected: true
-        end
-        button type: "button", class: "w-full flex items-center rounded-none rounded border border-gray-300 bg-gray-200 py-2 px-4 text-base font-bold text-gray-900 shadow-sm hover:bg-gray-300" do
-          svg class: "w-4 h-4", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", 'stroke-width': "4", stroke: "currentColor" do
-            path stroke: { linecap: "round", linejoin: "round" }, d: "M12 4.5v15m7.5-7.5h-15"
+          @views.each do |view|
+            option view.name, selected: params[:current_view] == view.name || params[:current_view].nil? && view.name == "Books"
           end
+        end
+        render ButtonComponent.new(class: "w-full flex") do
+          render Bootstrap::IconComponent.new("plus-lg")
           text "Add or import"
         end
       end
@@ -35,7 +35,7 @@ module Views
               end
 
               div class: "flex items-center justify-end gap-2 py-2 px-4 bg-gray-200" do
-                input type: "submit", value: "Save", form: "searchForm", formaction: views_path, class: "inline-flex items-center rounded-md border border-transparent bg-blue-500 hover:bg-blue-400 text-white px-2.5 py-1.5 text-base font-medium text-gray-900 gap-2"
+                render ButtonComponent.new(as: :input, type: "submit", value: "Save", form: "searchForm", formaction: views_path, primary: true)
               end
             end
           end
