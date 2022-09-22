@@ -25,7 +25,7 @@ module Views
 
           div id: "new_tab"
 
-          render(Books::TabDropdown.new("New view", icon: "plus-lg")) do |t|
+          render(Books::TabPopover.new("New view", icon: "plus-lg")) do |t|
             t.body do
               div class: "p-2" do
                 label "Name", for: "views_name", class: "block text-sm font-medium text-gray-700"

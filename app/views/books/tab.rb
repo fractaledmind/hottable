@@ -6,7 +6,7 @@ module Views
 
     def template
       if current_page?
-        render(Books::TabDropdown.new(@view.name, active: current_page?)) do |t|
+        render(Books::TabPopover.new(@view.name, active: current_page?)) do |t|
           t.body do
             div class: "block group-has-peer-checked:hidden divide-y divide-gray-100" do
               div class: "py-1" do
