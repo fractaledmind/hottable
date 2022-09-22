@@ -3,9 +3,6 @@ module Views
     class Footer < ApplicationComponent
       include Pagy::Frontend
 
-      delegate :request, to: :@_view_context
-      delegate :params, to: :@_view_context
-
       def initialize(search, pagy:)
         @search = search
         @pagy = pagy

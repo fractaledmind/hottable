@@ -1,8 +1,5 @@
 module Views
   class Books::Tab < ApplicationComponent
-    delegate :request, to: :@_view_context
-    delegate :params, to: :@_view_context
-
     def initialize(view)
       @view = view
     end

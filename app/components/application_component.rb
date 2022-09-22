@@ -5,6 +5,9 @@ class ApplicationComponent < Phlex::Component
   include ActionView::RecordIdentifier
   include Rails.application.routes.url_helpers
 
+  delegate :request, to: :@_view_context
+  delegate :params, to: :@_view_context
+
   def merge_attributes(default_attributes, provided_attributes)
     flat_default_attributes = flatten_keys_of(default_attributes)
     flat_provided_attributes = flatten_keys_of(provided_attributes)
