@@ -78,15 +78,7 @@ td, th {
 }
 td, th {
   /* only put "borders" on right and bottom */
-  background-size: 100% 1px, 0px 100%, 100% 0px, 1px 100%;
-}
-tfoot td {
-  /* only put "borders" on top */
-  background-size: 100% 1px, 0px 100%, 100% 0px, 1px 100%;
-}
-th[scope="rowgroup"] {
-  /* only put "borders" on top */
-  background-size: 100% 1px, 0px 100%, 100% 0px, 1px 100%;
+  background-size: 100% 0.5px, 0.5px 100%, 100% 0.5px, 0.5px 100%;
 }
 
 .pagy-nav {

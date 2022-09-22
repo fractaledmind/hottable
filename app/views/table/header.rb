@@ -34,12 +34,12 @@ module Views
           scope: :col,
           style: "width: #{attribute_schema.fetch(:width, "initial")}",
           class: tokens(
-            "sticky top-0 z-20 border-b whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
+            "sticky top-0 z-20 whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
             conditionless?: "bg-gray-50",
             filtered?: "bg-#{SearchHelper.filter_color}-300",
             sorted?: "bg-#{SearchHelper.sort_color}-300",
             grouped?: "bg-#{SearchHelper.group_color}-300",
-            primary_attribute?: "left-[calc(3rem+2px)] z-30"
+            primary_attribute?: "left-[calc(3rem+1px)] z-30"
           ),
         }
       end
