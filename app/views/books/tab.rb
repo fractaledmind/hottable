@@ -2,6 +2,8 @@ module Views
   class Books::Tab < ApplicationComponent
     def initialize(view)
       @view = view
+      @view_name = @view.name
+      @rename_id = "rename_#{@view_name}"
     end
 
     def template
@@ -10,15 +12,11 @@ module Views
           t.body do
             div class: "block group-has-peer-checked:hidden divide-y divide-gray-100" do
               div class: "py-1" do
-                label for: "rename_#{@view_name}", class: "cursor-pointer text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
-                  render Bootstrap::IconComponent.new("pencil")
+                render MenuItemComponent.new(as: :label, for: @rename_id, icon: "pencil") do
                   span "Rename view"
-                  input id: "rename_#{@view_name}", type: "checkbox", checked: false, class: "sr-only peer"
+                  input id: @rename_id, type: "checkbox", checked: false, class: "sr-only peer"
                 end
-                button type: "submit", form: "searchForm", formaction: view_path(@view.id), class: "w-full text-gray-700 group flex items-center px-4 py-2 space-x-2 hover:bg-gray-200", role: "menuitem", tabindex: "-1" do
-                  render Bootstrap::IconComponent.new("sliders2")
-                  span "Update view"
-                end
+                render MenuItemComponent.new(as: :button, type: "submit", form: "searchForm", formaction: view_path(@view.id), class: "w-full", icon: "sliders2", text: "Update view")
               end
               unless @view.name == "Books!"
                 div class: "py-1" do
