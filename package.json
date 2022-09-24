@@ -14,7 +14,7 @@
     "esbuild-rails": "^1.0.3",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
-    "turbo_power": "^0.1.0-beta.2"
+    "turbo_power": "^0.1.2"
   },
   "scripts": {
     "build": "node esbuild.config.js",

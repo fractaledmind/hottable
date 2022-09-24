@@ -19,10 +19,10 @@ gem "puma", "~> 5.0"
 gem "jsbundling-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", github: "marcoroth/turbo-rails", branch: "custom-action-helpers"
+gem "turbo-rails", "~> 1.3.0"
 
 # Power-pack for Turbo-Streams
-gem "turbo_power", github: "marcoroth/turbo_pack-rails", branch: "main"
+gem "turbo_power", "~> 0.1.2"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
