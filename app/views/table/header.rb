@@ -10,6 +10,20 @@ module Views
 
       def template
         th **header_attributes do
+          if sorted?
+            span (@search.sorts.index { |sort| sort.attr_name == @attribute } + 1).to_s, class: "absolute left-3 top-[calc(50%-.5rem)] bg-orange-400 h-4 w-4 p-1 text-[0.5rem] text-center leading-none rounded-full z-50", id: "SortPriorityColTitle", aria_hidden: "true"
+
+            if @search.sorts.find { |sort| sort.attr_name == @attribute }.dir == "asc"
+              svg class: "h-2 w-2 text-orange-500 absolute top-2 left-3", viewBox: "0 0 425 233.7", fill: "currentColor", focusable: "false", aria_hidden: "true" do
+                path d: "M414.4 223.1L212.5 21.2 10.6 223.1"
+              end
+            else
+              svg class: "h-2 w-2 text-orange-500 absolute bottom-2 left-3", viewBox: "0 0 425 233.7", fill: "currentColor", focusable: "false", aria_hidden: "true" do
+                path d: "M10.6 10.6l201.9 201.9L414.4 10.6"
+              end
+            end
+          end
+          
           render DetailsPopoverComponent.new(**popover_component_props) do |popover|
             popover.trigger **popover_trigger_attributes do
               render Bootstrap::IconComponent.new(attribute_icon)
@@ -32,7 +46,7 @@ module Views
       def header_attributes
         {
           scope: :col,
-          style: "width: #{attribute_schema.fetch(:width, "initial")}",
+          style: "width: #{attribute_schema[:width] || 'initial'}",
           class: tokens(
             "sticky top-0 z-20 whitespace-nowrap p-0 text-left text-sm font-semibold text-gray-900 space-x-1",
             conditionless?: "bg-gray-50",
@@ -41,6 +55,9 @@ module Views
             grouped?: "bg-#{SearchHelper.group_color}-300",
             primary_attribute?: "left-[calc(3rem+1px)] z-30"
           ),
+          aria: {
+            sort: sorted? && (@search.sorts.find { |sort| sort.attr_name == @attribute }.dir + 'ending')
+          },
         }
       end
 
