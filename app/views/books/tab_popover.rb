@@ -7,7 +7,7 @@ module Views
     end
 
     def template(&)
-      render DetailsPopoverComponent.new(role: :menu, align: :start, **details_attributes) do |popover|
+      render PopoverComponent.new(role: :menu, align: :start, **details_attributes) do |popover|
         @popover = popover
 
         @popover.trigger class: "px-4 py-2 flex items-center gap-1" do

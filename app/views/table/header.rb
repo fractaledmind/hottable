@@ -24,7 +24,7 @@ module Views
             end
           end
           
-          render DetailsPopoverComponent.new(**popover_component_props) do |popover|
+          render PopoverComponent.new(**popover_component_props) do |popover|
             popover.trigger **popover_trigger_attributes do
               render Bootstrap::IconComponent.new(attribute_icon)
               span Book.human_attribute_name(@attribute)
