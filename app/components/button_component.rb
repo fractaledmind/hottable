@@ -1,13 +1,27 @@
 class ButtonComponent < ApplicationComponent
-  def self.attributes
-    {
-      type: "button",
-      class: [
-        "cursor-pointer inline-flex items-center rounded-md border border-transparent px-2.5 py-1.5 text-base font-medium gap-2",
-        primary?: "bg-blue-500 hover:bg-blue-400 text-white",
-        default?: "bg-gray-200 hover:bg-gray-300 text-gray-900"
-      ],
-    }
+  class Struct < ApplicationComponent::Struct
+    def initialize(primary: false)
+      @primary = primary
+    end
+    
+    def base
+      {
+        class: tokens(
+          "cursor-pointer inline-flex items-center rounded-md border border-transparent px-2.5 py-1.5 text-base font-medium gap-2",
+          primary?: "bg-blue-500 hover:bg-blue-400 text-white",
+          default?: "bg-gray-200 hover:bg-gray-300 text-gray-900"
+        ),
+      }
+    end
+    
+    private
+    
+    def primary? = !!@primary
+    def default? = !primary?
+  end
+
+  def self.struct(*args, **kwargs)
+    Struct.new(*args, **kwargs)
   end
 
   def initialize(text = nil, as: :button, primary: false, icon: nil, **attributes)
@@ -29,18 +43,13 @@ class ButtonComponent < ApplicationComponent
     end
   end
 
+  def struct
+    self.class.struct(primary: @primary)
+  end
+
   private
 
   def button_attributes
-    default_attributes = self.class.attributes.transform_values do |attribute_value|
-      case attribute_value
-      when String then attribute_value
-      when Array then tokens(*attribute_value[0..-2], **attribute_value[-1])
-      end
-    end
-    merge_attributes(default_attributes, @attributes)
+    attributify(struct.base, @attributes)
   end
-
-  def primary? = !!@primary
-  def default? = !primary?
 end
