@@ -10,14 +10,23 @@ class ButtonComponent < ApplicationComponent
     }
   end
 
-  def initialize(as: :button, primary: false, **attributes)
+  def initialize(text = nil, as: :button, primary: false, icon: nil, **attributes)
+    @text = text
     @element = as
     @primary = primary
+    @icon = icon
     @attributes = attributes
   end
 
-  def template(&)
-    public_send(@element, **button_attributes, &)
+  def template(&block)
+    if block_given?
+      public_send(@element, **button_attributes, &block)
+    else
+      public_send(@element, **button_attributes) do
+        render Bootstrap::IconComponent.new(@icon) if @icon
+        text @text
+      end
+    end
   end
 
   private
