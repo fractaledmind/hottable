@@ -25,8 +25,8 @@ class MenuItemComponent < ApplicationComponent
   private
 
   def menuitem_attributes
-    default_attributes = merge_attributes(self.class.attributes, { href: @url })
+    default_attributes = attributify(self.class.attributes, { href: @url })
 
-    merge_attributes(default_attributes, @attributes)
+    attributify(default_attributes, @attributes)
   end
 end

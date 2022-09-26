@@ -7,7 +7,7 @@ module Bootstrap
     end
 
     def template
-      i **merge_attributes(icon_attributes, @attributes)
+      i **attributify(icon_attributes, @attributes)
     end
 
     private
