@@ -722,10 +722,10 @@ turbo-morph@^0.1.0-beta.3:
   resolved "https://registry.yarnpkg.com/turbo-morph/-/turbo-morph-0.1.0-beta.7.tgz#3a3839c711c2c32fb9f1c9a163cdc8ebbd700795"
   integrity sha512-PeQgyXN9GOtOnXVs9sH+nzEKKZ1h4mBqN538v3F2uivJUU/w+crwObf3e6Q7kj7mUBfDoDDFefEfYwvhNKR1uA==
 
-turbo_power@^0.1.0-beta.2:
-  version "0.1.0-beta.2"
-  resolved "https://registry.yarnpkg.com/turbo_power/-/turbo_power-0.1.0-beta.2.tgz#ca80e658548ed19fad79d954db619a38c3fc6c39"
-  integrity sha512-h7Ohf7MqZ21joPYFrd7MSvBU1uC8OcX4fu9suGAG3daDMZ0lu2/tdIyjc2My5D7LXQ8kLVPODBwQk/DGp+FNbA==
+turbo_power@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/turbo_power/-/turbo_power-0.1.2.tgz#e13e8c2e7a3fd7ba8fecfd45d4f43f861612a484"
+  integrity sha512-8/atQyTVXcP1YOay8Sso2aTJy4oSU04jPQrtQ6e+1MYz6h/5sgz108Wu5kX8tIVrGtA+EDmnOqeGzck68b5/rg==
   dependencies:
     turbo-morph "^0.1.0-beta.3"
     turbo_ready "^0.0.6"
