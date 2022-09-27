@@ -24,15 +24,17 @@ module Views
             end
           end
           
-          render PopoverComponent.new(**popover_component_props) do |popover|
-            popover.trigger **popover_trigger_attributes do
+          render MenuComponent.new(**popover_component_props) do |menu|
+            menu.trigger **popover_trigger_attributes do
               render Bootstrap::IconComponent.new(attribute_icon)
               span Book.human_attribute_name(@attribute)
             end
-            popover.portal **popover_portal_attributes do
-              div class: "py-1" do
+            menu.portal **popover_portal_attributes do
+              menu.group do
                 render MenuItemComponent.new(**sort_asc_menu_item_props)
                 render MenuItemComponent.new(**sort_desc_menu_item_props)
+              end
+              menu.group do
                 render MenuItemComponent.new(**group_menu_item_props)
                 render MenuItemComponent.new(**hide_field_menu_item_props)
               end
@@ -63,12 +65,10 @@ module Views
 
       def popover_component_props
         {
-          role: :menu,
           align: :start,
-          class: "inline-block text-left z-30 w-full h-full",
+          class: "inline-block text-left w-full h-full",
           data: {
             details_set_target: "child",
-            controller: "other",
           },
         }
       end
@@ -81,7 +81,7 @@ module Views
 
       def popover_portal_attributes
         {
-          class: "divide-y divide-gray-100 rounded-md bg-white border-2 shadow-lg overflow-auto max-h-[calc(100vh-250px)] focus:outline-none origin-top-right",
+          class: "overflow-auto max-h-[calc(100vh-250px)] origin-top-right",
         }
       end
 
