@@ -18,16 +18,19 @@ module Views
 
         if @search.batch_attribute.present?
           group_counts = @result.reorder('').group(@search.batch_attribute).order("books_#{@search.batch_attribute}" => :desc).count
-          @records.reorder(@search.batch.attr_name => @search.batch.dir).group_by(& @search.batch_attribute.to_sym).each do |group_name, group_records|
+          groups = @records.reorder(@search.batch.attr_name => @search.batch.dir).group_by(& @search.batch_attribute.to_sym)
+          groups.each do |group_name, group_records|
             tbody class: "bg-white", data_controller: "groupable" do
               render Views::Table::GroupHeader.new(group_name, group_counts[group_name], search: @search)
 
               group_records.each do |record|
                 render Views::Table::Row.new(record, search: @search, expanded: @search.batch.expanded)
               end
-              tr aria_hidden: "true", class: "bg-violet-100 h-full" do
-                td colspan: attributes.size + 1, class: "p-0 bg-none"
-              end
+            end
+          end
+          tbody class: "bg-white" do
+            tr aria_hidden: "true", class: "bg-violet-100 h-full", style: tokens(-> {!@search.batch.expanded} => "height: calc(100vh - 313px - (59px * #{groups.count}));") do
+              td colspan: attributes.size + 1, class: "p-0 bg-none"
             end
           end
         else
