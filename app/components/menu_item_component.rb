@@ -1,10 +1,19 @@
 class MenuItemComponent < ApplicationComponent
-  def self.attributes
-    {
-      role: :menuitem,
-      class: "group<menuitem> cursor-pointer text-gray-700 flex items-center px-4 py-2 space-x-2 hover:bg-gray-200",
-      tabindex: -1,
-    }
+  class Struct < ApplicationComponent::Struct
+    def initialize()
+    end
+
+    def base
+      {
+        role: :menuitem,
+        class: "group<menuitem> cursor-pointer text-gray-700 flex items-center px-4 py-2 space-x-2 hover:bg-gray-200",
+        tabindex: -1,
+      }
+    end
+  end
+  
+  def self.struct(*args, **kwargs)
+    Struct.new(*args, **kwargs)
   end
 
   def initialize(as: :a, text: nil, icon: nil, url: nil, **attributes)
@@ -22,11 +31,13 @@ class MenuItemComponent < ApplicationComponent
     end
   end
 
+  def struct
+    self.class.struct()
+  end
+
   private
 
   def menuitem_attributes
-    default_attributes = attributify(self.class.attributes, { href: @url })
-
-    attributify(default_attributes, @attributes)
+    attributify(struct.base, { href: @url }, @attributes)
   end
 end
