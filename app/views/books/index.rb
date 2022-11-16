@@ -34,7 +34,7 @@ module Views
     def headline
       header class: "shrink text-white px-4 py-2 flex items-center justify-between" do
         a class: "min-w-0", href: root_path do
-          h2 "Workspace", class: "text-xl font-bold leading-7 sm:truncate sm:text-2xl sm:tracking-tight"
+          h2(class: "text-xl font-bold leading-7 sm:truncate sm:text-2xl sm:tracking-tight") { "Workspace" }
         end
         div class: "mt-4 flex items-center md:mt-0 md:ml-4" do
           svg width: "40", height: "40", viewBox: "0 0 280 300", fill: "white", xmlns: "http://www.w3.org/2000/svg" do
@@ -42,7 +42,7 @@ module Views
             path d: "M146 154.12v68.19a4.59 4.59 0 0 0 6.29 4.27L229 196.81a4.6 4.6 0 0 0 2.9-4.27v-68.2a4.6 4.6 0 0 0-6.29-4.27l-76.71 29.78a4.58 4.58 0 0 0-2.9 4.27"
             path d: "m128.13 157.64-22.77 11-2.31 1.11-48 23c-3 1.47-6.94-.75-6.94-4.13v-64a4.29 4.29 0 0 1 1.47-3.08 5.33 5.33 0 0 1 1.16-.87 4.9 4.9 0 0 1 4.18-.32l72.88 28.87a4.6 4.6 0 0 1 .38 8.41"
           end
-          span "HotTable"
+          span { "HotTable" }
         end
       end
     end

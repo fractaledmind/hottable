@@ -14,15 +14,13 @@ module Views
           render Bootstrap::IconComponent.new(@icon) if @icon
           text @title
         end
-        
-        content(&)
+
+        yield_content(&)
       end
     end
 
-    def body(&block)
-      @popover.portal **popover_portal_attributes do
-        content(&block)
-      end
+    def body(&)
+      @popover.portal(**popover_portal_attributes, &)
     end
 
     private

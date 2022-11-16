@@ -20,12 +20,12 @@ module Views
               end
               div class: "flex flex-1 items-center justify-between" do
                 div class: "flex flex-col text-left" do
-                  small Book.human_attribute_name(@search.batch_attribute), class: "uppercase font-bold text-gray-600"
-                  span @group_name.to_s, class: "h5 mb-0 whitespace-nowrap"
+                  small(class: "uppercase font-bold text-gray-600") { Book.human_attribute_name(@search.batch_attribute) }
+                  span(class: "h5 mb-0 whitespace-nowrap") { @group_name.to_s }
                 end
                 div class: "space-x-1" do
-                  small "Count", class: "font-normal text-gray-500"
-                  span @group_count.to_s, class: "monospace-numbers inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers"
+                  small(class: "font-normal text-gray-500") { "Count" }
+                  span(class: "monospace-numbers inline-flex items-center rounded-full bg-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-900 monospace-numbers") { @group_count.to_s }
                 end
               end
             end

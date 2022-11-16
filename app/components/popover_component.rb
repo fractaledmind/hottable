@@ -22,14 +22,14 @@ class PopoverComponent < ApplicationComponent
       @align = align
       @popover_id = "popover-#{@role}-#{object_id}"
     end
-    
+
     def root
       {
         class: "relative group",
         data: { controller: "details-popover" }
       }
     end
-    
+
     def trigger
       {
         class: tokens("marker:hidden cursor-pointer h-full"),
@@ -44,7 +44,7 @@ class PopoverComponent < ApplicationComponent
         },
       }
     end
-    
+
     def portal
       {
         id: @popover_id,
@@ -69,9 +69,9 @@ class PopoverComponent < ApplicationComponent
         ),
       }
     end
-    
+
     private
-    
+
     def side_top? = @side == :top
     def side_bottom? = @side == :bottom
     def side_left? = @side == :left
@@ -104,16 +104,14 @@ class PopoverComponent < ApplicationComponent
     @popover_id = "details-popover-#{@role}-#{object_id}"
   end
 
-  def template(&)
-    details **attributify(struct.root, @attributes) do
-      content(&)
-    end
+  def template(&block)
+    details(**attributify(struct.root, @attributes), &block)
   end
 
   def trigger(icon: true, **attributes, &block)
-    summary **struct.trigger do
-      div **attributify({class: "h-full"}, attributes) do
-        content(&block)
+    summary(**struct.trigger) do
+      div(**attributify({class: "h-full"}, attributes)) do
+        yield_content(&block)
 
         render trigger_icon(icon) if icon
       end
@@ -121,7 +119,7 @@ class PopoverComponent < ApplicationComponent
   end
 
   def portal(**attributes, &block)
-    div **attributify(struct.portal, attributes), &block
+    div(**attributify(struct.portal, attributes), &block)
   end
 
   def struct

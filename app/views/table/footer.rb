@@ -14,8 +14,8 @@ module Views
             td colspan: attributes.size + 1 do
               div class: "sticky left-0 flex flex-wrap items-center justify-between py-2 px-4 gap-4 max-w-screen", data_controller: "pagy" do
                 page_items_form
-                raw pagy_nav(@pagy)
-                raw pagy_info(@pagy)
+                unsafe_raw pagy_nav(@pagy)
+                unsafe_raw pagy_info(@pagy)
               end
             end
           end
@@ -30,7 +30,7 @@ module Views
         div data_controller: "element" do
           select name: "page_items", form: "searchForm", id: "page_items", class: "rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm", data: { action: "change->element#click" }, autocomplete: "off" do
             [10, 20, 50, 100].map do |item|
-              option item.to_s, value: item.to_s, selected: Array(params[:page_items]).include?(item.to_s) || Pagy::DEFAULT[:items] == item
+              option(value: item.to_s, selected: Array(params[:page_items]).include?(item.to_s) || Pagy::DEFAULT[:items] == item) { item.to_s }
             end
           end
           noscript do

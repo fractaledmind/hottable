@@ -11,7 +11,7 @@ class MenuItemComponent < ApplicationComponent
       }
     end
   end
-  
+
   def self.struct(*args, **kwargs)
     Struct.new(*args, **kwargs)
   end
@@ -27,7 +27,7 @@ class MenuItemComponent < ApplicationComponent
   def template(&)
     public_send(@element, **menuitem_attributes) do
       render Bootstrap::IconComponent.new(@icon) if @icon
-      @text ? span(@text) : content(&)
+      @text ? span { @text } : yield_content(&)
     end
   end
 
