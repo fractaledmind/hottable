@@ -9,13 +9,13 @@ module Views
       end
 
       def template
-        th **header_attributes do
+        th(**header_attributes) do
           render MenuComponent.new(**popover_component_props) do |menu|
-            menu.trigger **popover_trigger_attributes do
+            menu.trigger(**popover_trigger_attributes) do
               column_icon
-              span Book.human_attribute_name(@attribute)
+              span { Book.human_attribute_name(@attribute) }
             end
-            menu.portal **popover_portal_attributes do
+            menu.portal(**popover_portal_attributes) do
               menu.group do
                 render MenuItemComponent.new(**sort_asc_menu_item_props)
                 render MenuItemComponent.new(**sort_desc_menu_item_props)
@@ -70,21 +70,21 @@ module Views
           class: "overflow-auto max-h-[calc(100vh-250px)] origin-top-right",
         }
       end
-        
+
       def column_icon
         return render(Bootstrap::IconComponent.new(attribute_icon)) unless sorted?
 
-        span **classes("inline-flex flex-col items-center", -> { sort_dir == "asc" } => "-mt-3", -> { sort_dir == "desc" } => "-mb-3") do
+        span(**classes("inline-flex flex-col items-center", -> { sort_dir == "asc" } => "-mt-3", -> { sort_dir == "desc" } => "-mb-3")) do
           sort_index_indicator
           sort_dir_indicator
         end
       end
-      
+
       def sort_index = @search.sorts.index { |sort| sort.attr_name == @attribute } + 1
       def sort_index_indicator
-        span sort_index.to_s, class: "bg-orange-400 h-5 w-5 p-1 text-xs text-center leading-none rounded-full z-50", id: "SortPriorityColTitle", aria_hidden: "true"
+        span(class: "bg-orange-400 h-5 w-5 p-1 text-xs text-center leading-none rounded-full z-50", id: "SortPriorityColTitle", aria_hidden: "true") { sort_index.to_s }
       end
-      
+
       def sort_dir = @search.sorts.find { |sort| sort.attr_name == @attribute }.dir
       def sort_dir_indicator
         if sort_dir == "asc"

@@ -9,8 +9,8 @@ module Views
       end
 
       def template
-        tr **classes("row-group hover:bg-gray-100 has-checked:bg-blue-100",
-               -> { !@expanded } => "sr-only"), id: dom_id(@record, :row), data_groupable_target: "row" do
+        tr(**classes("row-group hover:bg-gray-100 has-checked:bg-blue-100",
+               -> { !@expanded } => "sr-only"), id: dom_id(@record, :row), data_groupable_target: "row") do
           select_cell
           attributes.each do |attribute|
             render column_class.new(@record, attribute:, search: @search)
@@ -29,8 +29,8 @@ module Views
       end
 
       def select_cell
-        td class: "text-center relative sticky left-px bg-white w-12 text-sm" do
-          input type: "checkbox",
+        td(class: "text-center relative sticky left-px bg-white w-12 text-sm") do
+          input(type: "checkbox",
                 id: select_identifier,
                 class: "hidden [.row-group:hover_&]:inline-block checked:inline-block peer rounded border-gray-300 text-blue-600 focus:ring-blue-500",
                 name: "select[#{@record.id}]",
@@ -41,8 +41,8 @@ module Views
                 data: {
                   checkbox_set_target: "child",
                   row_checkbox: true
-                }
-          span @record.id.to_s, class: "ml-1 text-gray-600 inline-block [.row-group:hover_&]:hidden peer-checked:hidden"
+                })
+          span(class: "ml-1 text-gray-600 inline-block [.row-group:hover_&]:hidden peer-checked:hidden") { @record.id.to_s }
           label for: select_identifier, class: "absolute inset-0"
           div class: "absolute inset-y-0 left-0 w-1 bg-blue-600 hidden peer-checked:block"
         end

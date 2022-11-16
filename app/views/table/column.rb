@@ -36,7 +36,7 @@ module Views
 
       def cell
         if @attribute.to_s == Book.primary_attribute.to_s
-          th scope: "row",
+          th(scope: "row",
              **classes("cursor-pointer text-sm font-medium text-gray-900 text-left sticky left-[calc(3rem+1px)] row-group-has-checked:text-blue-900",
                  filtered?: "bg-green-100 row-group-hover:bg-gray-green-100-mixed row-group-has-checked:bg-blue-green-100-mixed",
                  sorted?: "bg-orange-100 row-group-hover:bg-gray-orange-100-mixed row-group-has-checked:bg-blue-orange-100-mixed",
@@ -53,11 +53,11 @@ module Views
                   attribute_type: attribute_type,
                   edit_url: edit_book_path(@record),
                 },
-                style: "max-width: #{attribute_schema.fetch(:width, "initial")}" do
+                style: "max-width: #{attribute_schema.fetch(:width, "initial")}") do
             body
           end
         else
-          td **classes("text-sm text-gray-500 cursor-pointer whitespace-nowrap text-ellipsis overflow-hidden",
+          td(**classes("text-sm text-gray-500 cursor-pointer whitespace-nowrap text-ellipsis overflow-hidden",
                 filtered?: "bg-green-100 row-group-hover:bg-gray-green-100-mixed row-group-has-checked:bg-green-100/50",
                 sorted?: "bg-orange-100 row-group-hover:bg-gray-orange-100-mixed row-group-has-checked:bg-orange-100/50",
                 grouped?: "bg-purple-100 row-group-hover:bg-gray-purple-100-mixed row-group-has-checked:bg-purple-100/50",
@@ -72,18 +72,17 @@ module Views
                   attribute_type: attribute_type,
                   edit_url: edit_book_path(@record),
                 },
-                style: "max-width: #{attribute_schema.fetch(:width, "initial")}" do
+                style: "max-width: #{attribute_schema.fetch(:width, "initial")}") do
             body
           end
         end
       end
 
       def body
-        return div(number_with_precision(value, precision: Book.columns_hash[@attribute].sql_type_metadata.scale), class: "px-2 py-2 whitespace-nowrap text-ellipsis overflow-hidden") if attribute_type == :decimal
-        return div(value, class: "px-2 py-2 whitespace-nowrap text-ellipsis overflow-hidden") if attribute_type != :enum
+        return div(class: "px-2 py-2 whitespace-nowrap text-ellipsis overflow-hidden") { number_with_precision(value, precision: Book.columns_hash[@attribute].sql_type_metadata.scale) } if attribute_type == :decimal
+        return div(class: "px-2 py-2 whitespace-nowrap text-ellipsis overflow-hidden") { value } if attribute_type != :enum
 
-        color = tailwind_color_for_enum
-        div @record.public_send(@attribute).to_s, **classes("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", tailwind_color_for_enum)
+        div(**classes("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", tailwind_color_for_enum)) { @record.public_send(@attribute).to_s }
       end
 
       def filtered? = @search.condition_attributes.include? @attribute

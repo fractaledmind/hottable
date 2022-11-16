@@ -1,5 +1,6 @@
 module Views
   class Layout < ApplicationComponent
+    include Phlex::Rails::Layout
     include Propshaft::Helper
     include ActionView::Helpers::AssetTagHelper
 
@@ -8,7 +9,7 @@ module Views
 
       html do
         head do
-          title "HotTable"
+          title { "HotTable" }
           meta name: "viewport", content: "width=device-width, initial-scale=1"
           csp_meta_tag
           csrf_meta_tags
@@ -27,9 +28,7 @@ module Views
             defer: "defer"
         end
 
-        body do
-          content(&)
-        end
+        body(&)
       end
     end
   end

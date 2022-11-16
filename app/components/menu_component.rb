@@ -34,39 +34,33 @@ class MenuComponent < ApplicationComponent
     @align = align
     @attributes = attributes
   end
-  
+
   def template(&)
     render PopoverComponent.new(role: :menu, side: @side, align: @align, **attributify(struct.root, @attributes)) do |popover|
       @popover = popover
 
-      content(&)
+      yield_content(&)
     end
   end
-  
+
   def trigger(**attributes, &)
-    @popover.trigger **attributify(struct.trigger, button.base, attributes) do
-      content(&)
-    end
+    @popover.trigger(**attributify(struct.trigger, button.base, attributes), &)
   end
-  
+
   def portal(**attributes, &)
-    @popover.portal **attributify(struct.portal, attributes) do
-      content(&)
-    end
+    @popover.portal(**attributify(struct.portal, attributes), &)
   end
-  
+
   def group(&)
-    div class: "py-1" do
-      content(&)
-    end
+    div(class: "py-1", &)
   end
-  
+
   def struct
     self.class.struct()
   end
-  
+
   private
-  
+
   def button
     ButtonComponent.struct
   end

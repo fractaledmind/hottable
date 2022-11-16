@@ -13,14 +13,14 @@ module Views
       render PopoverComponent.new(align: :end, class: "inline-block text-left z-30", id: @id, **attributes) do |popover|
         @popover = popover
 
-        content(&)
+        yield_content(&)
       end
     end
 
     def title(icon:, colored: false, classes: {}, &block)
       @popover.trigger **classes("inline-flex items-center justify-center gap-2 w-full rounded-md border-2 border-transparent bg-white px-4 py-2 font-medium text-gray-700 focus:ring-offset-gray-100", -> { colored } => classes, -> { !colored } => "group-open:border-gray-200 hover:border-gray-300") do
         render Bootstrap::IconComponent.new(icon, class: "text-xl")
-      
+
         span class: "whitespace-nowrap", &block
       end
     end
