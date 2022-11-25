@@ -108,10 +108,10 @@ class PopoverComponent < ApplicationComponent
     details(**attributify(struct.root, @attributes), &block)
   end
 
-  def trigger(icon: true, **attributes, &block)
+  def trigger(icon: true, **attributes)
     summary(**struct.trigger) do
       div(**attributify({class: "h-full"}, attributes)) do
-        yield_content(&block)
+        yield
 
         render trigger_icon(icon) if icon
       end

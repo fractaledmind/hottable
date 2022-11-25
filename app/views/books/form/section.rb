@@ -9,11 +9,11 @@ module Views
       @attributes = attributes
     end
 
-    def template(&)
+    def template
       render PopoverComponent.new(align: :end, class: "inline-block text-left z-30", id: @id, **attributes) do |popover|
         @popover = popover
 
-        yield_content(&)
+        yield
       end
     end
 
