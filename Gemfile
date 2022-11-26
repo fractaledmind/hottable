@@ -55,7 +55,7 @@ gem "ransack", "~> 3.2"
 gem "pagy", "~> 5.10"
 
 # A framework for building view components with a Ruby DSL.
-gem "phlex", github: "joeldrapper/phlex"
+gem "phlex-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

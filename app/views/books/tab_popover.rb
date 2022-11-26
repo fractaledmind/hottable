@@ -6,7 +6,7 @@ module Views
       @active = active
     end
 
-    def template(&)
+    def template
       render PopoverComponent.new(role: :menu, align: :start, **details_attributes) do |popover|
         @popover = popover
 
@@ -15,7 +15,7 @@ module Views
           text @title
         end
 
-        yield_content(&)
+        yield
       end
     end
 
